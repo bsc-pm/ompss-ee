@@ -11,3 +11,4 @@ installation.
    :maxdepth: 2
 
    cholesky/README.rst
+   stream-barr/README.rst
