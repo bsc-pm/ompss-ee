@@ -6,6 +6,10 @@
 OmpSs Examples and Exercises
 ============================
 
+.. only:: html
+.. note::
+   There is a PDF version of this document at http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf
+
 .. toctree::
    :maxdepth: 3
 
