@@ -7,6 +7,24 @@ examples used in this document can be downloaded from the site: http://pm.bsc.es
 Getting Started
 ---------------
 
+In this section we describe how to tune your configure script and also how to use it to configure
+your environment. If you have a pre-configured package simply skip the configure script section.
+
+The configure script
+^^^^^^^^^^^^^^^^^^^^
+
+The configure script is used to set all environment variables you need to properly execute
+OmpSs applications. Among other things it contains the PATH where the system will look for
+to find mercurium compiler utility, and the MKL installation directory (if available) to
+run specific OmpSs applications (e.g. Cholesky kernel).
+
+System configuration
+^^^^^^^^^^^^^^^^^^^^
+
+To configure your system you have to run Linux command ''source'' using your configure script::
+
+   $source configure.sh
+
 The make utility
 ----------------
 
