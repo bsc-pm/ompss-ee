@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
-
-#include "krist.h"
+#include <krist.h>
 
 
 __global__ void cstructfac(int na, int nr, int nc, float f2, int NA,

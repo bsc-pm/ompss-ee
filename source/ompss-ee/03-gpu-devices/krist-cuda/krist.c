@@ -3,7 +3,9 @@
 #include <math.h>
 #include <string.h>
 #include <omp.h>
-#include "krist.h"
+#include <krist.h>
+
+double wallclock( void ); // defined at clocks.c
 
 long int random(void);
 inline int min(int x,int y)

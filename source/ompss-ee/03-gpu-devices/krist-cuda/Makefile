@@ -18,32 +18,32 @@ CFLAGS_D = --debug
 NVCFLAGS = -O3
 
 LIBS  = 
-INCS  =
+INCS  = -I$(PREFIX)
 
 EXTRA = -O3 -Wall -Wno-unused 
 
 $(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o clocks.o
 
 $(PROGRAM)-i: $(PROGRAM)-i.o $(KERNEL).o clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o clocks.o
 
 $(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o clocks.o
 
 
-$(PROGRAM)-p.o: $(PREFIX)/$(PROGRAM).c krist.h
+$(PROGRAM)-p.o: $(PROGRAM).c $(PREFIX)/krist.h
 	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
 
-$(PROGRAM)-i.o: $(PREFIX)/$(PROGRAM).c krist.h
+$(PROGRAM)-i.o: $(PROGRAM).c $(PREFIX)/krist.h
 	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
 
-$(PROGRAM)-d.o: $(PREFIX)/$(PROGRAM).c krist.h
+$(PROGRAM)-d.o: $(PROGRAM).c $(PREFIX)/krist.h
 	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
 
 
-$(KERNEL).o: $(PREFIX)/$(KERNEL).cu krist.h
-	$(KC) -c -o $@ $< $(LIBS)
+$(KERNEL).o: $(KERNEL).cu $(PREFIX)/krist.h
+	$(KC) $(INCS) -o $@ -c $< 
 
 .c.o:
 	$(CC) --no-openmp $(EXTRA) -c $<
