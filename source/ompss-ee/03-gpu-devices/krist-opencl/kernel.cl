@@ -1,4 +1,4 @@
-#include "krist_auxiliar_header.h"
+#include <krist.h>
 
 
 #ifdef cl_khr_fp64

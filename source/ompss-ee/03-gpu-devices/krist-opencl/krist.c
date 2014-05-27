@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include "clocks.c"
 #include <omp.h>
-#include "krist.h"
+#include <krist.h>
+
+double wallclock( void ); // defined at clocks.c
 
 long int random(void);
 inline int min(int x,int y)
@@ -147,8 +148,7 @@ void structfac_gpuss (int na, int nr, int NA, float*a, int NH, float*h, int NE, 
 		int sharedsize = 16384-2048;
 		int maxatoms = sharedsize/(sizeof(float)*DIM2_A);
 		//float* shared_mem= (float*) malloc(maxatoms*(sizeof(float)*DIM2_A)); 
-        cstructfac(na, nr_2,maxatoms, f2, NA, a, NH/tasks, &h[DIM2_H*ii],
-                          NE/tasks, &E[DIM2_E*ii]);
+      cstructfac(na, nr_2,maxatoms, f2, NA, a, NH/tasks, &h[DIM2_H*ii], NE/tasks, &E[DIM2_E*ii]);
     }
 }
 
