@@ -1,28 +1,53 @@
-CC=allmcc
-NVCC = nvcc
+PROGRAM=krist
+KERNEL=kernel
+PREFIX=.
 
-CFLAGS	= --instrument --ompss -O3  --Wn,-w
+TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
+
+BASE_DIR=../..
+include $(BASE_DIR)/common-files/Makefile
+
+CC = mcc
+KC = nvcc
+
+CFLAGS = --ompss
+CFLAGS_P =
+CFLAGS_I = --instrument
+CFLAGS_D = --debug
+
 NVCFLAGS = -O3
 
-all: krist
- 
+LIBS  = 
+INCS  =
 
-#genera ejecutable
-krist:  kernel.o krist.o
-	$(CC) $(CFLAGS) -o krist kernel.o krist.o
+EXTRA = -O3 -Wall -Wno-unused 
 
-#compile codigo host (.c)	
-krist.o: krist.c krist_auxiliar_header.h clocks.c
-	$(CC) $(CFLAGS) -c krist.c
+$(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o clocks.o
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS)
 
-#compile kernel using nvcc (mnvcc also works)
-kernel.o: kernel.cu krist_auxiliar_header.h
-	$(NVCC) -c kernel.cu
-	
+$(PROGRAM)-i: $(PROGRAM)-i.o $(KERNEL).o clocks.o
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS)
+
+$(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o clocks.o
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS)
+
+
+$(PROGRAM)-p.o: $(PREFIX)/$(PROGRAM).c krist.h
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
+
+$(PROGRAM)-i.o: $(PREFIX)/$(PROGRAM).c krist.h
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
+
+$(PROGRAM)-d.o: $(PREFIX)/$(PROGRAM).c krist.h
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
+
+
+$(KERNEL).o: $(PREFIX)/$(KERNEL).cu krist.h
+	$(KC) -c -o $@ $< $(LIBS)
+
+.c.o:
+	$(CC) --no-openmp $(EXTRA) -c $<
+
 clean:
-	rm -f krist *.o
+	rm -f $(CC)_* *.o *~ $(TARGETS) 
 
-wipe: clean
-	$(RM) *.out *.err
-	$(RM) *.prv *.row *.pcf
-	$(RM) graph.dot graph.pdf

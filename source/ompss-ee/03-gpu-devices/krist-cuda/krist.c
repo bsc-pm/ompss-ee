@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include "clocks.c"
 #include <omp.h>
 #include "krist.h"
 
