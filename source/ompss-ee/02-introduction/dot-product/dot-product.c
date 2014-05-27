@@ -28,7 +28,7 @@ double dot_product (long N, long CHUNK_SIZE, double A[N], double B[N])
 
 	acc=0.0;
 	j=0;
- 	for (long i=0; i<N; i+=CHUNK_SIZE)	{
+ 	for (long i=0; i<N; i+=CHUNK_SIZE) {
 
 		actual_size = (N-CHUNK_SIZE>=CHUNK_SIZE)?CHUNK_SIZE:(N-CHUNK_SIZE);
 
