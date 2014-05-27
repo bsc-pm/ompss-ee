@@ -3,5 +3,5 @@ PROGRAM=krist-p
 export NX_GPUMAXMEM=150000000
 export NX_GPUS=1 #change this in order to use more GPUs
 
-./$PROGRAM 10000 20000
+./$PROGRAM 1000 2000
 
