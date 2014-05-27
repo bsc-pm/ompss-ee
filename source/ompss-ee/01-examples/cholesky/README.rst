@@ -8,8 +8,8 @@ positive-definite matrix into the product of a lower triangular matrix and its c
 transpose.
 
 .. note::
-  You can dowload this code visiting http://pm.bsc.es *OmpSs Examples and Exercises* (code) link.
-  The Cholesky kernel is inside  *01-examples*'s directory.
+  You can dowload this code visiting the url http://pm.bsc.es *OmpSs Examples and Exercises*'s
+  (code) link. The Cholesky kernel is included inside the  *01-examples*'s directory.
 
 The kernel uses four different linear algorithms: potrf, trsm, gemm and syrk.
 Following code shows the basic pattern for a Cholesky factorisation::
