@@ -6,3 +6,4 @@ GPU Device Exercises
 
    saxpy-cuda/README.rst
    krist-cuda/README.rst
+   matmul-cuda/README.rst
