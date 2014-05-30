@@ -1,27 +1,54 @@
-MCC=allmcc
-NVCC = mnvcc
+PROGRAM=saxpy
+KERNEL=kernel
+PREFIX=.
 
-NVFLAGS = --Wn,-arch=sm_13
-CFLAGS=--ompss -O3 --instrument -lz
+TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
-OBJECTS = kernel.o saxpy.o
+BASE_DIR=../..
+include $(BASE_DIR)/common-files/Makefile
 
-#link everything 
-saxpy: $(OBJECTS)
-	${MCC} ${CFLAGS} -o saxpy $(OBJECTS)
+CC = mcc
+KC = nvcc
 
-#compile kernels
-kernel.o: kernel.cu kernel_header.h
-	${NVCC} ${NVFLAGS} ${CFLAGS} -c kernel.cu
+CFLAGS = --ompss
+CFLAGS_P =
+CFLAGS_I = --instrument
+CFLAGS_D = --debug
 
-#compile kernels
-saxpy.o: saxpy.c
-	${MCC} ${CFLAGS} -c saxpy.c
+NVCFLAGS = -O3
+
+LIBS  = 
+INCS  = -I$(PREFIX)
+
+EXTRA = -O3 -Wall -Wno-unused 
+OBJECTS=
+
+$(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o $(OBJECTS)
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
+
+$(PROGRAM)-i: $(PROGRAM)-i.o $(KERNEL).o $(OBJECTS)
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
+
+$(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o $(OBJECTS)
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
+
+
+$(PROGRAM)-p.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
+
+$(PROGRAM)-i.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
+
+$(PROGRAM)-d.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
+
+
+$(KERNEL).o: $(KERNEL).cu $(PREFIX)/$(KERNEL).h
+	$(KC) $(INCS) -o $@ -c $< 
+
+.c.o:
+	$(CC) --no-openmp $(EXTRA) -c $<
 
 clean:
-	rm -f *.o saxpy
+	rm -f $(CC)_* *.o *~ $(TARGETS) 
 
-wipe: clean
-	$(RM) *.out *.err
-	$(RM) *.prv *.row *.pcf
-	$(RM) graph.dot graph.pdf

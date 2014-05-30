@@ -1,4 +1,4 @@
-#include "kernel_header.h"
+#include <kernel.h>
 
 #define N 1024
 int main(int argc, char* argv[]) {
