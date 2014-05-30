@@ -5,9 +5,7 @@ This documentation contains examples and exercises using the OmpSs programming m
 
 .. note::
    There is a PDF version of this document at http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf
-
-.. note::
-   Examples and exercises are available in http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
+   You can also dowload all the examples and exercises from http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
 
 System configuration
 ---------------------
