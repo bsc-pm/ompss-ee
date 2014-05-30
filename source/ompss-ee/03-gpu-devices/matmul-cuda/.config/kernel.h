@@ -18,7 +18,7 @@ extern "C"
 //Remember, we want to multiply two matrices, (A*B=C) where all of them have size NB*NB
 #pragma omp target device(cuda) ndrange(2,NB,NB,16,16) copy_deps
 #pragma omp task inout([NB*NB]C) in([NB*NB]A,[NB*NB]B)
-__global__ void Muld(REAL* A, REAL* B, int wA, int wB, REAL* C,int NB)
+__global__ void Muld(REAL* A, REAL* B, int wA, int wB, REAL* C,int NB);
 
 #ifdef __cplusplus
 }

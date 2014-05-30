@@ -1,4 +1,4 @@
-#include "kernel.cuh"
+#include <kernel.h>
 
 // Thread block size
 #define BLOCK_SIZE 16
