@@ -4,8 +4,8 @@ Introduction
 This documentation contains examples and exercises using the OmpSs programming model.
 
 .. note::
-   There is a PDF version of this document at http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf
-   You can also dowload all the examples and exercises from http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
+   A PDF version of this document is available in http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf, and
+   all the example source codes in http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
 
 System configuration
 ---------------------
@@ -112,17 +112,13 @@ Finally the make utility will generate (if not already present in the directory)
 files as it is the case of ''extrae.xml'' file (used to configure extrae plugin in order to get a
 Paraver trace, see ''trace.sh'' file).
 
-Job Scheduler Examples
-----------------------
+Job Scheduler: Minotauro
+------------------------
 
-The following sections have examples on how to use job scheduler systems installed at BSC machines.
-
-Minotauro
-^^^^^^^^^
-
-Slurm is the utility used at MinoTauro for batch processing support, so all jobs must be run through
-it. This document provides information for getting started with job execution at the Cluster. These
-are the basic directives to submit jobs:
+The following sections have examples on how to use job scheduler systems installed at Minotauro
+BSC's machine. Slurm is the utility used in this machine for batch processing support, so all jobs
+must be run through it. This document provides information for getting started with job execution
+at the Cluster. These are the basic directives to submit jobs:
 
   * mnsubmit <job_script> submits a ''job script'' to the queue system (see below for job script
     directives).
