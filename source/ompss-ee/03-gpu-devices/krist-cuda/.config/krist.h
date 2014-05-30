@@ -1,28 +1,29 @@
-
 #define DIM2_H 4
 #define DIM2_A 4
 #define DIM2_E 2
 
 #if DIM2_H == 4
-#define TYPE_H float4
+  #define TYPE_H float4
 #endif
 #if DIM2_H == 3
-#define TYPE_H float3
+  #define TYPE_H float3
 #endif
+
 #if DIM2_A == 4
-#define TYPE_A float4
+  #define TYPE_A float4
 #endif
 #if DIM2_A == 3
-#define TYPE_A float3
+  #define TYPE_A float3
 #endif
+
 #if DIM2_E == 4
-#define TYPE_E float4
+  #define TYPE_E float4
 #endif
 #if DIM2_E == 3
-#define TYPE_E float3
+  #define TYPE_E float3
 #endif
 #if DIM2_E == 2
-#define TYPE_E float2
+  #define TYPE_E float2
 #endif
 
 #ifdef __cplusplus

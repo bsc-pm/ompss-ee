@@ -33,8 +33,7 @@ int main(int argc, char*argv[])
     float *h;  /* h[j,0] == h, h[j,1] == k, h[j,2] == l */
     float *E;  /* E[j,0] == real part of E, E[j,1] == imag part of E */
     float *E1;  /* E[j,0] == real part of E, E[j,1] == imag part of E */
-    float *a;  /* a[j,0] == atomic number, a[j,1] == x, a[j,2] == y,
-                 a[j,3] == z */
+    float *a;  /* a[j,0] == atomic number, a[j,1] == x, a[j,2] == y, a[j,3] == z */
     double t0,dt1,dt2;
     int i;
 
@@ -87,7 +86,9 @@ int main(int argc, char*argv[])
     for (tt=0; tt<times; tt++) {
         structfac_gpuss(na,nr,NA,a,NH,h,NE,E1);
     }
+
 #pragma omp taskwait
+
     dt2 = (wallclock() - t0) / times ;
 
     if (compute_serial) {
