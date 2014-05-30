@@ -1,29 +1,31 @@
 Introduction
 ============
 
-This documentation contains examples and exercises using the OmpSs programming model. All the
-examples used in this document can be downloaded from the site: http://pm.bsc.es
+This documentation contains examples and exercises using the OmpSs programming model.
 
-Getting Started
----------------
+.. note::
+   There is a PDF version of this document at http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf
+
+.. note::
+   Examples and exercises are available in http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
+
+System configuration
+---------------------
 
 In this section we describe how to tune your configure script and also how to use it to configure
-your environment. If you have a pre-configured package simply skip the configure script section.
+your environment. If you have a pre-configured package you can skip this section and simply run
+the Linux command ``source`` using your configure script::
 
-The configure script
-^^^^^^^^^^^^^^^^^^^^
+  $source configure.sh
 
 The configure script is used to set all environment variables you need to properly execute
 OmpSs applications. Among other things it contains the PATH where the system will look for
 to find mercurium compiler utility, and the MKL installation directory (if available) to
 run specific OmpSs applications (e.g. Cholesky kernel).
 
-System configuration
-^^^^^^^^^^^^^^^^^^^^
+To configure your system you have to run the Linux command ``source`` using your configure script::
 
-To configure your system you have to run Linux command ''source'' using your configure script::
-
-   $source configure.sh
+  $source configure.sh
 
 The make utility
 ----------------
