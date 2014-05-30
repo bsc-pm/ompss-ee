@@ -1,4 +1,4 @@
-#include"kernel_header.cuh"
+#include <kernel.h>
 
 
 __device__ void calculate_force(

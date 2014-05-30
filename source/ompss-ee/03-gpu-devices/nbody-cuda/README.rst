@@ -7,14 +7,15 @@ In this case we want to port a traditional SMP source code to another one which 
 beneficts of CUDA/OpenCL. Someone already ported the kernel, so it does the same calculations
 than the previous SMP function.
 
-Sources are not complete, we only have the C code which is calling a SMP function and a CUDA/OCL kernel, they do not interact with each other. 
+Sources are not complete, we only have the C code which is calling a SMP function and a CUDA/OCL
+kernel, they do not interact with each other. 
 
 Kernel.c::
   //Call the kernel
   calculate_particles_smp(bs,time_interval,number_of_particles,this_particle_array, &output_array[i], i, i+bs-1);   
 
 In this case there is nothing but a kernel ported by someone and a code calling a smp function.
-We’ll need to declare the kernel as an OmpSs task as we have done in previous samples
+We’ll need to declare the kernel as an OmpSs task as we have done in previous examples.
 
 ..note::
 Use an intermediate header file and include it, it will work if we declare it on the .c file).

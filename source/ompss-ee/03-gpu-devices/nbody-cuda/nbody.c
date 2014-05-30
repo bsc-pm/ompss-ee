@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "nbody.h"
 #include <time.h>
+#include <kernel.h>
+#include "nbody.h"
 
 #define default_domain_size_x               1.0e+18 /* m  */
 #define default_domain_size_y               1.0e+18 /* m  */
@@ -37,6 +38,8 @@ static int          number_of_timesteps;
 static int          timesteps_between_outputs;
 static unsigned int random_seed;
 
+const int MAX_NUM_THREADS= 128;
+
 static void Particle_input_arguments(FILE *);
 static Particle* Particle_array_construct(int number_of_particles);
 static void Particle_array_initialize(Particle* this_particle_array, int number_of_particles);
@@ -46,7 +49,16 @@ static void Particle_array_output(char* base_filename, Particle* this_particle_a
 static Particle* Particle_array_destruct(Particle* this_particle_array, int number_of_particles);
 static void Particle_array_output_xyz(FILE * fileptr, Particle* this_particle_array, int number_of_particles);
 void Particle_broadcast_arguments(); 
-void Particle_array_calculate_forces_cuda(Particle*, Particle *, int, float );
+
+void Particle_array_calculate_forces_cuda(Particle* this_particle_array, Particle *output_array, int number_of_particles, float time_interval ) {
+        const int bs = number_of_particles/1;
+        int i;
+
+        for ( i = 0; i < number_of_particles; i += bs )
+        {   
+		   calculate_force_func(bs,time_interval,number_of_particles,this_particle_array, &output_array[i], i, i+bs-1);	
+        }
+}
 
 double wall_time ( )
 {
