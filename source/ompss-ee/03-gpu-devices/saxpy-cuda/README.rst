@@ -1,6 +1,8 @@
 Saxpy kernel
 ------------
 
+.. highlight:: c
+
 In this exercise we will work with the Saxpy kernel. This algorithm sums one vector with another
 vector multiplied by a constant. 
 
@@ -11,7 +13,7 @@ The sources are not complete, but the standard structure for OmpSs CUDA/Kernel i
  * There is a kernel header file which declares the kernel as a task, this header must be
    included in the C-file and can also be included in the kernel file (not strictly needed).
 
-Kernel.h::
+Kernel header file (kernel.h) have::
 
   #pragma target device(cuda) copy_deps ndrange( /*???*/ )
   #pragma omp task in([n]x) inout([n]y)

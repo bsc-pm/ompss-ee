@@ -1,6 +1,8 @@
 Krist kernel
 ------------
 
+.. highlight:: c
+
 Krist kernel is used on crystallography to find the exact shape of a molecule using Rntgen
 diffraction on single crystals or powders. We’ll execute the same kernel many times.
 
@@ -13,7 +15,7 @@ The sources are not complete, but the standard structure for OmpSs CUDA/Kernel i
    must be included in the C-file and can also be included in the kernel file (not strictly
    needed).
 
-Krist header file (krist.h)::
+Krist header file (krist.h) have::
 
   #pragma omp target device(cuda) copy_deps //ndrange?
   #pragma omp task //in and outs?

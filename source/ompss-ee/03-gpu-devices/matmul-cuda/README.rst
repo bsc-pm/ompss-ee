@@ -1,6 +1,8 @@
 Matrix Multiply
 ---------------
 
+.. highlight:: c
+
 In this exercise we will work with the Matmul kernel. This algorithm is used to multiply two
 2D-matrices and store the result in a third one. Every matrix has the same size. 
 
@@ -15,7 +17,7 @@ Sources are not complete, but the standard file structure for OmpSs CUDA/Kernel 
  * There is a kernel header file which declares the kernel as a task, this header must be
    included in the C-file and can also be included in the kernel file (not strictly needed).
   
-matmul.h::
+Matrix multiply header file (matmul.h) have::
 
   //Kernel declaration as a task should be here
   //Remember, we want to multiply two matrices, (A*B=C) where all of them have size NB*NB
@@ -24,7 +26,7 @@ In this header, there is no kernel declared as a task, you have to search into t
 file in order to see which kernel you need to declare, declare the kernel as a task, by placing
 its declaration and the pragmas over it.
 
-..note::
+.. note::
 In this case as we are multiplying a two-dimension matrix, so the best approach is to use a
 two-dimension ndrange.
 
