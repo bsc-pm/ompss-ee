@@ -13,6 +13,7 @@ OmpSs Examples and Exercises
    ompss-ee/01-examples/README.rst
    ompss-ee/02-introduction/README.rst
    ompss-ee/03-gpu-devices/README.rst
+   ompss-ee/04-mpi+ompss/README.rst
 
 
 .. Indices and tables
