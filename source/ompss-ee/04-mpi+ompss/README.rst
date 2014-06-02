@@ -5,3 +5,4 @@ MPI+OmpSs Exercises
    :maxdepth: 2
 
    heat/README.rst
+   matmul/README.rst
