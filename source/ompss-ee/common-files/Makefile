@@ -4,7 +4,9 @@ CONFIG_DIR=.config
 PARAVER=extrae.xml trace.sh
 SCRIPTS=run-once.sh multirun.sh
 
+MPI_CHECK=$(MPI_LIB_DIR)/libmpi.so
 MKL_CHECK=$(MKL_LIB_DIR)/libmkl_sequential.so
+ATLAS_CHECK=$(ATLAS_LIB_DIR)/libatlas.a
 
 all: $(TARGETS) $(SCRIPTS) $(PARAVER)
 
@@ -24,9 +26,21 @@ multirun.sh:
 	cat $(COMMON_DIR)/sched-job >> multirun.sh 
 	cat $(CONFIG_DIR)/multirun.sh >> multirun.sh 
 
+$(MPI_CHECK):
+	@echo "=================================================="
+	@echo "===           MPI LIBRARY NEEDED               ==="
+	@echo "=================================================="
+	@false
+
 $(MKL_CHECK):
 	@echo "=================================================="
 	@echo "===           MKL LIBRARY NEEDED               ==="
+	@echo "=================================================="
+	@false
+
+$(ATLAS_CHECK):
+	@echo "=================================================="
+	@echo "===          ATLAS LIBRARY NEEDED              ==="
 	@echo "=================================================="
 	@false
 

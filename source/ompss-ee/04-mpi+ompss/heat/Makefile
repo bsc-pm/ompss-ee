@@ -14,31 +14,31 @@ CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
 
-LIBS  = -L/usr/lib64 -L/opt/compilers/intel/lib/intel64/ -lirc -L/opt/mpi/bullxmpi/1.1.11.1/lib -lpthread -lc -lm -lutil -lnsl -ldl -lopen-pal -lopen-rte -lrt -libverbs -lmpi  -L/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib -lcblas -latlas
+LIBS  = -L$(ATLAS_LIB_DIR) -lcblas -latlas -L$(MPI_LIB_DIR) -lopen-pal -lopen-rte -lmpi
+INCS  = -I. -I$(MPI_INC_DIR) -I$(ATLAS_INC_DIR)
 
-INCS  = -I. -I/opt/mpi/bullxmpi/1.1.11.1/include -I/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
 
 EXTRA = -std=c99 -O3 -Wall -Wno-unused 
 OBJECTS = misc.o
 
 all: $(TARGETS)
 
-$(PROGRAM)-p: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(SOLVER)-p.o
+$(PROGRAM)-p: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(SOLVER)-p.o $(ATLAS_CHECK) $(MPI_CHECK)
 	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS) $(SOLVER)-p.o
 
-$(PROGRAM)-i: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(SOLVER)-i.o
+$(PROGRAM)-i: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(SOLVER)-i.o $(ATLAS_CHECK) $(MPI_CHECK)
 	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS) $(SOLVER)-i.o
 
-$(PROGRAM)-d: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(SOLVER)-d.o
+$(PROGRAM)-d: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(SOLVER)-d.o $(ATLAS_CHECK) $(MPI_CHECK)
 	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS) $(SOLVER)-d.o
 
-$(SOLVER)-p.o: $(PREFIX)/$(SOLVER).c
+$(SOLVER)-p.o: $(PREFIX)/$(SOLVER).c $(ATLAS_CHECK) $(MPI_CHECK)
 	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
 
-$(SOLVER)-i.o: $(PREFIX)/$(SOLVER).c
+$(SOLVER)-i.o: $(PREFIX)/$(SOLVER).c $(ATLAS_CHECK) $(MPI_CHECK)
 	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
 
-$(SOLVER)-d.o: $(PREFIX)/$(SOLVER).c
+$(SOLVER)-d.o: $(PREFIX)/$(SOLVER).c $(ATLAS_CHECK) $(MPI_CHECK)
 	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
 
 .c.o:

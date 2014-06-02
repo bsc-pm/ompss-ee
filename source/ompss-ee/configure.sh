@@ -4,16 +4,28 @@ DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
 if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   # (@BSC) Marenostrum III section
+  export MPI_LIB_DIR=
+  export MPI_INC_DIR=
   export MKL_LIB_DIR=/opt/intel/mkl/lib/intel64/
   export MKL_INC_DIR=/opt/intel/mkl/include/
+  export ATLAS_LIB_DIR=
+  export ATLAS_INC_DIR=
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
+  export MPI_LIB_DIR=/opt/mpi/bullxmpi/1.1.11.1/lib
+  export MPI_INC_DIR=/opt/mpi/bullxmpi/1.1.11.1/include
   export MKL_LIB_DIR=/opt/compilers/intel/mkl/lib/intel64/
   export MKL_INC_DIR=/opt/compilers/intel/mkl/include/
+  export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
+  export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
 else
   # Other Machines (AD-HOC) section
+  export MPI_LIB_DIR=
+  export MPI_INC_DIR=
   export MKL_LIB_DIR=
   export MKL_INC_DIR=
+  export ATLAS_LIB_DIR=
+  export ATLAS_INC_DIR=
 fi
 
 # Configure OmpSs + Extrae + Paraver
@@ -25,7 +37,9 @@ export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
 export PATH=$OMPSS_HOME/bin:$PATH
 export PATH=$EXTRAE_HOME/bin/:$PATH
 export PATH=$PARAVER_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$MPI_LIB_DIR:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$MKL_LIB_DIR:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$ATLAS_LIB_DIR:$LD_LIBRARY_PATH
 
 echo Basic configuration...
 
@@ -52,19 +66,31 @@ if [ ! -f $DIRNAME/common-files/sched-job ]; then
    echo WARNING: Job schedule file is not configured for this machine!
 else
    if [ -s $DIRNAME/common-files/sched-job ] ; then
-      echo Not using any job schedule feature for this machine
+      echo No job schedule configuration...
    else
-      echo Job schedule configuration file...
+      echo Job schedule configuration preface...
       cat  $DIRNAME/common-files/sched-job
    fi
 fi
 
 echo Aditional libraries...
 
+if [ ! -f $MPI_LIB_DIR/libmpi.so ]; then
+   echo \ \ WARNING: MPI library is not found, some tests will not be compiled!
+else
+   echo \ \ MPI library at $MPI_LIB_DIR
+fi
+
 if [ ! -f $MKL_LIB_DIR/libmkl_sequential.so ]; then
-   echo \ \ WARNING: MKL library is not found, will not be compiled!
+   echo \ \ WARNING: MKL library is not found, some tests will not be compiled!
 else
    echo \ \ MKL library at $MKL_LIB_DIR
+fi
+
+if [ ! -f $ATLAS_LIB_DIR/libatlas.a ]; then
+   echo \ \ WARNING: ATLAS library is not found, some tests will not be compiled!
+else
+   echo \ \ ATLAS library at $ATLAS_LIB_DIR
 fi
 
 if [ "X$1" == "X--pack" ];
