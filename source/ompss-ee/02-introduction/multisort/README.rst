@@ -1,6 +1,8 @@
 Multisort application
 ---------------------
 
+.. highlight:: c
+
 Multisort application, sorts an array using a divide and conquer strategy. The vector is split
 into 4 chunks, and each chunk is recursively sorted (as it is recursive, it may be even split
 into other 4 smaller chunks), and then the result is merged. When the vector size is smaller

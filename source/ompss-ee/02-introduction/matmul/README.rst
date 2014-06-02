@@ -1,6 +1,8 @@
 Matrix Multiplication
 ---------------------
 
+.. highlight:: c
+
 This example performs the multiplication of two matrices (A and B) into a third one (C). Since
 the code is not optimized, not very good performance results are expected. Think about how to
 parallelize (using OmpSs) the following code found in compute() function::

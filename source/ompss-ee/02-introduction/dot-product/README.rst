@@ -1,6 +1,8 @@
 Dot Product
 -----------
 
+.. highlight:: c
+
 The dot product is an algebraic operation that takes two equal-length sequences of numbers and
 returns a single number obtained by multiplying corresponding entries and then summing those
 products. This is the code that you can found in dot_product() function::
