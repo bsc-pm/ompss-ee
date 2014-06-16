@@ -12,3 +12,4 @@ installation.
 
    cholesky/README.rst
    stream-barr/README.rst
+   array-sum-fortran/README.rst

@@ -1,0 +1,85 @@
+PROGRAM P
+    IMPLICIT NONE
+    INTEGER  N
+    INTEGER  BS
+    INTEGER, ALLOCATABLE :: VEC1(:), VEC2(:), RESULTS(:)
+    INTEGER :: I, J, K, ARGC
+    LOGICAL :: NOK
+    CHARACTER(LEN=32) :: ARG
+    REAL(8) :: START, END
+    REAL(8), EXTERNAL :: OMP_GET_WTIME
+    INTEGER, EXTERNAL :: OMP_GET_NUM_THREADS
+
+
+  ! READ THE COMMAND LINE
+    ARGC = COMMAND_ARGUMENT_COUNT()
+    IF (ARGC == 2) THEN
+        CALL GET_COMMAND_ARGUMENT(1, ARG)
+        ARG = TRIM(ARG)
+        READ(ARG, '(I10)') N
+
+        CALL GET_COMMAND_ARGUMENT(2, ARG)
+        ARG = TRIM(ARG)
+        READ(ARG, '(I10)') BS
+    ELSE
+        PRINT *, "INVALID NUMBER OF ARGUMENTS! EXPECTED: ./ARRAY_SUM N BS"
+        STOP 1
+    END IF
+
+    IF (MOD(N,BS) /= 0) THEN
+        PRINT *, "N =", N, "IS NOT DIVISIBLE BY BS =", BS
+        STOP 2
+    END IF
+
+
+    ALLOCATE(VEC1(N))
+    ALLOCATE(VEC2(N))
+    ALLOCATE(RESULTS(N))
+
+
+    START = OMP_GET_WTIME()
+   DO K=1,1000
+
+   IF(MOD(K,100)==0) WRITE(0,*) 'K=',K
+
+    ! INITIALIZE THE ARRAYS
+    DO I=1, N, BS
+        !$OMP TASK OUT(VEC1(I:I+BS-1), VEC2(I:I+BS-1), RESULTS(I:I+BS-1))&
+        !$OMP PRIVATE(J) FIRSTPRIVATE(I, BS) LABEL(INIT_TASK)
+            DO J = I, I+BS-1
+                VEC1(J) = J
+                VEC2(J) = N + 1 - J
+                RESULTS(J) = -1
+            END DO
+        !$OMP END TASK
+    ENDDO
+
+    ! RESULTS = VEC1 + VEC2
+    DO I=1, N, BS
+        !$OMP TASK OUT(VEC1(I:I+BS-1), VEC2(I:I+BS-1)) IN(RESULTS(I:I+BS-1))&
+        !$OMP PRIVATE(J) FIRSTPRIVATE(I, BS) LABEL(ARRAY_SUM_TASK)
+            DO J = I, I+BS-1
+                RESULTS(J) = VEC1(J) + VEC2(J)
+            END DO
+        !$OMP END TASK
+    ENDDO
+
+    ENDDO ! K
+
+    !$OMP TASKWAIT
+    END = OMP_GET_WTIME()
+    PRINT *, "OMPSS-> TIME:", END - START, "NUM_THREADS:", OMP_GET_NUM_THREADS(), "N:", N, "BS:", BS
+
+    NOK = (ANY(RESULTS /= N + 1))
+
+    DEALLOCATE(VEC1)
+    DEALLOCATE(VEC2)
+    DEALLOCATE(RESULTS)
+
+    IF (NOK) THEN
+        PRINT *, "ERROR!"
+        STOP 1
+    ELSE
+        PRINT *, "OK!"
+    ENDIF
+END PROGRAM P
