@@ -31,7 +31,7 @@ version::
 
 As the code is already annotated with some task directives, try to compile and run the program.
 Is it verifying? Why do you think it is failing? Running an unmodified version of this code may
-also raise a Segmentation Fault. Insvestigate which is the cause of that problem. Although it
+also raise a Segmentation Fault. Investigate which is the cause of that problem. Although it
 is not needed, you can also try to debug program execution using gdb debugger (with the ompss
 debug version)::
 
