@@ -35,7 +35,7 @@ Remind: ND-range clause has three members:
    vectors in this case).
  * The third one is the group size (number of threads per block), in this kind of kernels which
    do not use shared memory between groups, any number from 16 to 128 will work correctly (optimal
-   number depends on hardware, kernel code...
+   number depends on hardware, kernel code...)
 
 Once the ndrange clause is correct and the input/outputs are correctly defined. We can proceed to
 compile the source code, using the command 'make'. After it (if there are no errors), we can
