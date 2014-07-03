@@ -1,6 +1,4 @@
-
-
-#include "cuda_potrf.cuh"
+#include "cuda_potrf.h"
 // http://www.ast.cam.ac.uk/~stg20/cuda/cholesky/
 
 

@@ -15,21 +15,22 @@ CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
 
-NVCFLAGS = -O3
+NVCFLAGS = -O3 -arch=sm_13
 
-LIBS  = 
-INCS  = -I$(PREFIX)
+
+LIBS  = --Wl,-L$(MKL_LIB_DIR) -lmkl_sequential -lmkl_core -lmkl_rt -lpthread
+INCS  = -I$(PREFIX) -I$(MKL_INC_DIR)
 
 EXTRA = -O3 -Wall -Wno-unused 
 
-$(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o clocks.o
+$(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o $(MKL_CHECK)
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o
 
-$(PROGRAM)-i: $(PROGRAM)-i.o $(KERNEL).o clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o clocks.o
+$(PROGRAM)-i: $(PROGRAM)-i.o $(KERNEL).o $(MKL_CHECK)
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o
 
-$(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o clocks.o
+$(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o $(MKL_CHECK)
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o
 
 
 $(PROGRAM)-p.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
@@ -43,7 +44,7 @@ $(PROGRAM)-d.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
 
 
 $(KERNEL).o: $(KERNEL).cu $(PREFIX)/$(KERNEL).h
-	$(KC) $(INCS) -o $@ -c $< 
+	$(KC) $(NVCFLAGS) $(INCS) -o $@ -c $< 
 
 .c.o:
 	$(CC) --no-openmp $(EXTRA) -c $<

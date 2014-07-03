@@ -27,8 +27,6 @@ int NUM_NODES;
 #define CONVERT_REQUEST 0
 #define POTRF_SMP 0
 #define POTRF_NESTED 0
-#define MAGMA_BLAS 0
-#define BSC_POTRF 0
 #define CUDA_POTRF 1
 #endif
 
@@ -38,7 +36,6 @@ int NUM_NODES;
 #define CONVERT_REQUEST 0
 #define POTRF_SMP 1
 #define POTRF_NESTED 0
-#define MAGMA_BLAS 0
 #endif
 
 #ifdef CHOL_NESTED
@@ -47,7 +44,6 @@ int NUM_NODES;
 #define CONVERT_REQUEST 0
 #define POTRF_SMP 0
 #define POTRF_NESTED 1
-#define MAGMA_BLAS 0
 #endif
 
 #ifdef CHOL_CONVERT_UNDER_REQUEST
@@ -56,16 +52,6 @@ int NUM_NODES;
 #define CONVERT_REQUEST 1
 #define POTRF_SMP 0
 #define POTRF_NESTED 0
-#define MAGMA_BLAS 0
-#endif
-
-#ifdef CHOL_MAGMA
-#define CHOL_VERSION_DEFINED 4
-#define CONVERT_TASK 1
-#define CONVERT_REQUEST 0
-#define POTRF_SMP 1
-#define POTRF_NESTED 0
-#define MAGMA_BLAS 1
 #endif
 
 // Configuration variables defined from compile line
@@ -76,11 +62,6 @@ int NUM_NODES;
 
 #ifdef CUSTOM_CONFIG
   #define CHOL_VERSION_DEFINED 6
-  #ifdef MG
-    #define MAGMA_BLAS 1
-  #else
-    #define MAGMA_BLAS 0
-  #endif
   
   #ifdef CT
     #define CONVERT_TASK 1
@@ -128,11 +109,9 @@ int NUM_NODES;
 #define CONVERT_REQUEST 0 // Not working...
 #define POTRF_SMP       0
 #define POTRF_NESTED    0
-#define MAGMA_BLAS      0
 #define USE_PRIORITY    1
 #define USE_PINNED      1
 #define USE_IMPLEMENTS  0
-#define BSC_POTRF       0
 #define CUDA_POTRF      1
 #endif
 
@@ -150,23 +129,15 @@ int NUM_NODES;
  #endif
 #endif
 
-// Include GPU kernel's library: MAGMA or CUBLAS
-#if MAGMA_BLAS
-#include <magma.h>
-#include <cublas.h>
+// Include GPU kernel's library
+#if CUDA_VERSION < 5000
+# include <cublas.h>
 #else
-# if CUDA_VERSION < 5000
-#  include <cublas.h>
-# else
-#  include <cublas_v2.h>
-# endif
+# include <cublas_v2.h>
 #endif
 
-#if BSC_POTRF
-#  include "bsc_potrf.h"
-#endif
 #if CUDA_POTRF
-#  include "cuda_potrf.cuh"
+#  include "cuda_potrf.h"
 #endif
 
 // Define macro's to make the code cleaner
@@ -222,31 +193,14 @@ int NUM_NODES;
 #endif
 
 
-#if MAGMA_BLAS
-#define gpu_d_potrf     magma_dpotrf_gpu
-#define gpu_blas_d_gemm magmablas_dgemm
-#define gpu_blas_d_trsm magmablas_dtrsm
-#define gpu_blas_d_syrk cublasDsyrk // = magmablas_dsyrk
-#define gpu_s_potrf     magma_spotrf_gpu
-#define gpu_blas_s_gemm magmablas_sgemm
-#define gpu_blas_s_trsm magmablas_strsm
-#define gpu_blas_s_syrk cublasSsyrk // = magmablas_ssyrk
-#define gpu_blas_s_syrk cublasSsyrk
-#else
 #define gpu_blas_d_gemm cublasDgemm
 #define gpu_blas_d_trsm cublasDtrsm
 #define gpu_blas_d_syrk cublasDsyrk
 #define gpu_blas_s_gemm cublasSgemm
 #define gpu_blas_s_trsm cublasStrsm
 #define gpu_blas_s_syrk cublasSsyrk
-#  if BSC_POTRF
-#   define gpu_s_potrf  bsc_spotrf
-#   define gpu_d_potrf  bsc_dpotrf
-#  elif CUDA_POTRF
-#   define gpu_s_potrf  cuda_spotrf
-#   define gpu_d_potrf  cuda_dpotrf
-#  endif
-#endif
+#define gpu_s_potrf  cuda_spotrf
+#define gpu_d_potrf  cuda_dpotrf
 
 #if USE_PINNED
 #define my_malloc nanos_malloc_pinned_cuda
@@ -584,17 +538,8 @@ void potrf_tile_gpu(REAL *A, int NB)
     cublasSetKernelStream(stream);
 
 
-  #if MAGMA_BLAS
-    gpu_potrf(L, NB, A, NB, &INFO);
-  #elif !(BSC_POTRF || CUDA_POTRF)
-    int block = 32;
-    REAL * address = A;
-    gpu_spotrf_var1_(&L, &NB, (unsigned int *) &address, &NB, &block, &INFO);
-  #else
     cublasHandle_t handle = nanos_get_cublas_handle();
     gpu_potrf( handle, L, NB, A, NB, &INFO );
-    //gpu_potrf( L, NB, A, NB, &INFO );
-  #endif
 }
 #endif
 
@@ -653,7 +598,7 @@ void gemm_tile_gpu(REAL  *A, REAL *B, REAL *C, unsigned long NB)
     // new api:
     //cublasSetStream(nanos_get_cublas_handle(), stream);
 
-#if CUDA_VERSION < 5000 || MAGMA_BLAS
+#if CUDA_VERSION < 5000
     cublasSetKernelStream(stream);
     gpu_blas_gemm(NT, TR,
                   NB, NB, NB,
@@ -725,7 +670,7 @@ void trsm_tile_gpu(REAL *T, REAL *B, unsigned long NB, unsigned priority)
 
     cudaStream_t stream = nanos_get_kernel_execution_stream();
 
-#if CUDA_VERSION < 5000 || MAGMA_BLAS
+#if CUDA_VERSION < 5000
     cublasSetKernelStream(stream);
     gpu_blas_trsm(RI, LO, TR, NU, NB, NB,
                   DONE, T, NB, B, NB );
@@ -1077,7 +1022,7 @@ int main(int argc, char* argv[])
 
     // Print configuration
     PRINT_PRECISION;
-    printf("\tCONVERT_TASK %d\n\tCONVERT_REQUEST %d\n\tPOTRF_SMP %d\n\tPOTRF_NESTED %d\n\tMAGMA_BLAS %d\n\tUSE_PRIORITY %d\n\tUSE_PINNED %d\n\tUSE_IMPLEMENTS %d\n", CONVERT_TASK, CONVERT_REQUEST, POTRF_SMP, POTRF_NESTED, MAGMA_BLAS, USE_PRIORITY, USE_PINNED, USE_IMPLEMENTS);
+    printf("\tCONVERT_TASK %d\n\tCONVERT_REQUEST %d\n\tPOTRF_SMP %d\n\tPOTRF_NESTED %d\n\tUSE_PRIORITY %d\n\tUSE_PINNED %d\n\tUSE_IMPLEMENTS %d\n", CONVERT_TASK, CONVERT_REQUEST, POTRF_SMP, POTRF_NESTED, USE_PRIORITY, USE_PINNED, USE_IMPLEMENTS);
 
     // Print results
     printf( "============ CHOLESKY RESULTS ============\n" );
