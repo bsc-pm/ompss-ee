@@ -1,4 +1,0 @@
-Heat benchmark
---------------
-
-This is...
