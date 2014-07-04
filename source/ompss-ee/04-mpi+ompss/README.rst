@@ -3,6 +3,6 @@ MPI+OmpSs Exercises
 
 .. toctree::
    :maxdepth: 2
-   :numbered
+   :numbered:
 
    matmul/README.rst

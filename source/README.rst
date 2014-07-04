@@ -8,7 +8,7 @@ OmpSs Examples and Exercises
 
 .. toctree::
    :maxdepth: 3
-   :numbered
+   :numbered:
 
    ompss-ee/README.rst
    ompss-ee/01-examples/README.rst
