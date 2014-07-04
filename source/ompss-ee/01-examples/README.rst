@@ -9,6 +9,7 @@ installation.
 
 .. toctree::
    :maxdepth: 2
+   :numbered
 
    cholesky/README.rst
    stream-barr/README.rst

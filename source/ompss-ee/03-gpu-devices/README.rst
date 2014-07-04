@@ -11,6 +11,7 @@ got one of them working, same steps can be done in the other version.
 
 .. toctree::
    :maxdepth: 2
+   :numbered
 
    saxpy-cuda/README.rst
    krist-cuda/README.rst
