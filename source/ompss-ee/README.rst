@@ -2,6 +2,10 @@ Introduction
 ============
 
 This documentation contains examples and exercises using the OmpSs programming model.
+The main objective of this paper is to provide guidance in learning Ompss programming
+model and serve as teaching materials in courses and tutorials. To find more complete
+applications please visit our BAR (BSC Application Repository) in the URL
+http://pm.bsc.es/projects/bar
 
 .. note::
    A PDF version of this document is available in http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf, and
@@ -115,10 +119,9 @@ Paraver trace, see ''trace.sh'' file).
 Job Scheduler: Minotauro
 ------------------------
 
-The following sections have examples on how to use job scheduler systems installed at Minotauro
-BSC's machine. Slurm is the utility used in this machine for batch processing support, so all jobs
-must be run through it. This document provides information for getting started with job execution
-at the Cluster. These are the basic directives to submit jobs:
+The current section have a short explanation on how to use the job scheduler systems installed at
+Minotauro BSC's machine. Slurm is the utility used in this machine for batch processing support,
+so all jobs must be run through it. These are the basic directives to submit jobs:
 
   * mnsubmit <job_script> submits a ''job script'' to the queue system (see below for job script
     directives).
@@ -135,4 +138,20 @@ The job would be submitted using: ''mnsubmit <job_script>''. While the jobs are 
 their status using the command ''mnq'' (it may take a while to start executing). Once a job has been
 executed you will get two files. One for console standard output (with .out extension) and other
 for console standard error (with .err extension).
+
+Job Scheduler: Marenostrum
+--------------------------
+
+LSF is the utility used at MareNostrum III for batch processing support, so all jobs must be run
+through it. This section provides information for getting started with job execution at the Cluster.
+These are the basic commands to submit, control and check your jobs:
+
+  * bsub < job_script: submits a “job script” passed through standard input (STDIN) to the queue
+    system.
+  * bjobs [−w][−X][−l job_id]: shows all the submitted jobs
+  * bkill <job_id>: remove the job from the queue system, canceling the execution of the processes,
+    if they were still running.
+  * bsc_jobs: shows all the pending or running jobs from your group.
+
+
 
