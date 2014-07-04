@@ -10,6 +10,7 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   export MKL_INC_DIR=/opt/intel/mkl/include/
   export ATLAS_LIB_DIR=
   export ATLAS_INC_DIR=
+  ln -sf $DIRNAME/common-files/sched-job_mn3 $DIRNAME/common-files/sched-job
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
   export MPI_LIB_DIR=/opt/mpi/bullxmpi/1.1.11.1/lib
@@ -18,6 +19,7 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   export MKL_INC_DIR=/opt/compilers/intel/mkl/include/
   export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
   export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
+  ln -sf $DIRNAME/common-files/sched-job_minotauro $DIRNAME/common-files/sched-job
 else
   # Other Machines (AD-HOC) section
   export MPI_LIB_DIR=
@@ -26,10 +28,11 @@ else
   export MKL_INC_DIR=
   export ATLAS_LIB_DIR=
   export ATLAS_INC_DIR=
+  touch $DIRNAME/common-files/sched-job
 fi
 
 # Configure OmpSs + Extrae + Paraver
-export OMPSS_HOME=/apps/PM/ompss/2014-04-10
+export OMPSS_HOME=/apps/PM/ompss/git
 export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
 export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
 
@@ -65,12 +68,8 @@ fi
 if [ ! -f $DIRNAME/common-files/sched-job ]; then
    echo WARNING: Job schedule file is not configured for this machine!
 else
-   if [ -s $DIRNAME/common-files/sched-job ] ; then
-      echo No job schedule configuration...
-   else
-      echo Job schedule configuration preface...
-      cat  $DIRNAME/common-files/sched-job
-   fi
+   echo Job schedule configuration preface...
+   cat  $DIRNAME/common-files/sched-job
 fi
 
 echo Aditional libraries...
