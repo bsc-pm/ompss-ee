@@ -123,7 +123,7 @@ The current section have a short explanation on how to use the job scheduler sys
 Minotauro BSC's machine. Slurm is the utility used in this machine for batch processing support,
 so all jobs must be run through it. These are the basic directives to submit jobs:
 
-  * mnsubmit <job_script> submits a ''job script'' to the queue system (see below for job script
+  * mnsubmit job_script submits a ''job script'' to the queue system (see below for job script
     directives).
   * mnq: shows all the submitted jobs.
   * mncancel <job_id> remove the job from the queue system, canceling the execution of the
@@ -146,9 +146,9 @@ LSF is the utility used at MareNostrum III for batch processing support, so all 
 through it. This section provides information for getting started with job execution at the Cluster.
 These are the basic commands to submit, control and check your jobs:
 
-  * bsub < job_script: submits a “job script” passed through standard input (STDIN) to the queue
+  * bsub < job_script: submits a ''job script'' passed through standard input (STDIN) to the queue
     system.
-  * bjobs [−w][−X][−l job_id]: shows all the submitted jobs
+  * bjobs: shows all the submitted jobs
   * bkill <job_id>: remove the job from the queue system, canceling the execution of the processes,
     if they were still running.
   * bsc_jobs: shows all the pending or running jobs from your group.
