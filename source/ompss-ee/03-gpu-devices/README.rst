@@ -16,3 +16,4 @@ got one of them working, same steps can be done in the other version.
    krist-cuda/README.rst
    matmul-cuda/README.rst
    nbody-cuda/README.rst
+   cholesky-cuda/README.rst
