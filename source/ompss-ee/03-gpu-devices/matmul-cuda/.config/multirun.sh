@@ -1,13 +1,19 @@
 PROGRAM=matmul-p
 
-export NX_THREADS=1
-export NX_GPUS=2 #change this in order to use more GPUs
+export IFS=";"
 
 export NX_GPUMAXMEM=150000000
 
-# Creating the input file
-touch test.in
-echo "8192 8192 8192 3" > test.in
+GPUS="01;02"
+SIZES="8192"
 
-# Executing the application
-./$PROGRAM
+for size in $SIZES; do
+  # Creating the input file
+  touch test.in
+  echo "$size $size $size 3" > test.in
+  for gpu in $GPUS; do
+    # Executing the application
+    NX_GPUS=$gpu NX_THREADS=1 ./$PROGRAM
+  done
+done
+
