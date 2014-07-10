@@ -34,4 +34,5 @@ $(PROGRAM)-d: $(PROGRAM).c $(KERNEL).cl
 
 clean:
 	rm -f $(CC)_* *.o *~ $(TARGETS) 
+	rm -f nbody_out.xyz
 
