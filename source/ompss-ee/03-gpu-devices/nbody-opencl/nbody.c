@@ -6,7 +6,7 @@
 #include <math.h>
 #include "nbody.h"
 #include <time.h>
-#include "kernel_header.clh"
+#include <kernel.h>
 
 #define default_domain_size_x               1.0e+18 /* m  */
 #define default_domain_size_y               1.0e+18 /* m  */

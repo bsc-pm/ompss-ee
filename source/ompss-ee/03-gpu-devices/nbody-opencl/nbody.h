@@ -16,7 +16,7 @@ typedef struct {
     float pad;
 } Particle;
 
-int MAX_NUM_THREADS= 128;
+__constant int MAX_NUM_THREADS= 128;
 
 #endif /* #ifndef nbody_h */
 

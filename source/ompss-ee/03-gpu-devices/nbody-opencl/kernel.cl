@@ -1,4 +1,4 @@
-#include "kernel_header.clh"
+#include <kernel.h>
 
 
 #ifdef cl_khr_fp64

@@ -1,23 +1,37 @@
-NVCC = allmcc
+PROGRAM=nbody
+KERNEL=kernel
+PREFIX=.config
 
-NVFLAGS = --Wn,-arch=sm_13
-#GCC44_FIX = --compiler-bindir gcc41
-CFLAGS=--ompss -O3
-#CFLAGS=--ompss -O3 -K -g --instrument -lz
-CUDADIR = /opt/cuda/4.0
+TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
-OBJECTS = nbody.o
+BASE_DIR=../..
+include $(BASE_DIR)/common-files/Makefile
 
-nbody: $(OBJECTS)
-	${NVCC} ${GCC44_FIX} ${CFLAGS} -L$(CUDADIR)/lib64 -lnanox -o nbody $(OBJECTS) ${LIBS} -lrt
+CC = mcc
 
-nbody.o: nbody.c nbody.h
-	${NVCC} ${GCC44_FIX} ${CFLAGS} -c nbody.c opencl_kernels.cl
+CFLAGS = --ompss -k
+CFLAGS_P =
+CFLAGS_I = --instrument
+CFLAGS_D = --debug
+
+LIBS  = 
+INCS  = -I$(PREFIX)
+
+EXTRA = -O3 -Wall -Wno-unused 
+OBJECTS = 
+
+$(PROGRAM)-p: $(PROGRAM).c $(KERNEL).cl
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl
+
+$(PROGRAM)-i: $(PROGRAM).c $(KERNEL).cl
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl
+
+$(PROGRAM)-d: $(PROGRAM).c $(KERNEL).cl
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl
+
+.c.o:
+	$(CC) --no-openmp $(EXTRA) -c $<
 
 clean:
-	rm -f *.o nbody
+	rm -f $(CC)_* *.o *~ $(TARGETS) 
 
-wipe: clean
-	$(RM) *.out *.err
-	$(RM) *.prv *.row *.pcf
-	$(RM) graph.dot graph.pdf

@@ -1,9 +1,8 @@
-#include "nbody.h"
+#include "../nbody.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 #pragma omp target device(opencl) ndrange(1,size,MAX_NUM_THREADS) copy_deps
 #pragma omp task in(d_particles[0;number_of_particles]) out([size] out)
