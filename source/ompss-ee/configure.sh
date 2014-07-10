@@ -4,6 +4,11 @@ DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
 if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   # (@BSC) Marenostrum III section
+  # Configure OmpSs + Extrae + Paraver
+  export OMPSS_HOME=/apps/PM/ompss/git
+  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
+  export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
+  # Extra package configuration
   export MPI_LIB_DIR=
   export MPI_INC_DIR=
   export MKL_LIB_DIR=/opt/intel/mkl/lib/intel64/
@@ -13,6 +18,11 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   ln -sf $DIRNAME/common-files/sched-job_mn3 $DIRNAME/common-files/sched-job
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
+  # Configure OmpSs + Extrae + Paraver
+  export OMPSS_HOME=/apps/PM/ompss/git
+  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
+  export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
+  # Extra package configuration
   export MPI_LIB_DIR=/opt/mpi/bullxmpi/1.1.11.1/lib
   export MPI_INC_DIR=/opt/mpi/bullxmpi/1.1.11.1/include
   export MKL_LIB_DIR=/opt/compilers/intel/mkl/lib/intel64/
@@ -22,6 +32,11 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   ln -sf $DIRNAME/common-files/sched-job_minotauro $DIRNAME/common-files/sched-job
 else
   # Other Machines (AD-HOC) section
+  # Configure OmpSs + Extrae + Paraver
+  export OMPSS_HOME=
+  export EXTRAE_HOME=
+  export PARAVER_HOME=
+  # Extra package configuration
   export MPI_LIB_DIR=
   export MPI_INC_DIR=
   export MKL_LIB_DIR=
@@ -31,10 +46,6 @@ else
   touch $DIRNAME/common-files/sched-job
 fi
 
-# Configure OmpSs + Extrae + Paraver
-export OMPSS_HOME=/apps/PM/ompss/git
-export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
-export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
 
 # Setting environment variables 
 export PATH=$OMPSS_HOME/bin:$PATH
