@@ -1,6 +1,6 @@
 PROGRAM=nbody
 KERNEL=kernel
-PREFIX=.config
+PREFIX=.
 
 TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
