@@ -51,4 +51,5 @@ $(KERNEL).o: $(KERNEL).cu $(PREFIX)/$(KERNEL).h
 
 clean:
 	rm -f $(CC)_* *.o *~ $(TARGETS) 
+	rm -f test.in
 
