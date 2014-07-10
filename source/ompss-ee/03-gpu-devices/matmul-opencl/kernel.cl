@@ -1,4 +1,4 @@
-#include "matmul_kernel.clh"
+#include <kernel.h>
 
 
 // Device multiplication function called by Mul() 

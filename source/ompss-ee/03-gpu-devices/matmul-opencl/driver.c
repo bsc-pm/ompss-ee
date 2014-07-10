@@ -78,7 +78,7 @@ int main()
 		for( i = 0; i < nrep; i++ ){
 			matmul( m, l, n, mDIM, lDIM, nDIM, a, b, c ); 
 		}
-#pragma omp taskwait
+
 		time = cclock() - time;
 		ok   = check( nrep, m, l, n, mDIM, nDIM, c);
 
