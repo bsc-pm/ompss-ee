@@ -6,9 +6,6 @@
 #include <sys/times.h>
 #include <unistd.h>
 #include <errno.h>
-#ifdef PROFILE
-#  include <google/profiler.h>
-#endif
 
 #define CUDA_VERSION 5000
 
@@ -28,22 +25,6 @@ int NUM_NODES;
 #define POTRF_SMP 0
 #define POTRF_NESTED 0
 #define CUDA_POTRF 1
-#endif
-
-#ifdef CHOL_DEVICE_COMBINED
-#define CHOL_VERSION_DEFINED 1
-#define CONVERT_TASK 1
-#define CONVERT_REQUEST 0
-#define POTRF_SMP 1
-#define POTRF_NESTED 0
-#endif
-
-#ifdef CHOL_NESTED
-#define CHOL_VERSION_DEFINED 2
-#define CONVERT_TASK 1
-#define CONVERT_REQUEST 0
-#define POTRF_SMP 0
-#define POTRF_NESTED 1
 #endif
 
 #ifdef CHOL_CONVERT_UNDER_REQUEST
@@ -844,57 +825,6 @@ void cholesky(REAL *Alin, REAL** Ah, int ts, int nt)
         }
     }
 }
-#pragma omp target device (smp) copy_deps
-#pragma omp task inout( [ts*ts]A )
-void ghost( int ts, REAL *A )
-{
-    //fprintf( stderr, "ghost A[0][0] %p - A[ts-1][ts-1] %p\n", &A[0], &A[ts*ts-1] );   
-}
-// This creates a series of "ghost" tasks that will make the runtime
-// overlap transfers from device to host as soon as possible.
-void overlap_transfers( int ts, int nt, REAL *A[nt][nt] )
-{
-    int i,j;
-    for (i = 0; i < nt; i++) {
-        for (j = 0; j < nt; j++) {
-            //fprintf( stderr, "overlap_transfers i=%d, j=%d, [%d*%d]A (ptr=%p offset = %llu)\n", i,j,ts,ts, A, A[i][j] - A[0][0]);
-            //#pragma omp target device( smp ) copy_deps
-            //#pragma omp task firstprivate( i,j, ts, nt, stderr )inout( [ts*ts]A[i][j] )
-            //{
-            //    //fprintf( stderr, "ghost A[0][0] %p - A[ts-1][ts-1] %p\n", &A[i][j][0], &A[i][j][ts*ts-1] );
-            //}
-            // mcxx bug
-            nanos_current_socket( j % NUM_NODES );
-            ghost( ts, A[i][j] );
-        }
-    }
-    // Is this needed?
-    //#pragma omp taskwait
-}
-
-void warmup( int ts )
-{
-   REAL *A = (REAL*) my_malloc( sizeof(REAL) * ts* ts );
-   REAL *B = (REAL*) my_malloc( sizeof(REAL) * ts* ts );
-   REAL *C = (REAL*) my_malloc( sizeof(REAL) * ts* ts );
-   
-   // Init matrices
-   larnv_(&intONE, &ISEED[0], &ts, A);
-   larnv_(&intONE, &ISEED[0], &ts, B);
-   larnv_(&intONE, &ISEED[0], &ts, C);
-   
-   // Call some dgemms to train the versioning scheduling
-   int i;
-   for( i = 0; i < 96; i++ ){
-      gemm_tile( A, B, C, ts );
-   }
-   
-   #pragma omp taskwait
-   
-   my_free( C );
-   my_free( B );
-   my_free( A );
-}
 
 //--------------------------- MAIN --------------------
 int main(int argc, char* argv[])
@@ -945,8 +875,6 @@ int main(int argc, char* argv[])
         }
     }
 
-    warmup( ts );
-
     nt = n / ts;
 
     // Allocate blocked matrix
@@ -974,26 +902,16 @@ int main(int argc, char* argv[])
     //t1 = get_time();
 #if !CONVERT_REQUEST
     convert_to_blocks(ts, nt, n, (REAL(*)[n]) matrix, (REAL* (*)[nt]) Ah);
-// gmiranda: wait before converting to blocks, don't compute the time until it's done
-#pragma omp taskwait
-#endif
-    // Profile
-#ifdef PROFILE
-    ProfilerStart("cholesky_profile.prof" );
+// wait before converting to blocks, don't compute the time until it's done
+#pragma omp taskwait noflush
 #endif
     t1 = get_time();
     cholesky(matrix, Ah, ts, nt);
-    // Try to force data transfers back to the host as early as possible
-    overlap_transfers( ts, nt, (REAL* (*)[nt]) Ah );
 #if !CONVERT_TASKS
 // If convert_to_linear is sequential, wait for all tasks before going on
 #pragma omp taskwait
 #endif
   
-#ifdef PROFILE
-    ProfilerStop();
-#endif  
-    
     t2 = get_time() - t1;
     convert_to_linear(ts, nt, n, (REAL* (*)[nt]) Ah, (REAL (*)[n]) matrix);
 #pragma omp taskwait
