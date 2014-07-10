@@ -2,7 +2,7 @@ PROGRAM=matmul-p
 
 export IFS=";"
 
-export NX_GPUMAXMEM=150000000
+export NX_GPUMAXMEM=90
 
 GPUS="01;02"
 SIZES="8192"

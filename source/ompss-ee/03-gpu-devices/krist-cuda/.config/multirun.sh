@@ -1,6 +1,6 @@
 PROGRAM=krist-p
 
-export NX_GPUMAXMEM=150000000
+export NX_GPUMAXMEM=90
 
 export IFS=";"
 
