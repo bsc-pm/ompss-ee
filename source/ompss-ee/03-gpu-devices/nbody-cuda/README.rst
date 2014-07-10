@@ -35,14 +35,3 @@ If we check the whole source code in nbody.c (not needed), you can see that the
 'Particle_array_calculate_forces_cuda' function in kernel.c is called 10 times, and in each call,
 the input and output array are swapped, so they act like their counter-part in the next call. So
 when we split the output, we must also split the input in as many pieces as the previous output.
-
-In this exercise we will work with the NBody kernel. This algorithm numerically approximates the
-evolution of a system of bodies in which each body continuously interacts with every other body
-
-In this case we want to port a traditional SMP source code to another one which can exploit the
-beneficts of CUDA/OpenCL. Someone already ported the kernel, so it does the same calculations than
-the previous SMP function.
-
-Sources are not complete, we only have the C code which is calling a SMP function and a CUDA/OCL
-kernel, they do not interact with each other. 
-

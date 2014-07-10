@@ -483,6 +483,8 @@ static REAL * malloc_block (int ts)
 //			 TASKS FOR CHOLESKY
 //----------------------------------------------------------------------------------
 
+#pragma omp target device (cuda) copy_deps
+#pragma omp task inout([NB*NB]A) priority(100000)
 void potrf_tile_gpu(REAL *A, int NB)
 {
     char L = 'L';
@@ -497,6 +499,8 @@ void potrf_tile_gpu(REAL *A, int NB)
     gpu_potrf( handle, L, NB, A, NB, &INFO );
 }
 
+#pragma omp target device (cuda) copy_deps
+#pragma omp task in([NB*NB]A, [NB*NB]B) inout([NB*NB]C) priority(1)
 void gemm_tile_gpu(REAL  *A, REAL *B, REAL *C, unsigned long NB)
 {
     unsigned char TR = 'T', NT = 'N';
@@ -527,6 +531,8 @@ void gemm_tile_gpu(REAL  *A, REAL *B, REAL *C, unsigned long NB)
 
 }
 
+#pragma omp target device (cuda) copy_deps
+#pragma omp task in([NB*NB]T) inout([NB*NB]B) priority(priority)
 void trsm_tile_gpu(REAL *T, REAL *B, unsigned long NB, unsigned priority)
 {
     char LO = 'L', TR = 'T', NU = 'N', RI = 'R';
@@ -549,6 +555,8 @@ void trsm_tile_gpu(REAL *T, REAL *B, unsigned long NB, unsigned priority)
 #endif
 }
 
+#pragma omp target device (cuda) copy_deps
+#pragma omp task in([NB*NB]A) inout([NB*NB]C) priority(priority)
 void syrk_tile_gpu(REAL *A, REAL *C, long NB, unsigned priority)
 {
     unsigned char LO = 'L', NT = 'N';
