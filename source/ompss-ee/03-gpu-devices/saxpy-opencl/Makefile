@@ -1,21 +1,37 @@
-MCC=allmcc
+PROGRAM=saxpy
+KERNEL=kernel
+PREFIX=.
 
-CFLAGS=--ompss -O3
+TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
-OBJECTS = saxpy.o
+BASE_DIR=../..
+include $(BASE_DIR)/common-files/Makefile
 
-#link everything 
-saxpy: $(OBJECTS)
-	${MCC} ${CFLAGS} -o saxpy $(OBJECTS)
+CC = mcc
 
-#compile saxpy
-saxpy.o: saxpy.c
-	${MCC} ${CFLAGS} -c saxpy.c kernel.cl 
+CFLAGS = --ompss
+CFLAGS_P =
+CFLAGS_I = --instrument
+CFLAGS_D = --debug
+
+LIBS  = 
+INCS  = -I$(PREFIX) --opencl-build-opts=-I$(PREFIX)
+
+EXTRA = -O3 -Wall -Wno-unused 
+OBJECTS = 
+
+$(PROGRAM)-p: $(PROGRAM).c $(KERNEL).cl $(OBJECTS)
+	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
+
+$(PROGRAM)-i: $(PROGRAM).c $(KERNEL).cl $(OBJECTS)
+	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
+
+$(PROGRAM)-d: $(PROGRAM).c $(KERNEL).cl $(OBJECTS)
+	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
+
+.c.o:
+	$(CC) --no-openmp $(EXTRA) -c $<
 
 clean:
-	rm -f *.o saxpy
+	rm -f $(CC)_* *.o *~ $(TARGETS) 
 
-wipe: clean
-	$(RM) *.out *.err
-	$(RM) *.prv *.row *.pcf
-	$(RM) graph.dot graph.pdf

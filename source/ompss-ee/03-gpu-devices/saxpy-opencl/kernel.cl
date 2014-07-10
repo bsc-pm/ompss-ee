@@ -1,4 +1,4 @@
-#include "kernel_header.h"
+#include <kernel.h>
 
 __kernel void saxpy(int n, float a,
           __global float* x, __global float* y) {
@@ -6,3 +6,4 @@ __kernel void saxpy(int n, float a,
     if(i < n)
        y[i] = a * x[i] + y[i];
 }
+
