@@ -15,7 +15,7 @@ CFLAGS_I = --instrument
 CFLAGS_D = --debug
 
 LIBS  = 
-INCS  = -I$(PREFIX)
+INCS  = -I$(PREFIX) --opencl-build-opts=-I$(PREFIX)
 
 EXTRA = -O3 -Wall -Wno-unused 
 

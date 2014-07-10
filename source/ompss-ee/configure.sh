@@ -19,7 +19,7 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
   # Configure OmpSs + Extrae + Paraver
-  export OMPSS_HOME=/apps/PM/ompss/git
+  export OMPSS_HOME=/apps/PM/ompss/cuda-async-14.5
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   # Extra package configuration
@@ -122,6 +122,25 @@ then
    pushd ..
    tar -pczf ompss-ee.tar.gz ompss-ee
    popd
+   popd
+fi
+
+if [ "X$1" == "X--wipe" ];
+then
+   pushd $DIRNAME
+   for first in `ls -d ??-*/ | cut -f1 -d'/'`;
+   do
+      echo Entering... $first
+      pushd $first
+      for second in `ls -d */ | cut -f1 -d'/'`;
+      do
+         echo Entering... $second
+         pushd $second
+         make wipe
+         popd
+      done
+      popd
+   done
    popd
 fi
 
