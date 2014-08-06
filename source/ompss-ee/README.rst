@@ -153,5 +153,14 @@ These are the basic commands to submit, control and check your jobs:
     if they were still running.
   * bsc_jobs: shows all the pending or running jobs from your group.
 
+Liablity Disclaimer
+-------------------
+
+The information included in this examples and exercises document and the associated examples's
+source file package are not guaranteed to be complete and/or error-free at this stage and they
+are subject to changes without furter notice. Barcelona Supercomputing Center will not assume any
+responsibility for errors or omissions in this document and/or the associated exmample's source
+file package. Please send comments, corrections and/or suggestions to pm-tools at bsc.es
+
 
 
