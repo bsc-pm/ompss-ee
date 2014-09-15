@@ -96,7 +96,13 @@ Appart of building the program's binnaries, the make utility will also build she
 the program. Each exercise have two running scripts, one to run a single program execution
 (''run-once.sh''), the other will run multiples configurations with respect the number of threads,
 data size, etc (''multirun.sh''). Before submitting any job, make sure all environment variables
-have the values you expect to.
+have the values you expect to. Here it is an example of the ''run-once.sh'' script::
+
+  #!/bin/bash
+  export NX_THREADS=4
+  
+  ./cholesky-p 4096 512 1
+
 
 In some cases the shell script will contain job scheduler variables declared in top of the script
 file. A job scheduler script must contain a series of directives to inform the batch system about
@@ -111,6 +117,17 @@ file is::
   export EXTRAE_CONFIG_FILE=extrae.xml
   export NX_INSTRUMENTATION=extrae
   $*
+
+Additionally you will need to change your running script in order to invoke the your program through
+the ''trace.sh'' script. Athough you can also edit your running script adding all the environment
+variables related with the instrumentation, it is preferable to use this extra script to easily
+change in between instrumented and non-instrumented executions. When you want to intrument you will
+need to include ''trace.sh'' before your program execution command line::
+
+  #!/bin/bash
+  export NX_THREADS=1
+  
+  ./trace.sh ./cholesky-p 4096 512 1
 
 Finally the make utility will generate (if not already present in the directory) other configuration
 files as it is the case of ''extrae.xml'' file (used to configure extrae plugin in order to get a
