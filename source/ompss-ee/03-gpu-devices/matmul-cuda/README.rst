@@ -17,7 +17,7 @@ Sources are not complete, but the standard file structure for OmpSs CUDA/Kernel 
  * There is a kernel header file which declares the kernel as a task, this header must be
    included in the C-file and can also be included in the kernel file (not strictly needed).
   
-Matrix multiply header file (matmul.h) have::
+Matrix multiply header file (kernel.h) have::
 
   //Kernel declaration as a task should be here
   //Remember, we want to multiply two matrices, (A*B=C) where all of them have size NB*NB
