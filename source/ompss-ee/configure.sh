@@ -19,7 +19,7 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
   # Configure OmpSs + Extrae + Paraver
-  export OMPSS_HOME=/apps/PM/ompss/cuda-async-14.5
+  export OMPSS_HOME=/apps/PM/ompss/14.09
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   # Extra package configuration
