@@ -23,13 +23,13 @@ OBJECTS = driver.o check.o prthead.o gendat.o prtspeed.o cclock.o layouts.o
 all: $(TARGETS)
 
 $(PROGRAM)-p: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(ATLAS_CHECK) $(MPI_CHECK)
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS)
 
 $(PROGRAM)-i: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(ATLAS_CHECK) $(MPI_CHECK)
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS)
 
 $(PROGRAM)-d: $(PREFIX)/$(PROGRAM).c $(OBJECTS) $(ATLAS_CHECK) $(MPI_CHECK)
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(OBJECTS)
 
 .c.o:
 	$(CC) --no-openmp $(EXTRA) $(INCS) -c $< $(LIBS)

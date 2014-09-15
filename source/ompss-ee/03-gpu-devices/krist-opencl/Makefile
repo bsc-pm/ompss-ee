@@ -20,13 +20,13 @@ INCS  = -I$(PREFIX) --opencl-build-opts=-I$(PREFIX)
 EXTRA = -O3 -Wall -Wno-unused 
 
 $(PROGRAM)-p: $(PROGRAM).c $(KERNEL).cl clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl clocks.o
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl clocks.o
 
 $(PROGRAM)-i: $(PROGRAM).c $(KERNEL).cl clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl clocks.o
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl clocks.o
 
 $(PROGRAM)-d: $(PROGRAM).c $(KERNEL).cl clocks.o
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl clocks.o
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl clocks.o
 
 .c.o:
 	$(CC) --no-openmp $(EXTRA) -c $<

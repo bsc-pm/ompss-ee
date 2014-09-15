@@ -1,6 +1,8 @@
 COMMON_DIR=$(BASE_DIR)/common-files
 CONFIG_DIR=.config
 
+GFLAGS=
+
 PARAVER=extrae.xml trace.sh
 SCRIPTS=run-once.sh multirun.sh
 

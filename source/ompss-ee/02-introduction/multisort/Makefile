@@ -23,13 +23,13 @@ RM = rm -f
 all: $(TARGETS)
 
 $(PROGRAM)-p: $(PREFIX)/$(PROGRAM).c
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-i: $(PREFIX)/$(PROGRAM).c
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-d: $(PREFIX)/$(PROGRAM).c
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 clean:
 	$(RM) $(CC)_* *.o *~ $(TARGETS) 

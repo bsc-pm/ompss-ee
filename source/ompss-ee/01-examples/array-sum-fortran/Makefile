@@ -18,13 +18,13 @@ INCS  =
 EXTRA = -O3
 
 $(PROGRAM)-p: $(PROGRAM).f90
-	$(FC) $(FFLAGS) $(FFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(FC) $(GFLAGS) $(FFLAGS) $(FFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-i: $(PROGRAM).f90
-	$(FC) $(FFLAGS) $(FFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(FC) $(GFLAGS) $(FFLAGS) $(FFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-d: $(PROGRAM).f90
-	$(FC) $(FFLAGS) $(FFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(FC) $(GFLAGS) $(FFLAGS) $(FFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 clean:
 	rm -f $(FC)_* *.o *~ $(TARGETS)

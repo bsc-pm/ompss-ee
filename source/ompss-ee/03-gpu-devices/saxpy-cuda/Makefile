@@ -24,23 +24,23 @@ EXTRA = -O3 -Wall -Wno-unused
 OBJECTS=
 
 $(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o $(OBJECTS)
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
 
 $(PROGRAM)-i: $(PROGRAM)-i.o $(KERNEL).o $(OBJECTS)
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
 
 $(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o $(OBJECTS)
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o $(OBJECTS)
 
 
 $(PROGRAM)-p.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
 
 $(PROGRAM)-i.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
 
 $(PROGRAM)-d.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
 
 
 $(KERNEL).o: $(KERNEL).cu $(PREFIX)/$(KERNEL).h

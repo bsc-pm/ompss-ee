@@ -18,13 +18,13 @@ INCS  =
 EXTRA = -std=c99 -O3 -Wall -Wno-unused -mcmodel=large 
 
 $(PROGRAM)-p: $(PROGRAM).c
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-i: $(PROGRAM).c
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-d: $(PROGRAM).c
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 clean:
 	rm -f $(CC)_* *.o *~ $(TARGETS) 

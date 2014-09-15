@@ -18,13 +18,13 @@ INCS  = -I$(MKL_INC_DIR)
 EXTRA = -std=c99 -O3 -Wall -Wno-unused 
 
 $(PROGRAM)-p: $(PROGRAM).c $(MKL_CHECK)
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-i: $(PROGRAM).c $(MKL_CHECK)
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 $(PROGRAM)-d: $(PROGRAM).c $(MKL_CHECK)
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS)
 
 clean:
 	rm -f $(CC)_* *.o *~ $(TARGETS) 

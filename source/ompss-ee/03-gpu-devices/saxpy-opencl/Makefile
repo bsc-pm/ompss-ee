@@ -21,13 +21,13 @@ EXTRA = -O3 -Wall -Wno-unused
 OBJECTS = 
 
 $(PROGRAM)-p: $(PROGRAM).c $(KERNEL).cl $(OBJECTS)
-	$(CC) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
 
 $(PROGRAM)-i: $(PROGRAM).c $(KERNEL).cl $(OBJECTS)
-	$(CC) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
 
 $(PROGRAM)-d: $(PROGRAM).c $(KERNEL).cl $(OBJECTS)
-	$(CC) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(LIBS) $(KERNEL).cl $(OBJECTS)
 
 .c.o:
 	$(CC) --no-openmp $(EXTRA) -c $<
