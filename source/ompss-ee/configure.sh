@@ -2,12 +2,15 @@
 
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
+echo Initial configuration...
+
 if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   # (@BSC) Marenostrum III section
-  # Configure OmpSs + Extrae + Paraver
+  # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=/apps/PM/ompss/git
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
+  export TEMANEJO_HOME=
   # Extra package configuration
   export MPI_LIB_DIR=
   export MPI_INC_DIR=
@@ -16,12 +19,15 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   export ATLAS_LIB_DIR=
   export ATLAS_INC_DIR=
   ln -sf $DIRNAME/common-files/sched-job_mn3 $DIRNAME/common-files/sched-job
+  # Python configuration (needed by Temanejo)
+  module load python
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
-  # Configure OmpSs + Extrae + Paraver
+  # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=/apps/PM/ompss/14.09
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
+  export TEMANEJO_HOME=/apps/PM/ompss/14.09/temanejo
   # Extra package configuration
   export MPI_LIB_DIR=/opt/mpi/bullxmpi/1.1.11.1/lib
   export MPI_INC_DIR=/opt/mpi/bullxmpi/1.1.11.1/include
@@ -30,12 +36,15 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
   export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
   ln -sf $DIRNAME/common-files/sched-job_minotauro $DIRNAME/common-files/sched-job
+  # Python configuration (needed by Temanejo)
+  module load python
 else
-  # Other Machines (AD-HOC) section
-  # Configure OmpSs + Extrae + Paraver
+  # Other Machines (AD-HOC) section, fill this section to configure your environment
+  # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=
   export EXTRAE_HOME=
   export PARAVER_HOME=
+  export TEMANEJO_HOME=
   # Extra package configuration
   export MPI_LIB_DIR=
   export MPI_INC_DIR=
@@ -44,6 +53,7 @@ else
   export ATLAS_LIB_DIR=
   export ATLAS_INC_DIR=
   touch $DIRNAME/common-files/sched-job
+  # Python configuration (needed by Temanejo)
 fi
 
 
@@ -51,9 +61,12 @@ fi
 export PATH=$OMPSS_HOME/bin:$PATH
 export PATH=$EXTRAE_HOME/bin/:$PATH
 export PATH=$PARAVER_HOME/bin:$PATH
+export PATH=$TEMANEJO_HOME/bin:$PATH
+
 export LD_LIBRARY_PATH=$MPI_LIB_DIR:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$MKL_LIB_DIR:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$ATLAS_LIB_DIR:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$TEMANEJO_HOME/lib:$LD_LIBRARY_PATH
 
 echo Basic configuration...
 
@@ -74,6 +87,12 @@ if [ ! -f $PARAVER_HOME/bin/wxparaver ]; then
    echo \ \ WARNING: Paraver utility not found!
 else
    echo \ \ Paraver utility at $PARAVER_HOME/bin 
+fi 
+
+if [ ! -f $TEMANEJO_HOME/bin/Temanejo ]; then
+   echo \ \ WARNING: Temanejo utility not found!
+else
+   echo \ \ Temanejo utility at $TEMANEJO_HOME/bin 
 fi 
 
 if [ ! -f $DIRNAME/common-files/sched-job ]; then
