@@ -127,7 +127,7 @@ need to include ''trace.sh'' before your program execution command line::
   #!/bin/bash
   export NX_THREADS=1
   
-  ./trace.sh ./cholesky-p 4096 512 1
+  ./trace.sh ./cholesky-i 4096 512 1
 
 Finally the make utility will generate (if not already present in the directory) other configuration
 files as it is the case of ''extrae.xml'' file (used to configure extrae plugin in order to get a
