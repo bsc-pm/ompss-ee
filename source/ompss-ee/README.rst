@@ -81,7 +81,7 @@ Building the examples
 ---------------------
 
 All the examples and exercises comes with a makefile (Makefile) configured to compile 3 different
-versions for each program. Each of the binnary file name created by doing make ends with a suffix
+versions for each program. Each of the binary file name created by running make ends with a suffix
 which determines the version:
 
  * program-p: performance version
@@ -92,11 +92,11 @@ You can actually select which version you want to compile by executing: ''make p
 (e.g. in the Cholesky kernel you can compile the performance version executing ''make cholesky-p''.
 By default (running make with no parameters) all the versions are compiled.
 
-Appart of building the program's binnaries, the make utility will also build shell scripts to run
+Appart of building the program's binaries, the make utility will also build shell scripts to run
 the program. Each exercise have two running scripts, one to run a single program execution
 (''run-once.sh''), the other will run multiples configurations with respect the number of threads,
 data size, etc (''multirun.sh''). Before submitting any job, make sure all environment variables
-have the values you expect to. Here it is an example of the ''run-once.sh'' script::
+have the values you expect to. Here is an example of the ''run-once.sh'' script::
 
   #!/bin/bash
   export NX_THREADS=4
@@ -118,7 +118,7 @@ file is::
   export NX_INSTRUMENTATION=extrae
   $*
 
-Additionally you will need to change your running script in order to invoke the your program through
+Additionally, you will need to change your running script in order to invoke the your program through
 the ''trace.sh'' script. Athough you can also edit your running script adding all the environment
 variables related with the instrumentation, it is preferable to use this extra script to easily
 change in between instrumented and non-instrumented executions. When you want to intrument you will
@@ -129,21 +129,21 @@ need to include ''trace.sh'' before your program execution command line::
   
   ./trace.sh ./cholesky-i 4096 512 1
 
-Finally the make utility will generate (if not already present in the directory) other configuration
+Finally, the make utility will generate (if not already present in the directory) other configuration
 files as it is the case of ''extrae.xml'' file (used to configure extrae plugin in order to get a
 Paraver trace, see ''trace.sh'' file).
 
 Job Scheduler: Minotauro
 ------------------------
 
-The current section have a short explanation on how to use the job scheduler systems installed at
-Minotauro BSC's machine. Slurm is the utility used in this machine for batch processing support,
+The current section has a short explanation on how to use the job scheduler systems installed in
+BSC's Minotauro machine. Slurm is the utility used in this machine for batch processing support,
 so all jobs must be run through it. These are the basic directives to submit jobs:
 
   * mnsubmit job_script submits a ''job script'' to the queue system (see below for job script
     directives).
   * mnq: shows all the submitted jobs.
-  * mncancel <job_id> remove the job from the queue system, canceling the execution of the
+  * mncancel <job_id> remove the job from the queue system, cancelling the execution of the
     processes, if they were still running.
 
 A job must contain a series of directives to inform the batch system about the characteristics of
@@ -151,7 +151,7 @@ the job. These directives appear as comments in the job script, with the followi
 
    # @ directive = value.
 
-The job would be submitted using: ''mnsubmit <job_script>''. While the jobs are queued you can check
+The job would be submitted using: ''mnsubmit <job_script>''. While the jobs are queued, you can check
 their status using the command ''mnq'' (it may take a while to start executing). Once a job has been
 executed you will get two files. One for console standard output (with .out extension) and other
 for console standard error (with .err extension).
@@ -173,9 +173,9 @@ These are the basic commands to submit, control and check your jobs:
 Liablity Disclaimer
 -------------------
 
-The information included in this examples and exercises document and the associated examples's
+The information included in these examples and exercises document and the associated examples'
 source file package are not guaranteed to be complete and/or error-free at this stage and they
-are subject to changes without furter notice. Barcelona Supercomputing Center will not assume any
+are subject to changes without further notice. Barcelona Supercomputing Center will not assume any
 responsibility for errors or omissions in this document and/or the associated exmample's source
 file package. Please send comments, corrections and/or suggestions to pm-tools at bsc.es
 
