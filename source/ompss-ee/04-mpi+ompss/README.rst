@@ -6,3 +6,4 @@ MPI+OmpSs Exercises
    :numbered:
 
    matmul/README.rst
+   heat/README.rst
