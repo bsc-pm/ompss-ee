@@ -1,4 +1,4 @@
-PROGRAM=heatmpi-ompss-p
+PROGRAM=heat-mpi-ompss-p
 
 export NX_THREADS=2
 
