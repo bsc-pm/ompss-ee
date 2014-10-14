@@ -12,8 +12,8 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=
   # Extra package configuration
-  export MPI_LIB_DIR=
-  export MPI_INC_DIR=
+  export MPI_LIB_DIR=/apps/OPENMPI/1.8.1-mellanox/lib
+  export MPI_INC_DIR=/apps/OPENMPI/1.8.1-mellanox/include
   export MKL_LIB_DIR=/opt/intel/mkl/lib/intel64/
   export MKL_INC_DIR=/opt/intel/mkl/include/
   export ATLAS_LIB_DIR=
