@@ -218,7 +218,6 @@ if (iter %10 ==0) {
     finalize( &param );
 
     //fprintf(stdout, "Process %d finished computing with residual value = %f\n", myid, residual);
-
     MPI_Finalize();
 
     return 0;

@@ -10,8 +10,8 @@ double relax_jacobi (double *u, double *utmp, unsigned sizex, unsigned sizey)
     double diff, sum=0.0;
     int nbx, bx, nby, by;
   
-    nbx = 1;
-    //nbx = NB;
+    //nbx = 1;   //gmiranda: why we had this?
+    nbx = NB;
     bx = sizex/nbx;
     nby = NB;
     by = sizey/nby;
@@ -19,24 +19,24 @@ double relax_jacobi (double *u, double *utmp, unsigned sizex, unsigned sizey)
 //#pragma omp parallel for private(diff) reduction(+:sum)
 //#pragma omp task  shared (sum)
         for (int jj=0; jj<nby; jj++) {
-#pragma omp task  shared (sum) label (nested_comp)
-{
-	double local_sum = 0.0;
-            for (int i=1+ii*bx; i<=min((ii+1)*bx, sizex-2); i++) 
-                for (int j=1+jj*by; j<=min((jj+1)*by, sizey-2); j++) {
-	            utmp[i*sizey+j]= 0.25 * (u[ i*sizey     + (j-1) ]+  // left
-					     u[ i*sizey     + (j+1) ]+  // right
-				             u[ (i-1)*sizey + j     ]+  // top
-				             u[ (i+1)*sizey + j     ]); // bottom
-	            diff = utmp[i*sizey+j] - u[i*sizey + j];
-	            local_sum += diff * diff; 
-	        }
-//	#pragma omp atomic
-		sum += local_sum;
-}
+            #pragma omp task  shared (sum) label (nested_comp)
+            {
+                double local_sum = 0.0;
+                for (int i=1+ii*bx; i<=min((ii+1)*bx, sizex-2); i++) 
+                    for (int j=1+jj*by; j<=min((jj+1)*by, sizey-2); j++) {
+                        utmp[i*sizey+j]= 0.25 * (u[ i*sizey     + (j-1) ]+  // left
+                            u[ i*sizey     + (j+1) ]+  // right
+                            u[ (i-1)*sizey + j     ]+  // top
+                            u[ (i+1)*sizey + j     ]); // bottom
+                        diff = utmp[i*sizey+j] - u[i*sizey + j];
+                        local_sum += diff * diff; 
+                    }
+                //#pragma omp atomic
+                sum += local_sum;
+            }
 }
 #pragma omp taskwait
-    printf ("Partial residual %lf\n", sum); 
+    printf ("Partial residual %lf\n", sum);
     return sum;
 }
 

@@ -210,7 +210,7 @@ void write_image( FILE * f, double *u,
     {
 	for( j=0; j<sizex; j++ )
 	{
-	    k=(int)(1024.0*(u[i*sizex+j]-min)/(max-min));
+	    k=(int)(1023.0*(u[i*sizex+j]-min)/(max-min));
 	    fprintf(f, "%d %d %d  ", r[k], g[k], b[k]);
 	}
 	fprintf(f, "\n");
