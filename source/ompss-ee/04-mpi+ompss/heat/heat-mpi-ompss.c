@@ -138,14 +138,9 @@ uu = param.u;
 uhelp = param.uhelp;
 #pragma omp task in (*uu) out (*uhelp) out (residual) label (compute)
 	            residual = relax_jacobi(uu, uhelp, rows+2, np);
-//	            residual = relax_jacobi(param.u, param.uhelp, rows+2, np);
-//#pragma omp taskwait
 printf ("Residual in main %lf\n", residual); 
 #pragma omp task inout (*uhelp) label (comm) inout (residual)
 {
-//		    MPI_Sendrecv(&param.uhelp[last_row*np], np, MPI_DOUBLE, 1, 0,
-//		     		 &param.uhelp[(last_row+1)*np], np, MPI_DOUBLE, 1, 0,
-//		     		 MPI_COMM_WORLD, &status);
 		    MPI_Sendrecv(&uhelp[last_row*np], np, MPI_DOUBLE, 1, 0,
 		     		 &uhelp[(last_row+1)*np], np, MPI_DOUBLE, 1, 0,
 		     		 MPI_COMM_WORLD, &status);

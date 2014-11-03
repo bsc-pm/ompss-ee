@@ -10,14 +10,11 @@ double relax_jacobi (double *u, double *utmp, unsigned sizex, unsigned sizey)
     double diff, sum=0.0;
     int nbx, bx, nby, by;
   
-    //nbx = 1;   //gmiranda: why we had this?
     nbx = NB;
     bx = sizex/nbx;
     nby = NB;
     by = sizey/nby;
     for (int ii=0; ii<nbx; ii++)
-//#pragma omp parallel for private(diff) reduction(+:sum)
-//#pragma omp task  shared (sum)
         for (int jj=0; jj<nby; jj++) {
             #pragma omp task  shared (sum) label (nested_comp)
             {

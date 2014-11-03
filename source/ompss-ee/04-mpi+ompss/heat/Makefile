@@ -13,8 +13,8 @@ CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
 
-LIBS  = -L $(MPI_LIB_DIR) -lpthread -lc -lm -lutil -lnsl -ldl -lopen-pal -lopen-rte -lrt -libverbs -lmpi  -L$(ATLAS_LIB_DIR) -lcblas -latlas
-INCS  = -I$(MPI_INC_DIR) -I$(ATLAS_INC_DIR)
+LIBS  = -L $(MPI_LIB_DIR) -lpthread -lc -lm -lutil -lnsl -ldl -lopen-pal -lopen-rte -lrt -libverbs -lmpi
+INCS  = -I$(MPI_INC_DIR) 
 
 EXTRA = -std=c99 -O3 -Wall -Wno-unused 
 
