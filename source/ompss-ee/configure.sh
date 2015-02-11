@@ -24,7 +24,8 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
   # Configure OmpSs + Extrae + Paraver + Temanejo
-  export OMPSS_HOME=/apps/PM/ompss/14.09
+  #export OMPSS_HOME=/apps/PM/ompss/14.09
+  export OMPSS_HOME=/gpfs/scratch/bsc56/bsc56678/apps/nvidia/ompss-dev
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=/apps/PM/ompss/14.09/temanejo
@@ -38,6 +39,21 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   ln -sf $DIRNAME/common-files/sched-job_minotauro $DIRNAME/common-files/sched-job
   # Python configuration (needed by Temanejo)
   module load python
+elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
+  # (@BSC) VirtualBox section
+  # Configure OmpSs + Extrae + Paraver + Temanejo
+  export OMPSS_HOME=/home/user/Builds/OmpSs/mcxx
+  export EXTRAE_HOME=/home/user/Builds/extrae
+  export PARAVER_HOME=/home/user/Tools/paraver
+  export TEMANEJO_HOME=/home/user/Builds/temanejo
+  # Extra package configuration
+  export MPI_LIB_DIR=/usr/lib/openmpi/lib
+  export MPI_INC_DIR=/usr/lib/openmpi/include
+  export MKL_LIB_DIR=/home/user/Builds/mkl/lib/intel64
+  export MKL_INC_DIR=/home/user/Builds/mkl/include
+  export ATLAS_LIB_DIR=/usr/lib
+  export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include
+  # Python configuration (needed by Temanejo
 else
   # Other Machines (AD-HOC) section, fill this section to configure your environment
   # Configure OmpSs + Extrae + Paraver + Temanejo
@@ -55,7 +71,6 @@ else
   touch $DIRNAME/common-files/sched-job
   # Python configuration (needed by Temanejo)
 fi
-
 
 # Setting environment variables 
 export PATH=$OMPSS_HOME/bin:$PATH
