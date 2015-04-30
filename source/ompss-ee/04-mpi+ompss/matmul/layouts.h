@@ -12,7 +12,7 @@ void clear_double( int n, REAL (*matrix)[n]);
 
 
 //#pragma omp target device (smp) copy_deps
-#pragma omp task input([N]Alin) output([ts]A) 
+#pragma omp task in([N]Alin) out([ts]A) 
 void gather_block(int N, REAL (*Alin)[N], int I, int J, int ts, REAL (*A)[ts]);
 
 //alternative declaration. reported bug if copy functions are needed

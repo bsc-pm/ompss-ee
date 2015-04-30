@@ -42,11 +42,11 @@ void matmul ( int m, int n, double (*A)[m], double (*B)[n], double (*C)[n] )
 
     for( it = 0; it < nodes; it++ ) {
 
-      #pragma omp task input (a[0:n-1], B[0:m-1]) inout (C[i:i+n-1][0:n-1]) firstprivate (n,m)
+      #pragma omp task in (a[0:n-1], B[0:m-1]) inout (C[i:i+n-1][0:n-1]) firstprivate (n,m)
       cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, n, n, m, 1.0, (double *)a, m, (double *)B, n, 1.0, (double *)&C[i][0], n);
 
       if (it < nodes-1) {
-         #pragma omp task input (a[0:n-1]) output (rbuf[0:n-1]) inout(stats) firstprivate (size,m,n,tag,down,up)
+         #pragma omp task in (a[0:n-1]) out (rbuf[0:n-1]) inout(stats) firstprivate (size,m,n,tag,down,up)
          MPI_Sendrecv( a, size, MPI_DOUBLE, down, tag, rbuf, size, MPI_DOUBLE, up, tag, MPI_COMM_WORLD, &stats );
       }
 

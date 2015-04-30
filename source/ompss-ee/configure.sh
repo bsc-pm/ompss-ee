@@ -19,6 +19,7 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   export ATLAS_LIB_DIR=
   export ATLAS_INC_DIR=
   ln -sf $DIRNAME/common-files/sched-job_mn3 $DIRNAME/common-files/sched-job
+  ln -sf $DIRNAME/common-files/sched-job-mpi_mn3 $DIRNAME/common-files/sched-job-mpi
   # Python configuration (needed by Temanejo)
   module load python
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
@@ -37,6 +38,7 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
   export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
   ln -sf $DIRNAME/common-files/sched-job_minotauro $DIRNAME/common-files/sched-job
+  ln -sf $DIRNAME/common-files/sched-job-mpi_minotauro $DIRNAME/common-files/sched-job-mpi
   # Python configuration (needed by Temanejo)
   module load python
 elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
@@ -69,6 +71,7 @@ else
   export ATLAS_LIB_DIR=
   export ATLAS_INC_DIR=
   touch $DIRNAME/common-files/sched-job
+  touch $DIRNAME/common-files/sched-job-mpi
   # Python configuration (needed by Temanejo)
 fi
 
