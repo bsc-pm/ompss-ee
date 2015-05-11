@@ -8,7 +8,7 @@ include $(BASE_DIR)/common-files/Makefile
 
 CC = mcc
 
-CFLAGS = --ompss --task-correctness
+CFLAGS = --ompss
 CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
