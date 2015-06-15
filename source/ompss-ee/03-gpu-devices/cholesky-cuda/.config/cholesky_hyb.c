@@ -392,7 +392,7 @@ void read_matrix(char * filename, int n, int ts, REAL *matrix, REAL *checksum)
 
 #if CONVERT_TASK
 #pragma omp target device (smp) copy_deps
-#pragma omp task in([N*N]Alin) out([ts*ts]A) 
+#pragma omp task in([N*(ts-1)+ts]Alin) out([ts*ts]A) 
 static void gather_block(int N, int ts, REAL *Alin, REAL *A)
 {
     int i, j;
@@ -406,7 +406,7 @@ static void gather_block(int N, int ts, REAL *Alin, REAL *A)
 
 #if CONVERT_TASK
 #pragma omp target device (smp) copy_deps
-#pragma omp task in([ts*ts]A) inout([N*N]Alin)
+#pragma omp task in([ts*ts]A) out([N*(ts-1)+ts]Alin)
 static void scatter_block(int N, int ts, REAL *A, REAL *Alin)
 {
     int i, j;
@@ -469,6 +469,9 @@ static REAL * malloc_block (int ts)
 {
    REAL *block;
    block = (REAL *) my_malloc(ts * ts * sizeof(REAL));
+#if NANOS_API_COPIES_API >= 1004
+   #pragma omp register ([ts*ts]block)
+#endif
 
    if ( block == NULL ) {
       printf( "ALLOCATION ERROR (Ah block of %d elements )\n", ts );
@@ -654,6 +657,9 @@ int main(int argc, char* argv[])
 
     // Allocate matrix
     matrix = (REAL *) malloc(n * n * sizeof(REAL));
+#if NANOS_API_COPIES_API >= 1004
+    #pragma omp register ([n*n]matrix)
+#endif
     if (matrix == NULL) {
         printf("ALLOCATION ERROR\n");
         exit(-1);
