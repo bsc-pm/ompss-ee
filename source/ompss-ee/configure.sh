@@ -27,7 +27,7 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=/apps/PM/ompss/15.04
   #export OMPSS_HOME=/gpfs/scratch/bsc56/bsc56678/apps/nvidia/ompss-dev
-  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
+  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/2.5.2/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=/apps/PM/ompss/14.09/temanejo
   # Extra package configuration
