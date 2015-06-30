@@ -10,7 +10,7 @@ include $(BASE_DIR)/common-files/Makefile
 CC = mcc
 KC = nvcc
 
-CFLAGS = --ompss
+CFLAGS = --ompss -DDP
 CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
