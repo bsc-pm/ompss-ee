@@ -5,6 +5,6 @@ Beginners Exercises
    :maxdepth: 2
    :numbered:
 
-   dot-product/README.rst
    matmul/README.rst
+   dot-product/README.rst
    multisort/README.rst
