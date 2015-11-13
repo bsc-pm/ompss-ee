@@ -7,7 +7,7 @@ echo Initial configuration...
 if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   # (@BSC) Marenostrum III section
   # Configure OmpSs + Extrae + Paraver + Temanejo
-  export OMPSS_HOME=/apps/PM/ompss/15.04
+  export OMPSS_HOME=/apps/PM/ompss/git
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=
