@@ -14,7 +14,7 @@ EXTRAEL = -L$(EXTRAE_HOME)/lib -Wl,-rpath=$(EXTRAE_HOME)/lib -lompitrace -lxml2
 
 CFLAGS = -openmp -qopenmp-lib=compat
 CFLAGS_P = -O3
-CFLAGS_I = 
+CFLAGS_I = -O3 -g  -D_EXTRAE_
 CFLAGS_D = -O0 -g2
 
 LIBS  = -lpthread -lc -lm 

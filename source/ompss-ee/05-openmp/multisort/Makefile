@@ -10,7 +10,7 @@ CC = icc
 
 CFLAGS = -fopenmp
 CFLAGS_P = -O3
-CFLAGS_I = -O3 -g
+CFLAGS_I = -O3 -g  -D_EXTRAE_
 CFLAGS_D = -O0 -g2
 
 EXTRAEI = -I$(EXTRAE_HOME)/include
