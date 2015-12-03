@@ -45,18 +45,20 @@ int main( int argc, char *argv[] )
     // check arguments
     if( argc < 2 )
     {
-	usage( argv[0] );
-	return 1;
+	   usage( argv[0] );
+      MPI_Finalize();
+	   return 1;
     }
 
     // check input file
     if( !(infile=fopen(argv[1], "r"))  ) 
     {
-	fprintf(stderr, 
-		"\nError: Cannot open \"%s\" for reading.\n\n", argv[1]);
+	   fprintf(stderr, 
+		        "\nError: Cannot open \"%s\" for reading.\n\n", argv[1]);
       
-	usage(argv[0]);
-	return 1;
+	   usage(argv[0]);
+      MPI_Finalize();
+	   return 1;
     }
 
     // check result file
@@ -64,19 +66,21 @@ int main( int argc, char *argv[] )
 
     if( !(resfile=fopen(resfilename, "w")) )
     {
-	fprintf(stderr, 
-		"\nError: Cannot open \"%s\" for writing.\n\n", 
+	   fprintf(stderr, 
+		        "\nError: Cannot open \"%s\" for writing.\n\n", 
 		resfilename);
-	usage(argv[0]);
-	return 1;
+	   usage(argv[0]);
+      MPI_Finalize();
+	   return 1;
     }
 
     // check input
     if( !read_input(infile, &param) )
     {
-	fprintf(stderr, "\nError: Error parsing input file.\n\n");
-	usage(argv[0]);
-	return 1;
+       fprintf(stderr, "\nError: Error parsing input file.\n\n");
+       usage(argv[0]);
+       MPI_Finalize();
+	    return 1;
     }
     print_params(&param);
 
@@ -88,11 +92,12 @@ int main( int argc, char *argv[] )
     param.visres = param.resolution;
    
     if( !initialize(&param) )
-	{
+    {
 	    fprintf(stderr, "Error in Solver initialization.\n\n");
 	    usage(argv[0]);
-            return 1;
-	}
+       MPI_Finalize();
+       return 1;
+    }
 
     // full size (param.resolution are only the inner points)
     np = param.resolution + 2;
@@ -228,6 +233,7 @@ int main( int argc, char *argv[] )
     if( (!param.u) || (!param.uhelp) )
     {
         fprintf(stderr, "Error: Cannot allocate memory\n");
+        MPI_Finalize();
         return 0;
     }
     

@@ -8,12 +8,16 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   # (@BSC) Marenostrum III section
   # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=/apps/PM/ompss/git
-  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
+  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/impi5_mt+libgomp4.9/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=
   # Extra package configuration
-  export MPI_LIB_DIR=/apps/OPENMPI/1.8.1-mellanox/lib
-  export MPI_INC_DIR=/apps/OPENMPI/1.8.1-mellanox/include
+  export MPI_HOME=/apps/INTEL/impi/5.0.1.035/intel64
+  export MPI_LIB_DIR=$MPI_HOME/lib
+  export MPI_INC_DIR=$MPI_HOME/include
+  export MPICC=mpiicc
+  # Note (gmiranda): if you don't do this, mpiicc can't find icc. Fixme!
+  module load impi/5.0.1.035 intel/16.0.0
   export MKL_LIB_DIR=/opt/intel/mkl/lib/intel64/
   export MKL_INC_DIR=/opt/intel/mkl/include/
   export ATLAS_LIB_DIR=
@@ -31,8 +35,10 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=/apps/PM/ompss/14.09/temanejo
   # Extra package configuration
-  export MPI_LIB_DIR=/opt/mpi/bullxmpi/1.1.11.1/lib
-  export MPI_INC_DIR=/opt/mpi/bullxmpi/1.1.11.1/include
+  export MPI_HOME=/opt/mpi/bullxmpi/1.1.11.1
+  export MPI_LIB_DIR=$MPI_HOME/lib
+  export MPI_INC_DIR=$MPI_HOME/include
+  export MPI_CC=mpicc
   export MKL_LIB_DIR=/opt/compilers/intel/mkl/lib/intel64/
   export MKL_INC_DIR=/opt/compilers/intel/mkl/include/
   export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
@@ -49,8 +55,10 @@ elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
   export PARAVER_HOME=/home/user/Tools/paraver
   export TEMANEJO_HOME=/home/user/Builds/temanejo
   # Extra package configuration
-  export MPI_LIB_DIR=/usr/lib/openmpi/lib
-  export MPI_INC_DIR=/usr/lib/openmpi/include
+  export MPI_HOME=/usr/lib/openmpi
+  export MPI_LIB_DIR=$MPI_HOME/lib
+  export MPI_INC_DIR=$MPI_HOME/include
+  export MPI_CC=mpicc
   export MKL_LIB_DIR=/home/user/Builds/mkl/lib/intel64
   export MKL_INC_DIR=/home/user/Builds/mkl/include
   export ATLAS_LIB_DIR=/usr/lib
@@ -80,6 +88,7 @@ export PATH=$OMPSS_HOME/bin:$PATH
 export PATH=$EXTRAE_HOME/bin/:$PATH
 export PATH=$PARAVER_HOME/bin:$PATH
 export PATH=$TEMANEJO_HOME/bin:$PATH
+export PATH=$MPI_HOME/bin:$PATH
 
 export LD_LIBRARY_PATH=$MPI_LIB_DIR:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$MKL_LIB_DIR:$LD_LIBRARY_PATH
