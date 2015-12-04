@@ -87,6 +87,12 @@ int main( int argc, char *argv[] )
 
 #if _EXTRAE_
     Extrae_init();
+
+    extrae_type_t mat_event = 100000;
+    unsigned mat_copy_nvalues = 2;
+    extrae_value_t mat_copy_values[] = { 0 , 1};
+    char * mat_copy_desc[] = { "Not inside", "Inside" };
+    Extrae_define_event_type( &mat_event, "Jacobi matrix copy", &mat_copy_nvalues, mat_copy_values, mat_copy_desc );
 #endif
 
     
@@ -100,14 +106,14 @@ int main( int argc, char *argv[] )
 	            residual = relax_jacobi(param.u, param.uhelp, np, np);
 		    // Copy uhelp into u
 #if _EXTRAE_
-		    Extrae_event(100000, 1);
+		    Extrae_event(mat_event, 1);
 #endif
 #pragma omp parallel for
 		    for (int i=0; i<np; i++)
     		        for (int j=0; j<np; j++)
 	    		    param.u[ j*np+i ] = param.uhelp[ j*np+i ];
 #if _EXTRAE_
-                    Extrae_event(100000, 0);
+                    Extrae_event(mat_event, 0);
 #endif
 		    break;
 	    case 1: // RED-BLACK

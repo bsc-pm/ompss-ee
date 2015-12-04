@@ -310,7 +310,7 @@ void print_params( algoparam_t *param )
   fprintf(stdout, "Resolution        : %u\n", param->resolution);
   fprintf(stdout, "Algorithm         : %d (%s)\n",
 	  param->algorithm,
-	  (param->algorithm == 0) ? "Jacobi":(param->algorithm ==1) ? "Red-Black":"Gauss-Seidel" );
+	  (param->algorithm == 0) ? "Jacobi":(param->algorithm ==1) ? "Red-Black":"Gauss-Seidel");
   fprintf(stdout, "Num. Heat sources : %u\n", param->numsrcs);
 
   for( i=0; i<param->numsrcs; i++ )
