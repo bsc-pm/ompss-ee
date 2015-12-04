@@ -9,17 +9,17 @@ EXTRA_SCHED_OPTIONS=-mpi
 BASE_DIR=../..
 include $(BASE_DIR)/common-files/Makefile
 
-CC = mcc
+CC = smpcc
 
-CFLAGS = --ompss
+CFLAGS = --ompss  -cc=$(CC)
 CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
 
-LIBS  = -L $(MPI_LIB_DIR) -lpthread -lc -lm -lutil -lnsl -ldl -lopen-pal -lopen-rte -lrt -libverbs -lmpi
-INCS  = -I$(MPI_INC_DIR) 
+LIBS  = -lm -mt_mpi
+INCS  = 
 
-EXTRA = -std=c99 -O3 -Wall -Wno-unused 
+EXTRA = -std=c99 -Wall -Wno-unused 
 
 RM = rm -f
 
@@ -28,13 +28,13 @@ OBJECTS = misc.c solver-mpi-ompss.c
 all: $(TARGETS)
 
 $(PROGRAM)-p: $(PREFIX)/$(PROGRAM).c $(OBJECTS)
-	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
+	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
 
 $(PROGRAM)-i: $(PREFIX)/$(PROGRAM).c $(OBJECTS)
-	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
+	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
 
 $(PROGRAM)-d: $(PREFIX)/$(PROGRAM).c $(OBJECTS)
-	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
+	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
 
 clean:
 	$(RM) $(CC)_* *.o *~ $(TARGETS) test.ppm

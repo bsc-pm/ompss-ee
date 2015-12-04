@@ -5,8 +5,9 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "heat.h"
-//#include "omp.h"
+#include "omp.h"
 
 void usage( char *s )
 {
@@ -27,8 +28,10 @@ int main( int argc, char *argv[] )
   char *resfilename;
   int myid, numprocs;
   MPI_Status status;
+  int provided;
 
-  MPI_Init(&argc, &argv);
+  MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
+  assert(MPI_THREAD_MULTIPLE == provided);
   MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
   MPI_Comm_rank(MPI_COMM_WORLD, &myid);
 
@@ -45,8 +48,9 @@ int main( int argc, char *argv[] )
     // check arguments
     if( argc < 2 )
     {
-	usage( argv[0] );
-	return 1;
+	   usage( argv[0] );
+      MPI_Finalize();
+	   return 1;
     }
 
     // check input file
@@ -56,6 +60,7 @@ int main( int argc, char *argv[] )
 		"\nError: Cannot open \"%s\" for reading.\n\n", argv[1]);
       
 	usage(argv[0]);
+	MPI_Finalize();
 	return 1;
     }
 
@@ -68,6 +73,7 @@ int main( int argc, char *argv[] )
 		"\nError: Cannot open \"%s\" for writing.\n\n", 
 		resfilename);
 	usage(argv[0]);
+	MPI_Finalize();
 	return 1;
     }
 
@@ -76,6 +82,7 @@ int main( int argc, char *argv[] )
     {
 	fprintf(stderr, "\nError: Error parsing input file.\n\n");
 	usage(argv[0]);
+	MPI_Finalize();
 	return 1;
     }
     print_params(&param);
@@ -91,6 +98,7 @@ int main( int argc, char *argv[] )
 	{
 	    fprintf(stderr, "Error in Solver initialization.\n\n");
 	    usage(argv[0]);
+	    MPI_Finalize();
             return 1;
 	}
 
