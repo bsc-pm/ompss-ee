@@ -5,6 +5,7 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "heat.h"
 #include "omp.h"
 
@@ -27,8 +28,10 @@ int main( int argc, char *argv[] )
   char *resfilename;
   int myid, numprocs;
   MPI_Status status;
+  int provided;
 
-  MPI_Init(&argc, &argv);
+  MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
+  assert(MPI_THREAD_MULTIPLE == provided);
   MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
   MPI_Comm_rank(MPI_COMM_WORLD, &myid);
 
