@@ -7,20 +7,21 @@ TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 EXTRA_SCHED_OPTIONS=-mpi
 
 BASE_DIR=../..
-include ../../common-files/Makefile
+include $(BASE_DIR)/common-files/Makefile
 
 EXTRAEI = -I$(EXTRAE_HOME)/include/ -I.
 EXTRAEL = -L$(EXTRAE_HOME)/lib -Wl,-rpath=$(EXTRAE_HOME)/lib -lompitrace -lxml2 
 
 CFLAGS = -openmp -qopenmp-lib=compat
+CFLAGS = -fopenmp
 CFLAGS_P = -O3
 CFLAGS_I = -O3 -g  -D_EXTRAE_
 CFLAGS_D = -O0 -g2
 
-LIBS  = -lpthread -lc -lm 
+LIBS  = -lm 
 INCS  = 
 
-EXTRA = -std=c99 -O3 -Wall -Wno-unused 
+EXTRA = -std=c99 -Wall -Wno-unused 
 
 RM = rm -f
 
