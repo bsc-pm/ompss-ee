@@ -33,13 +33,13 @@ $(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o $(MKL_CHECK)
 	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) -o $@ $< $(LIBS) $(KERNEL).o
 
 
-$(PROGRAM)-p.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
+$(PROGRAM)-p.o: $(PREFIX)/$(PROGRAM).c $(PREFIX)/$(KERNEL).h
 	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
 
-$(PROGRAM)-i.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
+$(PROGRAM)-i.o: $(PREFIX)/$(PROGRAM).c $(PREFIX)/$(KERNEL).h
 	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
 
-$(PROGRAM)-d.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
+$(PROGRAM)-d.o: $(PREFIX)/$(PROGRAM).c $(PREFIX)/$(KERNEL).h
 	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
 
 
