@@ -15,7 +15,7 @@ CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
 
-NVCFLAGS = -O3 -arch=sm_13
+NVCFLAGS = -O3 -arch=sm_20
 
 
 LIBS  = --Wl,-L$(MKL_LIB_DIR) -lmkl_sequential -lmkl_core -lmkl_rt -lpthread
