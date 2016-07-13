@@ -39,14 +39,15 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   export MPI_LIB_DIR=$MPI_HOME/lib
   export MPI_INC_DIR=$MPI_HOME/include
   export MPI_CC=mpicc
-  export MKL_LIB_DIR=/opt/compilers/intel/mkl/lib/intel64/
-  export MKL_INC_DIR=/opt/compilers/intel/mkl/include/
+  export MKL_LIB_DIR=/opt/compilers/intel/2016.3.067/mkl/lib/intel64/
+  export MKL_INC_DIR=/opt/compilers/intel/2016.3.067/mkl/include
   export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
   export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
   ln -sf $DIRNAME/common-files/sched-job_minotauro $DIRNAME/common-files/sched-job
   ln -sf $DIRNAME/common-files/sched-job-mpi_minotauro $DIRNAME/common-files/sched-job-mpi
   # Python configuration (needed by Temanejo)
   module load python
+  module load ompss/16.06
 elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
   # (@BSC) VirtualBox section
   # Configure OmpSs + Extrae + Paraver + Temanejo
