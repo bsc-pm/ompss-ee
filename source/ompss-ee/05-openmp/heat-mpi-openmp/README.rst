@@ -1,5 +1,5 @@
 Heat diffusion (Jacobi solver)
----------------
+------------------------------
 
 .. highlight:: c
 

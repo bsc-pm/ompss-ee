@@ -1,5 +1,5 @@
 Array Sum Benchmark (Fortran version)
-----------------
+-------------------------------------
 
 .. highlight:: fortran
 

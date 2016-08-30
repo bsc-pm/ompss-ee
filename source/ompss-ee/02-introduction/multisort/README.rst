@@ -29,6 +29,8 @@ version::
     basicsort(n, data);
   }
 
+.. highlight:: none
+
 As the code is already annotated with some task directives, try to compile and run the program.
 Is it verifying? Why do you think it is failing? Running an unmodified version of this code may
 also raise a Segmentation Fault. Investigate which is the cause of that problem. Although it

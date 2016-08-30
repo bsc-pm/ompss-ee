@@ -22,6 +22,7 @@ Kernel header file (kernel.h) have::
 As you can see, we have two vectors (x and y) of size n and a constant a. They specify which data
 needs to be copied to our runtime. In order to get this program working, we only need to specify
 the ``ndrange`` clause, which has three members:
+
  * First one is the number of dimensions on the kernel (1 in this case).
  * The second one is the total number of kernel threads to be launched (as one kernel thread
    usually calculates a single index of data, this is usually the number of elements, of the

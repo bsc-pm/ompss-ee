@@ -27,11 +27,13 @@ file in order to see which kernel you need to declare, declare the kernel as a t
 its declaration and the pragmas over it.
 
 .. note::
-In this case as we are multiplying a two-dimension matrix, so the best approach is to use a
-two-dimension ``ndrange``.
+
+    In this case as we are multiplying a two-dimension matrix, so the best approach is to use a
+    two-dimension ``ndrange``.
 
 In order to get this program working, we only need to specify the ``ndrange`` clause, which has
 five members:
+
  * First one is the number of dimensions on the kernel (2 in this case).
  * The second and third ones are the total number of kernel threads to be launched (as one
    kernel threads usually calculates a single index of data, this is usually the number of

@@ -19,7 +19,8 @@ In this case there is nothing but a kernel ported by someone and a code calling 
 We’ll need to declare the kernel as an OmpSs task as we have done in previous examples.
 
 .. note::
-Use an intermediate header file and include it, it will work if we declare it on the .c file).
+
+    Use an intermediate header file and include it, it will work if we declare it on the .c file.
 
 Once the kernel is correctly declared as a task, we can call it instead of the 'old' smp function.
 We can proceed to compile the source code, using the command 'make'. After it (if there are no
@@ -27,9 +28,10 @@ errors), we can execute it using one of the running scripts. In order to check r
 use the command 'diff nbody_out-ref.xyz nbody_out.xyz'.
 
 .. note::
-If someone is interested, you can try to do a NBody implementation which works with multiple GPUs
-can be done if you have finished early, you must split the output in different parts so each GPU
-will calculate one of this parts.
+
+    If someone is interested, you can try to do a NBody implementation which works with multiple GPUs
+    can be done if you have finished early, you must split the output in different parts so each GPU
+    will calculate one of this parts.
 
 If we check the whole source code in nbody.c (not needed), you can see that the
 'Particle_array_calculate_forces_cuda' function in kernel.c is called 10 times, and in each call,
