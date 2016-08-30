@@ -2,7 +2,7 @@ Introduction
 ============
 
 This documentation contains examples and exercises using the OmpSs programming model.
-The main objective of this paper is to provide guidance in learning Ompss programming
+The main objective of this paper is to provide guidance in learning OmpSs programming
 model and serve as teaching materials in courses and tutorials. To find more complete
 applications please visit our BAR (BSC Application Repository) in the URL
 http://pm.bsc.es/projects/bar
@@ -22,7 +22,7 @@ the Linux command ``source`` using your configure script::
 
 The configure script is used to set all environment variables you need to properly execute
 OmpSs applications. Among other things it contains the PATH where the system will look for
-to find mercurium compiler utility, and the MKL installation directory (if available) to
+to find Mercurium compiler utility, and the MKL installation directory (if available) to
 run specific OmpSs applications (e.g. Cholesky kernel).
 
 To configure your system you have to run the Linux command ``source`` using your configure script::
@@ -56,7 +56,7 @@ components as prerequisites of the target::
   [target
 
 Below is a very simple makefile that by default compiles the program helloworld (first target:
-all) using the gcc C compiler (CC) and using “-g” compiler option (CFLAGS). The makefile also
+all) using the GCC C compiler (CC) and using “-g” compiler option (CFLAGS). The makefile also
 provides a ''clean'' target to remove the generated files if the user desires to start over (by
 running make clean)::
 
@@ -92,7 +92,7 @@ You can actually select which version you want to compile by executing: ''make p
 (e.g. in the Cholesky kernel you can compile the performance version executing ''make cholesky-p''.
 By default (running make with no parameters) all the versions are compiled.
 
-Appart of building the program's binaries, the make utility will also build shell scripts to run
+Apart of building the program's binaries, the make utility will also build shell scripts to run
 the program. Each exercise have two running scripts, one to run a single program execution
 (''run-once.sh''), the other will run multiples configurations with respect the number of threads,
 data size, etc (''multirun.sh''). Before submitting any job, make sure all environment variables
@@ -100,9 +100,8 @@ have the values you expect to. Here is an example of the ''run-once.sh'' script:
 
   #!/bin/bash
   export NX_THREADS=4
-  
-  ./cholesky-p 4096 512 1
 
+  ./cholesky-p 4096 512 1
 
 In some cases the shell script will contain job scheduler variables declared in top of the script
 file. A job scheduler script must contain a series of directives to inform the batch system about
@@ -119,18 +118,18 @@ file is::
   $*
 
 Additionally, you will need to change your running script in order to invoke the your program through
-the ''trace.sh'' script. Athough you can also edit your running script adding all the environment
+the ''trace.sh'' script. Although you can also edit your running script adding all the environment
 variables related with the instrumentation, it is preferable to use this extra script to easily
-change in between instrumented and non-instrumented executions. When you want to intrument you will
+change in between instrumented and non-instrumented executions. When you want to instrument you will
 need to include ''trace.sh'' before your program execution command line::
 
   #!/bin/bash
   export NX_THREADS=1
-  
+
   ./trace.sh ./cholesky-i 4096 512 1
 
 Finally, the make utility will generate (if not already present in the directory) other configuration
-files as it is the case of ''extrae.xml'' file (used to configure extrae plugin in order to get a
+files as it is the case of ''extrae.xml'' file (used to configure Extrae plugin in order to get a
 Paraver trace, see ''trace.sh'' file).
 
 Job Scheduler: Minotauro
@@ -170,14 +169,11 @@ These are the basic commands to submit, control and check your jobs:
     if they were still running.
   * bsc_jobs: shows all the pending or running jobs from your group.
 
-Liablity Disclaimer
--------------------
+Liability Disclaimer
+--------------------
 
 The information included in these examples and exercises document and the associated examples'
 source file package are not guaranteed to be complete and/or error-free at this stage and they
 are subject to changes without further notice. Barcelona Supercomputing Center will not assume any
-responsibility for errors or omissions in this document and/or the associated exmample's source
+responsibility for errors or omissions in this document and/or the associated example's source
 file package. Please send comments, corrections and/or suggestions to pm-tools at bsc.es
-
-
-

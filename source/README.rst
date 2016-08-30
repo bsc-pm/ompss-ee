@@ -24,4 +24,3 @@ OmpSs Examples and Exercises
 .. * :ref:`genindex`
 .. * :ref:`modindex`
 .. * :ref:`search`
-

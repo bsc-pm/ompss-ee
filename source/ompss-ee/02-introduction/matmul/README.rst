@@ -23,4 +23,3 @@ hints and that you may consider before do the exercise:
  * Annotate the tasks that you consider are necessary, and don't forget to ensure that all of
    them are finished before returned the result of the matrix multiplication (would it be
    necessary any synchronization directive to guarantee that result has been already computed?).
-

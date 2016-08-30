@@ -11,7 +11,7 @@ This benchmark computes the sum of two arrays and stores the result in an other 
 
 In this case we annotate the algorithm using the Fortran syntax. The benchmark compute
 a set of array sums. The first inner loop initializes one array, that will be computed
-in the second inner loop. Dependences warantee proper execution and synchronization
+in the second inner loop. Dependences warrant proper execution and synchronization
 between initialization and compute results::
 
    DO K=1,1000
@@ -38,4 +38,3 @@ between initialization and compute results::
       ENDDO
    ENDDO ! K
    !$OMP TASKWAIT
-

@@ -43,4 +43,3 @@ In that code we have already annotated the tasks for you, but this parallel vers
    a difference from the previous? You have to write the dependencies of this task again, but this
    time think if there is any other clause (besides in and out) that you can use in order to maximize
    parallelism.
-

@@ -34,7 +34,7 @@ Following code shows the basic pattern for a Cholesky factorisation::
 
 In this case we parallelize the code by annotating the kernel functions.
 So each call in the previous loop becomes the instantiation of a task.
-The following code shows how we have parallelized cholesky::
+The following code shows how we have parallelized Cholesky::
 
    #pragma omp task inout([ts][ts]A)
    void omp_potrf(double * const A, int ts, int ld)
@@ -47,13 +47,13 @@ The following code shows how we have parallelized cholesky::
    {
       ...
    }
-   
+
    #pragma omp task in([ts][ts]A) inout([ts][ts]B)
    void omp_syrk(double *A, double *B, int ts, int ld)
    {
       ...
    }
-   
+
    #pragma omp task in([ts][ts]A, [ts][ts]B) inout([ts][ts]C)
    void omp_gemm(double *A, double *B, double *C, int ts, int ld)
    {
@@ -63,4 +63,3 @@ The following code shows how we have parallelized cholesky::
 Note that for each of the dependences we also specify which is the matrix (block) size.
 Although this is not needed, due there is no overlapping among the different blocks,
 it will allow the runtime to compute dependences using the region mechanism.
-

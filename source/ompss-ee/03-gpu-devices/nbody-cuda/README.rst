@@ -6,14 +6,14 @@ NBody kernel
 In this exercise we will work with the NBody kernel. This algorithm numerically approximates the
 evolution of a system of bodies in which each body continuously interacts with every other body.
 In this case we want to port a traditional SMP source code to another one which can exploit the
-beneficts of CUDA/OpenCL. Someone already ported the kernel, so it does the same calculations
+benefits of CUDA/OpenCL. Someone already ported the kernel, so it does the same calculations
 than the previous SMP function.
 
 Sources are not complete, we only have the C code which is calling a SMP function and a CUDA/OCL
 kernel, they do not interact with each other, nbody.c file have::
 
   // Call the kernel
-  calculate_force_func(bs,time_interval,number_of_particles,this_particle_array, &output_array[i], i, i+bs-1);   
+  calculate_force_func(bs,time_interval,number_of_particles,this_particle_array, &output_array[i], i, i+bs-1);
 
 In this case there is nothing but a kernel ported by someone and a code calling a smp function.
 We’ll need to declare the kernel as an OmpSs task as we have done in previous examples.

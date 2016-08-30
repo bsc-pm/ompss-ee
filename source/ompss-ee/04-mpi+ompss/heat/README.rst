@@ -12,5 +12,3 @@ This codes performs a ... hybrid MPI/OmpSs implementation.
 .. note::
   You need to specify the number of MPI tasks per node. In Marenostrum you can do this
   by adding <<#BSUB -R "span[ptile=1]">> to your job script.
-
-
