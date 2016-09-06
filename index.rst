@@ -10,12 +10,12 @@ OmpSs Examples and Exercises
    :maxdepth: 3
    :numbered:
 
-   ompss-ee/README.rst
-   ompss-ee/01-examples/README.rst
-   ompss-ee/02-introduction/README.rst
-   ompss-ee/03-gpu-devices/README.rst
-   ompss-ee/04-mpi+ompss/README.rst
-   ompss-ee/05-openmp/README.rst
+   README.rst
+   01-examples/README.rst
+   02-introduction/README.rst
+   03-gpu-devices/README.rst
+   04-mpi+ompss/README.rst
+   05-openmp/README.rst
 
 
 .. Indices and tables
