@@ -11,6 +11,67 @@ http://pm.bsc.es/projects/bar
    A PDF version of this document is available in http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf, and
    all the example source codes in http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
 
+The OmpSs documentation is written using Sphinx
+
+  http://www.sphinx-doc.org/
+
+Contributing to the examples and exercises document
+---------------------------------------------------
+
+1. Make sure you have sphinx-doc in your machine
+
+ Ubuntu/Debian:
+
+ $ sudo apt-get install sphinx-doc python-sphinx texlive-latex-extra texlive-fonts-recommended
+
+ (Note: texlive- packages are required to build PDF documentation).
+
+2. Make changes to .rst files
+
+ Start from index.rst to see the structure. Look at the .. toctree::, it lists
+ the included files used to generate the documentation (toctree stands for
+ "tree of the table of contents").
+
+ Syntax of .rst is reStructuredText. You may want to read a quick
+ introduction at
+
+   http://www.sphinx-doc.org/rest.html
+
+ The official reStructuredText documentation (if you want to dig further in the
+ details) is in:
+
+   http://docutils.sourceforge.net/rst.html#user-documentation
+
+3. Generate the documentation
+
+3.1. Generate the HTML
+
+  $ make html
+
+Now open your browser to _build/html/index.html and behold your contribution.
+
+3.2. Generate the PDF
+
+  $ make latexpdf
+
+Now open your PDF viewer to the _build/html/<docfile>.pdf (the file depends on
+the directory you chose in the step 0 above)
+
+4. Commit your changes using git
+
+  $ git commit -a
+  $ git push
+
+It may happen that the remote repository changed where you were editing your local one.
+In that case, first do
+
+  $ git pull --rebase
+
+and then proceed as above.
+
+  $ git commit -a
+  $ git push
+
 System configuration
 ---------------------
 
