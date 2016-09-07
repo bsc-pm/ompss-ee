@@ -153,7 +153,7 @@ fi
 if [ "X$1" == "X--pack" ];
 then
    pushd $DIRNAME
-   git archive --format=tar.gz --output=ompss-ee.tar.gz --prefix=ompss-ee/ master \
+   git archive --format=tar.gz --output=ompss-ee.tar.gz --prefix=ompss-ee/ HEAD \
        || { echo >&2 "Option --pack requires git. Aborting"; exit 1; }
    popd
 fi
