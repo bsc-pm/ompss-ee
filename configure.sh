@@ -153,22 +153,8 @@ fi
 if [ "X$1" == "X--pack" ];
 then
    pushd $DIRNAME
-   for first in `ls -d ??-*/ | cut -f1 -d'/'`;
-   do
-      echo Entering... $first
-      pushd $first
-      for second in `ls -d */ | cut -f1 -d'/'`;
-      do
-         echo Entering... $second
-         pushd $second
-         make wipe
-         popd
-      done
-      popd
-   done
-   pushd ..
-   tar -pczf ompss-ee.tar.gz ompss-ee
-   popd
+   git archive --format=tar.gz --output=ompss-ee.tar.gz --prefix=ompss-ee/ master \
+       || { echo >&2 "Option --pack requires git. Aborting"; exit 1; }
    popd
 fi
 
