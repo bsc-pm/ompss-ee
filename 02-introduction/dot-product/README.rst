@@ -10,6 +10,7 @@ operation is shown below::
 
   double dot_product(int N, int v1[N], int v2[N]) {
     double result = 0.0;
+  #pragma omp task label( dot_prod ) firstprivate( j, i, actual_size )
     for (long i=0; i<N; i++)
       result += v1[i] * v2[i];
 
@@ -48,13 +49,13 @@ more complicated than the previous version::
     actual_size = (N-i>=CHUNK_SIZE)?CHUNK_SIZE:(N-CHUNK_SIZE);
     C[j]=0;
 
-    #pragma omp task label( dot_prod ) firstprivate( j, i, actual_size )
+  #pragma omp task label( dot_prod ) firstprivate( j, i, actual_size )
     {
       for (long ii=0; ii<actual_size; ii++)
         C[j]+= A[i+ii] * B[i+ii];
     }
 
-    #pragma omp task label( increment ) firstprivate( j )
+  #pragma omp task label( increment ) firstprivate( j )
     result += C[j];
 
     j++;
