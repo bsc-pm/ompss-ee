@@ -19,36 +19,36 @@ double dot_product (long N, long CHUNK_SIZE, double A[N], double B[N])
 {
     long actual_size;
     int j;
-    double acc;
+    double result;
 
     const long N_CHUNKS = N/CHUNK_SIZE + (N % CHUNK_SIZE != 0);
     double *C = malloc (N_CHUNKS*sizeof(double));
 
-    acc=0.0;
+    result=0.0;
     j=0;
     for (long i=0; i<N; i+=CHUNK_SIZE) {
 
         actual_size = (N - i >= CHUNK_SIZE) ? CHUNK_SIZE : N - i;
 
         // OMPSS: What are the 2 inputs and the in/out data for this task ?
-#pragma omp task label( dot_prod ) firstprivate( j, i, actual_size ) in( A[i;actual_size], B[i; actual_size] ) inout( C[j;1] )
+        #pragma omp task label( dot_prod ) firstprivate( j, i, actual_size ) in( A[i;actual_size], B[i; actual_size] ) inout( C[j;1] )
         {
             C[j]=0;
             for (long ii=0; ii<actual_size; ii++)
                 C[j]+= A[i+ii] * B[i+ii];
         }
 
-        // OMPSS: This task depends on an single element of C and will accumulate the result on acc.
-#pragma omp task label( increment ) firstprivate( j ) in( C[j;1] ) commutative( acc )
-        acc += C[j];
+        // OMPSS: This task depends on an single element of C and will resultumulate the result on result.
+        #pragma omp task label( increment ) firstprivate( j ) in( C[j;1] ) commutative( result )
+        result += C[j];
 
         j++;
     }
 
     // OMPSS: We must make sure that all computations have ended before returning a value
-#pragma omp taskwait
+    #pragma omp taskwait
 
-    return(acc);
+    return(result);
 }
 
 int main(int argc, char **argv) {
