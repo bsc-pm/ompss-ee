@@ -46,7 +46,7 @@ more complicated than the previous version::
   double result = 0.0;
   long j = 0;
   for (long i=0; i<N; i+=CHUNK_SIZE) {
-    actual_size = (N-i>=CHUNK_SIZE)?CHUNK_SIZE:(N-CHUNK_SIZE);
+    actual_size = (N - i >= CHUNK_SIZE) ? CHUNK_SIZE : N - CHUNK_SIZE;
     C[j]=0;
 
   #pragma omp task label( dot_prod ) firstprivate( j, i, actual_size )
