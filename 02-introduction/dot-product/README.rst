@@ -40,25 +40,28 @@ There are several ways to parallelize operations that compute a reduction:
 Once we have introduced the dot product operation and the different ways of
 parallelizing a reduction, let's start this exercise. If you open the
 *dot-product.c* file, you will see that the ``dot_product`` function is a bit
-more complicated than the previous version::
+more complicated than the previous version.
 
-  double result = 0.0;
-  long j = 0;
-  for (long i=0; i<N; i+=CHUNK_SIZE) {
-    actual_size = (N - i >= CHUNK_SIZE) ? CHUNK_SIZE : N - CHUNK_SIZE;
-    C[j]=0;
+.. Ternary operator is wrongly colored in C syntax. If newer versions ever fix it, c# can be removed.
+.. code-block:: c#
 
-  #pragma omp task label( dot_prod ) firstprivate( j, i, actual_size )
-    {
-      for (long ii=0; ii<actual_size; ii++)
-        C[j]+= A[i+ii] * B[i+ii];
+    double result = 0.0;
+    long j = 0;
+    for (long i=0; i<N; i+=CHUNK_SIZE) {
+        actual_size = (N - i >= CHUNK_SIZE) ? CHUNK_SIZE : N - CHUNK_SIZE;
+        C[j] = 0;
+
+        #pragma omp task label( dot_prod ) firstprivate( j, i, actual_size )
+        {
+            for (long ii=0; ii<actual_size; ii++)
+                C[j] +=  A[i+ii] * B[i+ii];
+        }
+
+        #pragma omp task label( increment ) firstprivate( j )
+        result += C[j];
+
+        j++;
     }
-
-  #pragma omp task label( increment ) firstprivate( j )
-    result += C[j];
-
-    j++;
-  }
 
 Basically we have prepared our code to parallelize it, creating a private
 storage for each chunk and splitting the main loop into two different nested

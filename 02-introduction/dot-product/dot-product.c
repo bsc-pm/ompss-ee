@@ -38,7 +38,7 @@ double dot_product (long N, long CHUNK_SIZE, double A[N], double B[N])
                 C[j]+= A[i+ii] * B[i+ii];
         }
 
-        // OMPSS: This task depends on an single element of C and will resultumulate the result on result.
+        // OMPSS: This task depends on an single element of C and will accumulate it on result.
         #pragma omp task label( increment ) firstprivate( j )
         result += C[j];
 
