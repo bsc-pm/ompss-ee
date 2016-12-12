@@ -1,5 +1,5 @@
 Examples Using OmpSs
-====================
+********************
 
 In this section we include several OmpSs applications that are already parallelized (i.e. annotated
 with OmpSs directives). Users have not to change the code, but they are encouraged to experiment

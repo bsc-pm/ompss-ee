@@ -1,5 +1,5 @@
 MPI+OmpSs Exercises
-===================
+*******************
 
 .. toctree::
    :maxdepth: 2

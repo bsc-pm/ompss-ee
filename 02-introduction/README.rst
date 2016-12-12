@@ -1,5 +1,5 @@
 Beginners Exercises
-===================
+*******************
 
 .. toctree::
    :maxdepth: 2

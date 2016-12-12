@@ -1,5 +1,5 @@
 Introduction
-============
+************
 
 This documentation contains examples and exercises using the OmpSs programming model.
 The main objective of this paper is to provide guidance in learning OmpSs programming
@@ -16,7 +16,7 @@ The OmpSs documentation is written using Sphinx
   http://www.sphinx-doc.org/
 
 Contributing to the examples and exercises document
----------------------------------------------------
+===================================================
 
 1. Make sure you have sphinx-doc in your machine
 
@@ -73,7 +73,7 @@ and then proceed as above.
   $ git push
 
 System configuration
----------------------
+====================
 
 In this section we describe how to tune your configure script and also how to use it to configure
 your environment. If you have a pre-configured package you can skip this section and simply run
@@ -91,7 +91,7 @@ To configure your system you have to run the Linux command ``source`` using your
   $source configure.sh
 
 The make utility
-----------------
+================
 
 In software development, Make is a utility that automatically builds executable programs and
 libraries from source code by reading files called makefiles which specify how to derive the
@@ -139,7 +139,7 @@ running make clean)::
 
 
 Building the examples
----------------------
+=====================
 
 All the examples and exercises comes with a makefile (Makefile) configured to compile 3 different
 versions for each program. Each of the binary file name created by running make ends with a suffix
@@ -194,7 +194,7 @@ files as it is the case of ''extrae.xml'' file (used to configure Extrae plugin 
 Paraver trace, see ''trace.sh'' file).
 
 Job Scheduler: Minotauro
-------------------------
+========================
 
 The current section has a short explanation on how to use the job scheduler systems installed in
 BSC's Minotauro machine. Slurm is the utility used in this machine for batch processing support,
@@ -217,7 +217,7 @@ executed you will get two files. One for console standard output (with .out exte
 for console standard error (with .err extension).
 
 Job Scheduler: Marenostrum
---------------------------
+==========================
 
 LSF is the utility used at MareNostrum III for batch processing support, so all jobs must be run
 through it. This section provides information for getting started with job execution at the Cluster.
@@ -231,7 +231,7 @@ These are the basic commands to submit, control and check your jobs:
   * bsc_jobs: shows all the pending or running jobs from your group.
 
 Liability Disclaimer
---------------------
+====================
 
 The information included in these examples and exercises document and the associated examples'
 source file package are not guaranteed to be complete and/or error-free at this stage and they

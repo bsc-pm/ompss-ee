@@ -1,5 +1,5 @@
 GPU Device Exercises
-====================
+********************
 
 Almost all the programs in this section is available both in OpenCL and CUDA. From the point of
 view of an OmpSs programmer, the only difference between them is the language in which the kernel

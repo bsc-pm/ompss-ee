@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 OmpSs Examples and Exercises
-============================
+****************************
 
 .. toctree::
    :maxdepth: 3

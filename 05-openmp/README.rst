@@ -1,5 +1,5 @@
 OpenMP Exercises
-===================
+****************
 
 .. toctree::
    :maxdepth: 2
