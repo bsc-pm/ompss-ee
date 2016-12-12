@@ -48,13 +48,13 @@ Contributing to the examples and exercises document
 
   $ make html
 
-Now open your browser to _build/html/index.html and behold your contribution.
+Now open your browser to .build/html/index.html and behold your contribution.
 
 3.2. Generate the PDF
 
   $ make latexpdf
 
-Now open your PDF viewer to the _build/html/<docfile>.pdf (the file depends on
+Now open your PDF viewer to the .build/html/<docfile>.pdf (the file depends on
 the directory you chose in the step 0 above)
 
 4. Commit your changes using git
