@@ -11,7 +11,7 @@ OmpSs Examples and Exercises
    :numbered:
 
    README.rst
-   01-introduction/README.rst
+   00-introduction/README.rst
    01-examples/README.rst
    02-beginners/README.rst
    03-gpu-devices/README.rst

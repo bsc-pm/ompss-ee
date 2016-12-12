@@ -1,7 +1,10 @@
-OmpSs Examples
-==============
+Writing OmpSs programs
+======================
 
-Following examples are written in C/C++ or Fortran using OmpSs as a programming model. With each example we provide simple explanations on how they are annotated and, in some cases, how they can be compiled (if a full example is provided).
+Following examples are written in C/C++ or Fortran using OmpSs as a programming
+model. With each example we provide simple explanations on how they are
+annotated and, in some cases, how they can be compiled (if a full example is
+provided).
 
 Data Management
 ---------------
@@ -314,7 +317,7 @@ to the runtime system that the results written by the GPU onto the output array
 should be synchronized onto the host memory.  This is done at the latest when
 the host program encounters the ``taskwait`` directive.
 
-.. image:: ./images/example_blackscholes_solution.png
+.. image:: ./blackscholes_solution.png
 
 Perlin Noise
 ^^^^^^^^^^^^
@@ -352,7 +355,7 @@ GPUs.
 Following image shows the graphical representation of the data, and the way
 annotations split it across tasks.
 
-.. image:: ./images/example_perlin_noise_solution.png
+.. image:: ./perlin_noise_solution.png
 
 N-Body
 ^^^^^^
