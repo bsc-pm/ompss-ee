@@ -13,5 +13,4 @@ OmpSs Examples and Exercises
    02-beginners/README.rst
    03-gpu-devices/README.rst
    04-mpi+ompss/README.rst
-   05-openmp/README.rst
 
