@@ -1,22 +1,19 @@
-Introduction
-************
+Introduction: Examples and Exercises
+************************************
 
 This documentation contains examples and exercises using the OmpSs programming model.
 The main objective of this paper is to provide guidance in learning OmpSs programming
 model and serve as teaching materials in courses and tutorials. To find more complete
-applications please visit our BAR (BSC Application Repository) in the URL
-http://pm.bsc.es/projects/bar
+applications please visit our BAR (BSC Application Repository) in the URL:
 
-.. note::
-   A PDF version of this document is available in http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf, and
-   all the example source codes in http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
+   http://pm.bsc.es/projects/bar
+
+Contributing to the examples and exercises document
+===================================================
 
 The OmpSs documentation is written using Sphinx
 
   http://www.sphinx-doc.org/
-
-Contributing to the examples and exercises document
-===================================================
 
 1. Make sure you have sphinx-doc in your machine
 
@@ -230,11 +227,3 @@ These are the basic commands to submit, control and check your jobs:
     if they were still running.
   * bsc_jobs: shows all the pending or running jobs from your group.
 
-Liability Disclaimer
-====================
-
-The information included in these examples and exercises document and the associated examples'
-source file package are not guaranteed to be complete and/or error-free at this stage and they
-are subject to changes without further notice. Barcelona Supercomputing Center will not assume any
-responsibility for errors or omissions in this document and/or the associated example's source
-file package. Please send comments, corrections and/or suggestions to pm-tools at bsc.es
