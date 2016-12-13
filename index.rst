@@ -3,6 +3,21 @@
 OmpSs Examples and Exercises
 ****************************
 
+The information included in this document is provided "as is", with no
+warranties whatsoever, including any warranty of merchantability, fitness for
+any particular purpose, or any warranty otherwise arising out of any proposal,
+specification, or sample. The document is not guaranteed to be complete and/or
+error-free at this stage and it is subject to changes without furthernotice.
+Barcelona Supercomputing Center will not assume any responsibility for errors
+or omissions in this document. Please send comments, corrections and/or
+suggestions to pm-tools at bsc.es. This document is provided for informational
+purposes only.
+
+.. note::
+   A PDF version of this document is available in http://pm.bsc.es/ompss-docs/examples/OmpSsExamples.pdf, and
+   all the example source codes in http://pm.bsc.es/ompss-docs/examples/ompss-ee.tar.gz
+
+
 .. toctree::
    :maxdepth: 3
    :numbered:
