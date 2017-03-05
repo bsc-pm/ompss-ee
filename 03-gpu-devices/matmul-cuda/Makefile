@@ -10,7 +10,7 @@ include $(BASE_DIR)/common-files/Makefile
 CC = mcc
 KC = nvcc
 
-CFLAGS = --ompss -DDP
+CFLAGS = --ompss
 CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
@@ -20,7 +20,7 @@ NVCFLAGS = -O3
 LIBS  = 
 INCS  = -I$(PREFIX)
 
-EXTRA = -O3 -Wall -Wno-unused 
+EXTRA = -O3 -Wall -Wno-unused -DDP
 OBJECTS= check.o gendat.o prtspeed.o cclock.o
 
 $(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o $(OBJECTS)
