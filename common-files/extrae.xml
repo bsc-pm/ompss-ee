@@ -49,7 +49,7 @@
 
    <sampling enabled="no" type="virtual" period="50m" variability="10m" />
 
-   <merge enabled="yes" synchronization="default" binary="my_program"
+   <merge enabled="no" synchronization="default" binary="my_program"
       tree-fan-out="16" max-memory="512" joint-states="yes"
       keep-mpits="no" sort-addresses="yes" remove-files="yes" overwrite="yes"
    >
