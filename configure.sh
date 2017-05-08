@@ -6,12 +6,10 @@ echo Initial configuration...
 
 if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   # (@BSC) Marenostrum III section
-  # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=/apps/PM/ompss/git
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/impi5_mt+libgomp4.9/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=
-  # Extra package configuration
   export MPI_HOME=/apps/INTEL/impi/5.0.1.035/intel64
   export MPI_LIB_DIR=$MPI_HOME/lib
   export MPI_INC_DIR=$MPI_HOME/include
@@ -28,13 +26,10 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
   module load python
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
-  # Configure OmpSs + Extrae + Paraver + Temanejo
-  export OMPSS_HOME=/apps/PM/ompss/15.04
-  #export OMPSS_HOME=/gpfs/scratch/bsc56/bsc56678/apps/nvidia/ompss-dev
+  export OMPSS_HOME=/apps/PM/ompss/16.06.3/
   export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/2.5.2/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
   export TEMANEJO_HOME=/apps/PM/ompss/14.09/temanejo
-  # Extra package configuration
   export MPI_HOME=/opt/mpi/bullxmpi/1.1.11.1
   export MPI_LIB_DIR=$MPI_HOME/lib
   export MPI_INC_DIR=$MPI_HOME/include
@@ -47,15 +42,12 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   ln -sf $DIRNAME/common-files/sched-job-mpi_minotauro $DIRNAME/common-files/sched-job-mpi
   # Python configuration (needed by Temanejo)
   module load python
-  module load ompss/16.06
 elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
   # (@BSC) VirtualBox section
-  # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=/home/user/Builds/OmpSs/mcxx
   export EXTRAE_HOME=/home/user/Builds/extrae
   export PARAVER_HOME=/home/user/Tools/paraver
   export TEMANEJO_HOME=/home/user/Builds/temanejo
-  # Extra package configuration
   export MPI_HOME=/usr/lib/openmpi
   export MPI_LIB_DIR=$MPI_HOME/lib
   export MPI_INC_DIR=$MPI_HOME/include
@@ -64,15 +56,13 @@ elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
   export MKL_INC_DIR=/home/user/Builds/mkl/include
   export ATLAS_LIB_DIR=/usr/lib
   export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include
-  # Python configuration (needed by Temanejo
+  # Python configuration (needed by Temanejo) - by default
 else
   # Other Machines (AD-HOC) section, fill this section to configure your environment
-  # Configure OmpSs + Extrae + Paraver + Temanejo
   export OMPSS_HOME=
   export EXTRAE_HOME=
   export PARAVER_HOME=
   export TEMANEJO_HOME=
-  # Extra package configuration
   export MPI_LIB_DIR=
   export MPI_INC_DIR=
   export MKL_LIB_DIR=
