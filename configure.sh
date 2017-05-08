@@ -27,9 +27,9 @@ if [ "X$BSC_MACHINE" == "Xmn3" ]; then
 elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   # (@BSC) Minotauro section
   export OMPSS_HOME=/apps/PM/ompss/16.06.3/
-  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/2.5.2/default/64
+  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
   export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
-  export TEMANEJO_HOME=/apps/PM/ompss/14.09/temanejo
+  export TEMANEJO_HOME=
   export MPI_HOME=/opt/mpi/bullxmpi/1.1.11.1
   export MPI_LIB_DIR=$MPI_HOME/lib
   export MPI_INC_DIR=$MPI_HOME/include
@@ -42,6 +42,8 @@ elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
   ln -sf $DIRNAME/common-files/sched-job-mpi_minotauro $DIRNAME/common-files/sched-job-mpi
   # Python configuration (needed by Temanejo)
   module load python
+  # XML 2 used by Extrae:
+  export LD_LIBRARY_PATH=/apps/CEPBATOOLS/deps/libxml2/2.9.4/lib/:$LD_LIBRARY_PATH
 elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
   # (@BSC) VirtualBox section
   export OMPSS_HOME=/home/user/Builds/OmpSs/mcxx
