@@ -78,7 +78,7 @@ int main(int argc, char*argv[])
         printf("computation time (in seconds): %f\n", dt1);
     }
 
-    int times=10000;
+    int times=1000;
     int tt;
     printf("Running the GPU code %d times\n",times);
 
@@ -96,8 +96,10 @@ int main(int argc, char*argv[])
     } else {
         printf("computation time (in seconds): %f\n", dt2);
     }
-    double sumdf=sumdif(E,E1,2*nr);
-    printf("Cuda:      Sumdif: %f mean: %f\n",sumdf,sumdf/nr);
+    if (compute_serial) {
+       double sumdf = sumdif(E,E1,2*nr);
+       printf("Cuda:      Sumdif: %f mean: %f\n",sumdf,sumdf/(2*nr));
+    }
 
     return 0;
 }
