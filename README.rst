@@ -27,8 +27,13 @@ Once you have configured the script you will need to to run the Linux command
 ``source`` using your configure script as described in the beginning of this
 section.
 
+
+
+Building the examples
+=====================
+
 The make utility
-================
+----------------
 
 In software development, Make is a utility that automatically builds executable programs and
 libraries from source code by reading files called makefiles which specify how to derive the
@@ -74,9 +79,8 @@ running make clean)::
    clean:
       rm -f helloworld helloworld.o
 
-
-Building the examples
-=====================
+Examples Makefiles
+------------------
 
 All the examples and exercises comes with a makefile (Makefile) configured to compile 3 different
 versions for each program. Each of the binary file name created by running make ends with a suffix
