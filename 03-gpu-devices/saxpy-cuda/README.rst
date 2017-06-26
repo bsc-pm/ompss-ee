@@ -35,3 +35,10 @@ When the ``ndrange`` clause is correct. We can proceed to compile the source cod
 'make'. After it (if there are no compilation/link errors), we can execute it using one of the
 running scripts.
 
+**Goals of this exercise**
+
+ * Complete the OmpSs annotation (NDRange clause)
+ * Check execution and behaviour for different thread hierarchy configurations
+ * Check different runtime options (devices, max mem, prefetch, overlap,...)
+
+

@@ -41,3 +41,12 @@ Once the ``ndrange`` clause is correct and the input/outputs are correctly defin
 compile the source code, using the command 'make'. After it (if there are no errors), we can
 execute it using one of the provided running scripts. Check if all environment variables are set to
 the proper values.
+
+**Goals of this exercise**
+
+ * Complete the target annotation (copy info, NDRange clause,...)
+ * Complete the task annotation (dependences,...)
+ * Check execution and behaviour for different thread hierarchy configurations
+ * Check different runtime options (devices, max mem, prefetch, overlap,...)
+
+

@@ -31,7 +31,7 @@ its declaration and the pragmas over it.
     In this case as we are multiplying a two-dimension matrix, so the best approach is to use a
     two-dimension ``ndrange``.
 
-In order to get this program working, we only need to specify the ``ndrange`` clause, which has
+In order to get this program working, we need to specify the ``ndrange`` clause, which has
 five members:
 
  * First one is the number of dimensions on the kernel (2 in this case).
@@ -42,6 +42,15 @@ five members:
    of kernels which do not use shared memory between groups, any number from 16 to 32 (per
    dimension) should work correctly (depending on the underlying Hardware).
 
-Once the ``ndrange`` clause is correct and the input/outputs are correctly defined. We can proceed
+Once the ``ndrange`` clause is correct and the input/outputs are properly defined. We can proceed
 to compile the source code, using the command 'make'. After it (if there are no errors), we can
 execute it using one of the running scripts.
+
+**Goals of this exercise**
+
+ * Write the target directive (device, copies, thread hierarchy,...)
+ * Write the task directive (dependences,...)
+ * Check program execution verification
+ * Try different complile- (ndrange,...) and run- time options (devices, prefetch,...)
+
+
