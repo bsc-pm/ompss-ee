@@ -39,12 +39,15 @@ between initialization and compute results::
    ENDDO ! K
    !$OMP TASKWAIT
 
-Things to do with this example:
- * Code is completely annotated, you DON’T need to modify it
- * Review source code, check different directives and their clauses
- * Check different  versions  (performance, instrumented & debug)
- * Check other runtime options (schedulers,... )
- * Check (scalability), execute for different number of thread and compute speed-up
- * Get a task dependency graph to analyse dependences
- * Get different paraver traces and visualize them: thread state, task name,...
+**Goals of this exercise**
+
+ * Code is completely annotated, you DON’T need to modify it.
+ * Review source code, check different directives and their clauses. Try to understand
+   what they mean.
+ * Check different compiled versions (performance, instrumented & debug).
+ * Check other runtime options (schedulers, throttle,... ).
+ * Check (scalability), execute using different number of threads and compute speed-up.
+ * Get a task dependency graph to analyse dependences.
+ * Get different paraver traces and analyse them: use paraver configure files (.pcf)
+   in order to visualize thread state, task name,...
 

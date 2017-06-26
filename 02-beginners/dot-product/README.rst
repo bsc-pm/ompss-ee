@@ -71,9 +71,10 @@ version is not ready, yet.
 
 
 **Goals of this exercise**
+
  * Find all the ``#pragma omp`` lines. As you can see, there are tasks, but we
    forgot to specify their dependencies.
- * Tasks are executed asyncrhonously. Thus, at some point we have to wait for
+ * Tasks are executed asynchronously. Thus, at some point we have to wait for
    them. Where should we do that?
  * There is a task with a label ``dot_prod``. What are the inputs of that task?
    Does it have an output?  What is the size of the inputs and outputs?
@@ -83,3 +84,6 @@ version is not ready, yet.
    write the dependencies of this task again, but this time think if there is
    any other clause (besides in and out) that you can use in order to maximize
    parallelism.
+ * Think in other parallelization approaches using other types of dependencies.
+ * Check scalability (for different versions), use different runtime options (schedulers,...)
+ * Get a task dependency graph and/or paraver trackes (analysis)

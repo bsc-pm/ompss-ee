@@ -33,8 +33,17 @@ version::
 
 As the code is already annotated with some task directives, try to compile and run the program.
 Is it verifying? Why do you think it is failing? Running an unmodified version of this code may
-also raise a Segmentation Fault. Investigate which is the cause of that problem. Although it
+also raise a ``Segmentation Fault``. Investigate which is the cause of that problem. Although it
 is not needed, you can also try to debug program execution using gdb debugger (with the OmpSs
 debug version)::
 
   $NX_THREADS=4 gdb --args ./multisort-d 4096 64 128
+
+**Goals of this exercise**
+
+ * Solve the existant bug, program is not properly annotated.
+ * Think how the tasks must be synchronized and annotate the source file.
+ * Check different parallelization approaches: taskwait/dependences.
+ * Check scalability (for the different versions), use other runtime options (schedulers,... )
+ * Get a task dependency graph (different domains) and/or paraver traces
+

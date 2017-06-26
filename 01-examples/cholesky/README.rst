@@ -64,12 +64,15 @@ Note that for each of the dependences we also specify which is the matrix (block
 Although this is not needed, due there is no overlapping among the different blocks,
 it will allow the runtime to compute dependences using the region mechanism.
 
-Things to do with this example:
- * Code is completely annotated, you DON’T need to modify it
- * Review source code, check different directives and their clauses
- * Check different  versions  (performance, instrumented & debug)
- * Check other runtime options (schedulers,... )
- * Check (scalability), execute for different number of thread and compute speed-up
+**Goals of this exercise**
+
+ * Code is completely annotated: you DON’T need to modify it
+ * Review source code and check the different directives and their clauses. Try to
+   understand what they mean.
+ * Check different compiled versions (performance, instrumented & debug)
+ * Check other runtime options (schedulers, throttle,... )
+ * Check (scalability), execute the program using different number of threads and
+   compute the speed-up
  * Get a task dependency graph to analyse dependences
  * Get different paraver traces and visualize them: thread state, task name,...
 

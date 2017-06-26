@@ -20,6 +20,17 @@ hints and that you may consider before do the exercise:
    locality and to parallelize operations on those blocks).
  * Now go to the matmul function. As you can see, this function performs the multiplication on
    a block level.
- * Annotate the tasks that you consider are necessary, and don't forget to ensure that all of
-   them are finished before returned the result of the matrix multiplication (would it be
-   necessary any synchronization directive to guarantee that result has been already computed?).
+ * When creating tasks do not forget to ensure that all of them have finished before returning
+   the result of the matrix multiplication (would it be necessary any synchronization directive
+   to guarantee that result has been already computed?).
+
+**Goals of this exercise**
+
+ * Look for candidates to become a task and taskify them
+ * Include synchroniztion directives when required
+ * Check scalability (for different versions), use different runtime options (schedulers,... )
+ * Get a task dependency graph and/or paraver traces
+
+
+
+
