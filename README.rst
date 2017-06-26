@@ -14,7 +14,7 @@ System configuration
 
 In this section we describe how to tune your configure script and also how to use it to configure
 your environment. If you have a pre-configured package you can skip this section and simply run
-the Linux command ``source`` using your configure script::
+the Linux command ``source`` using the provided configure script::
 
   $source configure.sh
 
@@ -23,9 +23,9 @@ OmpSs applications. Among other things it contains the PATH where the system wil
 to find Mercurium compiler utility, and the MKL installation directory (if available) to
 run specific OmpSs applications (e.g. Cholesky kernel).
 
-To configure your system you have to run the Linux command ``source`` using your configure script::
-
-  $source configure.sh
+Once you have configured the script you will need to to run the Linux command
+``source`` using your configure script as described in the beginning of this
+section.
 
 The make utility
 ================
