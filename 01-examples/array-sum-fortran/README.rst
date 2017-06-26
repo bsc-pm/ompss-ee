@@ -38,3 +38,13 @@ between initialization and compute results::
       ENDDO
    ENDDO ! K
    !$OMP TASKWAIT
+
+Things to do with this example:
+ * Code is completely annotated, you DON’T need to modify it
+ * Review source code, check different directives and their clauses
+ * Check different  versions  (performance, instrumented & debug)
+ * Check other runtime options (schedulers,... )
+ * Check (scalability), execute for different number of thread and compute speed-up
+ * Get a task dependency graph to analyse dependences
+ * Get different paraver traces and visualize them: thread state, task name,...
+
