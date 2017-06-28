@@ -1,4 +1,4 @@
-PROGRAM=stream-p
+PROGRAM=stream-barr-p
 
 export IFS=";"
 

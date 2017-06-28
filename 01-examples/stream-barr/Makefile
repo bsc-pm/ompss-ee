@@ -1,4 +1,4 @@
-PROGRAM=stream
+PROGRAM=stream-barr
 
 TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
