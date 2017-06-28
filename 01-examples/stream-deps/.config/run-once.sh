@@ -1,5 +1,5 @@
 PROGRAM=stream-deps-p
 
-export NX_THREADS=1
+export NX_SMP_WORKERS=1
 
 ./$PROGRAM

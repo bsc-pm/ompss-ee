@@ -10,7 +10,7 @@ BSIZES="256"
 for MS in $MSIZES; do
   for BS in $BSIZES; do
     for thread in $THREADS; do
-      NX_THREADS=$thread ./$PROGRAM $MS $BS 0
+      NX_SMP_WORKERS=$thread ./$PROGRAM $MS $BS 0
     done
   done
 done

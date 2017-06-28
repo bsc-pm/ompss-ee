@@ -9,7 +9,7 @@ BSIZE="128"
 for MS in $MSIZE; do
   for BS in $BSIZE; do
     for thread in $THREADS; do
-      NX_GPUS=0 NX_THREADS=$thread ./$PROGRAM $MS $BS
+      NX_GPUS=0 NX_SMP_WORKERS=$thread ./$PROGRAM $MS $BS
     done
   done
 done

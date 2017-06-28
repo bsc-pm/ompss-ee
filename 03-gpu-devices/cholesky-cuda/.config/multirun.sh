@@ -1,6 +1,6 @@
 PROGRAM=cholesky_hyb-p
 
-export NX_THREADS=1
+export NX_SMP_WORKERS=1
 
 export NX_GPUMAXMEM=90
 

@@ -37,7 +37,7 @@ also raise a ``Segmentation Fault``. Investigate which is the cause of that prob
 is not needed, you can also try to debug program execution using gdb debugger (with the OmpSs
 debug version)::
 
-  $NX_THREADS=4 gdb --args ./multisort-d 4096 64 128
+  $NX_SMP_WORKERS=4 gdb --args ./multisort-d 4096 64 128
 
 **Goals of this exercise**
 

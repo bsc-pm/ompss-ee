@@ -101,7 +101,7 @@ data size, etc (''multirun.sh''). Before submitting any job, make sure all envir
 have the values you expect to. Here is an example of the ''run-once.sh'' script::
 
   #!/bin/bash
-  export NX_THREADS=4
+  export NX_SMP_WORKERS=4
 
   ./cholesky-p 4096 512 1
 
@@ -126,7 +126,7 @@ change in between instrumented and non-instrumented executions. When you want to
 need to include ''trace.sh'' before your program execution command line::
 
   #!/bin/bash
-  export NX_THREADS=1
+  export NX_SMP_WORKERS=1
 
   ./trace.sh ./cholesky-i 4096 512 1
 

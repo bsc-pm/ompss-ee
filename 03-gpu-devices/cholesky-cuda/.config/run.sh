@@ -8,7 +8,7 @@
 #@ gpus_per_node = 2
 
 export LD_LIBRARY_PATH=/opt/compilers/intel/mkl/lib/intel64/:$LD_LIBRARY_PATH
-export NX_THREADS=1
+export NX_SMP_WORKERS=1
 
 for gpus in 1 2 ; do
 echo "Number of gpus = $gpus" 

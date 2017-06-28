@@ -11,7 +11,7 @@ for size in $VSIZE; do
   for seq_sort in $SEQ_SORT; do
     for seq_merge in $SEQ_MERGE; do
       for thread in $THREADS; do
-        NX_GPUS=0 NX_THREADS=$thread ./$PROGRAM $size $seq_sort $seq_merge
+        NX_GPUS=0 NX_SMP_WORKERS=$thread ./$PROGRAM $size $seq_sort $seq_merge
       done
     done
   done

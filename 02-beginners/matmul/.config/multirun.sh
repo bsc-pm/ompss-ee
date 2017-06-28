@@ -7,6 +7,6 @@ SIZES="16"
 
 for size in $SIZES; do
   for thread in $THREADS; do
-    NX_GPUS=0 NX_THREADS=$thread ./$PROGRAM $size
+    NX_GPUS=0 NX_SMP_WORKERS=$thread ./$PROGRAM $size
   done
 done
