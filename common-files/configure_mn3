@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
+
+export OMPSS_HOME=/apps/PM/ompss/git
+export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/impi5_mt+libgomp4.9/64
+export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
+export TEMANEJO_HOME=
+export MPI_HOME=/apps/INTEL/impi/5.0.1.035/intel64
+export MPI_LIB_DIR=$MPI_HOME/lib
+export MPI_INC_DIR=$MPI_HOME/include
+export MPICC=mpiicc
+
+# Note (gmiranda): if you don't do this, mpiicc can't find icc. Fixme!
+module load impi/5.0.1.035 intel/16.0.0
+export MKL_LIB_DIR=/opt/intel/mkl/lib/intel64/
+export MKL_INC_DIR=/opt/intel/mkl/include/
+export ATLAS_LIB_DIR=
+export ATLAS_INC_DIR=
+
+ln -sf $DIRNAME/common-files/sched-job-smp_mn3 $DIRNAME/common-files/sched-job-smp
+ln -sf $DIRNAME/common-files/sched-job-mpi_mn3 $DIRNAME/common-files/sched-job-mpi
+
+# Python configuration (needed by Temanejo)
+module load python

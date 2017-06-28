@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
+
+export OMPSS_HOME=/home/user/Builds/OmpSs/mcxx
+export EXTRAE_HOME=/home/user/Builds/extrae
+export PARAVER_HOME=/home/user/Tools/paraver
+export TEMANEJO_HOME=/home/user/Builds/temanejo
+export MPI_HOME=/usr/lib/openmpi
+export MPI_LIB_DIR=$MPI_HOME/lib
+export MPI_INC_DIR=$MPI_HOME/include
+export MPI_CC=mpicc
+export MKL_LIB_DIR=/home/user/Builds/mkl/lib/intel64
+export MKL_INC_DIR=/home/user/Builds/mkl/include
+export ATLAS_LIB_DIR=/usr/lib
+export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include
+
+touch $DIRNAME/sched-job-smp
+touch $DIRNAME/sched-job-mpi
