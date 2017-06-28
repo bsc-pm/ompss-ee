@@ -18,8 +18,8 @@ export MKL_INC_DIR=/opt/intel/mkl/include/
 export ATLAS_LIB_DIR=
 export ATLAS_INC_DIR=
 
-ln -sf $DIRNAME/common-files/sched-job-smp_mn3 $DIRNAME/common-files/sched-job-smp
-ln -sf $DIRNAME/common-files/sched-job-mpi_mn3 $DIRNAME/common-files/sched-job-mpi
+ln -sf $DIRNAME/sched-job-smp_mn3 $DIRNAME/sched-job-smp
+ln -sf $DIRNAME/sched-job-mpi_mn3 $DIRNAME/sched-job-mpi
 
 # Python configuration (needed by Temanejo)
 module load python
