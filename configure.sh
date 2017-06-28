@@ -1,80 +1,14 @@
 #!/bin/bash -ex
 
-DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
+ROOTNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
 echo Initial configuration...
 
-if [ "X$BSC_MACHINE" == "Xmn3" ]; then
-  # (@BSC) Marenostrum III section
-  export OMPSS_HOME=/apps/PM/ompss/git
-  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/impi5_mt+libgomp4.9/64
-  export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
-  export TEMANEJO_HOME=
-  export MPI_HOME=/apps/INTEL/impi/5.0.1.035/intel64
-  export MPI_LIB_DIR=$MPI_HOME/lib
-  export MPI_INC_DIR=$MPI_HOME/include
-  export MPICC=mpiicc
-  # Note (gmiranda): if you don't do this, mpiicc can't find icc. Fixme!
-  module load impi/5.0.1.035 intel/16.0.0
-  export MKL_LIB_DIR=/opt/intel/mkl/lib/intel64/
-  export MKL_INC_DIR=/opt/intel/mkl/include/
-  export ATLAS_LIB_DIR=
-  export ATLAS_INC_DIR=
-  ln -sf $DIRNAME/common-files/sched-job_mn3 $DIRNAME/common-files/sched-job
-  ln -sf $DIRNAME/common-files/sched-job-mpi_mn3 $DIRNAME/common-files/sched-job-mpi
-  # Python configuration (needed by Temanejo)
-  module load python
-elif [ "X$BSC_MACHINE" == "Xnvidia" ]; then
-  # (@BSC) Minotauro section
-  export OMPSS_HOME=/apps/PM/ompss/16.06.3/
-  export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
-  export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
-  export TEMANEJO_HOME=
-  export MPI_HOME=/opt/mpi/bullxmpi/1.1.11.1
-  export MPI_LIB_DIR=$MPI_HOME/lib
-  export MPI_INC_DIR=$MPI_HOME/include
-  export MPI_CC=mpicc
-  export MKL_LIB_DIR=/opt/compilers/intel/2016.3.067/mkl/lib/intel64/
-  export MKL_INC_DIR=/opt/compilers/intel/2016.3.067/mkl/include
-  export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
-  export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
-  ln -sf $DIRNAME/common-files/sched-job_minotauro $DIRNAME/common-files/sched-job
-  ln -sf $DIRNAME/common-files/sched-job-mpi_minotauro $DIRNAME/common-files/sched-job-mpi
-  # Python configuration (needed by Temanejo)
-  module load python
-  # XML 2 used by Extrae:
-  export LD_LIBRARY_PATH=/apps/CEPBATOOLS/deps/libxml2/2.9.4/lib/:$LD_LIBRARY_PATH
-elif [ "X$BSC_MACHINE" == "XVirtualBox" ]; then
-  # (@BSC) VirtualBox section
-  export OMPSS_HOME=/home/user/Builds/OmpSs/mcxx
-  export EXTRAE_HOME=/home/user/Builds/extrae
-  export PARAVER_HOME=/home/user/Tools/paraver
-  export TEMANEJO_HOME=/home/user/Builds/temanejo
-  export MPI_HOME=/usr/lib/openmpi
-  export MPI_LIB_DIR=$MPI_HOME/lib
-  export MPI_INC_DIR=$MPI_HOME/include
-  export MPI_CC=mpicc
-  export MKL_LIB_DIR=/home/user/Builds/mkl/lib/intel64
-  export MKL_INC_DIR=/home/user/Builds/mkl/include
-  export ATLAS_LIB_DIR=/usr/lib
-  export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include
-  # Python configuration (needed by Temanejo) - by default
-else
-  # Other Machines (AD-HOC) section, fill this section to configure your environment
-  export OMPSS_HOME=
-  export EXTRAE_HOME=
-  export PARAVER_HOME=
-  export TEMANEJO_HOME=
-  export MPI_LIB_DIR=
-  export MPI_INC_DIR=
-  export MKL_LIB_DIR=
-  export MKL_INC_DIR=
-  export ATLAS_LIB_DIR=
-  export ATLAS_INC_DIR=
-  touch $DIRNAME/common-files/sched-job
-  touch $DIRNAME/common-files/sched-job-mpi
-  # Python configuration (needed by Temanejo)
+if [ "X$BSC_MACHINE" == "X" ]; then
+   export BSC_MACHINE=default
 fi
+
+source $ROOTNAME/common-files/configure_$BSC_MACHINE
 
 # Setting environment variables 
 export PATH=$OMPSS_HOME/bin:$PATH
@@ -115,11 +49,18 @@ else
    echo \ \ Temanejo utility at $TEMANEJO_HOME/bin 
 fi 
 
-if [ ! -f $DIRNAME/common-files/sched-job ]; then
-   echo WARNING: Job schedule file is not configured for this machine!
+echo Job schedule SMP configuration preface...
+if [ ! -f $ROOTNAME/common-files/sched-job-smp ]; then
+   echo \ \ WARNING: Job schedule file for SMP is not configured for this machine!
 else
-   echo Job schedule configuration preface...
-   cat  $DIRNAME/common-files/sched-job
+   cat  $ROOTNAME/common-files/sched-job-smp
+fi
+
+echo Job schedule MPI configuration preface...
+if [ ! -f $ROOTNAME/common-files/sched-job-mpi ]; then
+   echo \ \ WARNING: Job schedule file for MPI is not configured for this machine!
+else
+   cat  $ROOTNAME/common-files/sched-job-mpi
 fi
 
 echo Aditional libraries...
@@ -144,7 +85,7 @@ fi
 
 if [ "X$1" == "X--pack" ];
 then
-   pushd $DIRNAME
+   pushd $ROOTNAME
    git archive --format=tar.gz --output=ompss-ee.tar.gz --prefix=ompss-ee/ HEAD \
        || { echo >&2 "Option --pack requires git. Aborting"; exit 1; }
    popd
@@ -152,7 +93,7 @@ fi
 
 if [ "X$1" == "X--wipe" ];
 then
-   pushd $DIRNAME
+   pushd $ROOTNAME
    for first in `ls -d ??-*/ | cut -f1 -d'/'`;
    do
       echo Entering... $first

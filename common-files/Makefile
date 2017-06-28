@@ -20,12 +20,12 @@ trace.sh:
 
 run-once.sh:
 	cp  $(COMMON_DIR)/run-once.sh . 
-	cat $(COMMON_DIR)/sched-job$(EXTRA_SCHED_OPTIONS) >> run-once.sh 
+	cat $(COMMON_DIR)/sched-job$(JOB_SCHED_VERSION) >> run-once.sh 
 	cat $(CONFIG_DIR)/run-once.sh >> run-once.sh 
 
 multirun.sh:
 	cp  $(COMMON_DIR)/multirun.sh . 
-	cat $(COMMON_DIR)/sched-job$(EXTRA_SCHED_OPTIONS) >> multirun.sh 
+	cat $(COMMON_DIR)/sched-job$(JOB_SCHED_VERSION) >> multirun.sh 
 	cat $(CONFIG_DIR)/multirun.sh >> multirun.sh 
 
 $(MPI_CHECK):

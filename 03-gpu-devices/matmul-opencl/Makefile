@@ -4,6 +4,8 @@ PREFIX=.
 
 TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
+JOB_SCHED_VERSION=-smp
+
 BASE_DIR=../..
 include $(BASE_DIR)/common-files/Makefile
 

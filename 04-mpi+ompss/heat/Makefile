@@ -3,8 +3,7 @@ PREFIX=.
 
 TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
-# Use MPI sched job
-EXTRA_SCHED_OPTIONS=-mpi
+JOB_SCHED_VERSION=-mpi
 
 BASE_DIR=../..
 include $(BASE_DIR)/common-files/Makefile
