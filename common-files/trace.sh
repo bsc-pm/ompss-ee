@@ -10,3 +10,5 @@ export EXTRAE_CONFIG_FILE=extrae.xml
 export NX_INSTRUMENTATION=extrae
 
 $*
+
+mpi2prv -f TRACE.mpits -o myTrace.prv
