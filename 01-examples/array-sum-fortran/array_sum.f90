@@ -56,7 +56,7 @@ PROGRAM P
 
     ! RESULTS = VEC1 + VEC2
     DO I=1, N, BS
-        !$OMP TASK OUT(VEC1(I:I+BS-1), VEC2(I:I+BS-1)) IN(RESULTS(I:I+BS-1))&
+        !$OMP TASK IN(VEC1(I:I+BS-1), VEC2(I:I+BS-1)) OUT(RESULTS(I:I+BS-1))&
         !$OMP PRIVATE(J) FIRSTPRIVATE(I, BS) LABEL(ARRAY_SUM_TASK)
             DO J = I, I+BS-1
                 RESULTS(J) = VEC1(J) + VEC2(J)
