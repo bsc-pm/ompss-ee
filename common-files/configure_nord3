@@ -3,23 +3,27 @@
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
 export OMPSS_HOME=/apps/PM/ompss/git
-export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/impi5_mt+libgomp4.9/64
-export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
+export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/impi_5_1_3_210
+export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
 export TEMANEJO_HOME=
-export MPI_HOME=/apps/INTEL/impi/5.0.1.035/intel64
+export MPI_HOME=/apps/INTEL/2016.3.067/impi/5.1.3.210/intel64
 export MPI_LIB_DIR=$MPI_HOME/lib
 export MPI_INC_DIR=$MPI_HOME/include
 export MPICC=mpiicc
 
+# Note (vlopez); wxparaver needs glibcxx from gcc >= 5
+module load gcc/5.1.0
+module unload openmpi
+module load impi/5.1.3.210
 # Note (gmiranda): if you don't do this, mpiicc can't find icc. Fixme!
-module load impi/5.0.1.035 intel/16.0.0
+module load intel/16.0.0
 export MKL_LIB_DIR=/opt/intel/mkl/lib/intel64/
 export MKL_INC_DIR=/opt/intel/mkl/include/
 export ATLAS_LIB_DIR=
 export ATLAS_INC_DIR=
 
-ln -sf $DIRNAME/sched-job-smp_mn3 $DIRNAME/sched-job-smp
-ln -sf $DIRNAME/sched-job-mpi_mn3 $DIRNAME/sched-job-mpi
+ln -sf $DIRNAME/sched-job-smp_nord3 $DIRNAME/sched-job-smp
+ln -sf $DIRNAME/sched-job-mpi_nord3 $DIRNAME/sched-job-mpi
 
 # Python configuration (needed by Temanejo)
 module load python
