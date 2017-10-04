@@ -10,7 +10,7 @@ include $(BASE_DIR)/common-files/Makefile
 
 CC = smpcc
 
-CFLAGS = --ompss  -cc=$(CC)
+CFLAGS = --ompss -cc=$(CC)
 CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
@@ -22,18 +22,18 @@ EXTRA = -std=c99 -Wall -Wno-unused
 
 RM = rm -f
 
-OBJECTS =
+SOURCES = mpi_ompss_pils.c
 
 all: $(TARGETS)
 
-$(PROGRAM)-p: $(PREFIX)/$(PROGRAM).c $(OBJECTS)
-	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
+$(PROGRAM)-p: $(SOURCES)
+	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $^ $(LIBS)
 
-$(PROGRAM)-i: $(PREFIX)/$(PROGRAM).c $(OBJECTS)
-	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
+$(PROGRAM)-i: $(SOURCES)
+	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $^ $(LIBS)
 
-$(PROGRAM)-d: $(PREFIX)/$(PROGRAM).c $(OBJECTS)
-	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $< $(OBJECTS) $(LIBS)
+$(PROGRAM)-d: $(SOURCES)
+	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $^ $(LIBS)
 
 clean:
 	$(RM) $(CC)_* *.o *~ $(TARGETS)
