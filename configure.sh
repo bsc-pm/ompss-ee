@@ -12,6 +12,7 @@ source $ROOTNAME/common-files/configure_$BSC_MACHINE
 
 # Setting environment variables 
 export PATH=$OMPSS_HOME/bin:$PATH
+export PATH=$DLB_HOME/bin:$PATH
 export PATH=$EXTRAE_HOME/bin/:$PATH
 export PATH=$PARAVER_HOME/bin:$PATH
 export PATH=$TEMANEJO_HOME/bin:$PATH

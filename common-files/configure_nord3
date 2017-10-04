@@ -3,6 +3,7 @@
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
 export OMPSS_HOME=/apps/PM/ompss/git
+export DLB_HOME=/apps/PM/dlb/latest/impi
 export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/impi_5_1_3_210
 export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
 export TEMANEJO_HOME=
