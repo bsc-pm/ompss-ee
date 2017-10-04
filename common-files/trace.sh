@@ -6,6 +6,8 @@
 # Uncomment the following line to trace MPI+OpenMP (GNU) programs
 #export LD_PRELOAD=${EXTRAE_HOME}/lib/libompitrace.so
 
+export LD_PRELOAD="$LD_PRELOAD:$OMPSSEE_LD_PRELOAD"
+
 export EXTRAE_CONFIG_FILE=extrae.xml
 export NX_INSTRUMENTATION=extrae
 
