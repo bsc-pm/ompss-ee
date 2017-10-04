@@ -13,20 +13,20 @@ ATLAS_CHECK=$(ATLAS_LIB_DIR)/libatlas.a
 all: $(TARGETS) $(SCRIPTS) $(PARAVER)
 
 extrae.xml:
-	cp $(COMMON_DIR)/extrae.xml . 
+	cp $(COMMON_DIR)/extrae.xml .
 
 trace.sh:
-	cp $(COMMON_DIR)/trace.sh . 
+	cp $(COMMON_DIR)/trace.sh .
 
-run-once.sh:
-	cp  $(COMMON_DIR)/run-once.sh . 
-	cat $(COMMON_DIR)/sched-job$(JOB_SCHED_VERSION) >> run-once.sh 
-	cat $(CONFIG_DIR)/run-once.sh >> run-once.sh 
+run-once.sh: $(COMMON_DIR)/run-once.sh $(CONFIG_DIR)/run-once.sh
+	cp  $(COMMON_DIR)/run-once.sh .
+	cat $(COMMON_DIR)/sched-job$(JOB_SCHED_VERSION) >> run-once.sh
+	cat $(CONFIG_DIR)/run-once.sh >> run-once.sh
 
-multirun.sh:
-	cp  $(COMMON_DIR)/multirun.sh . 
-	cat $(COMMON_DIR)/sched-job$(JOB_SCHED_VERSION) >> multirun.sh 
-	cat $(CONFIG_DIR)/multirun.sh >> multirun.sh 
+multirun.sh: $(COMMON_DIR)/multirun.sh $(CONFIG_DIR)/multirun.sh
+	cp  $(COMMON_DIR)/multirun.sh .
+	cat $(COMMON_DIR)/sched-job$(JOB_SCHED_VERSION) >> multirun.sh
+	cat $(CONFIG_DIR)/multirun.sh >> multirun.sh
 
 $(MPI_CHECK):
 	@echo "=================================================="
