@@ -2,8 +2,7 @@ PROGRAM=lulesh2.0-p
 
 # Uncomment to enable DLB
 # export NX_ARGS+=" --thread-manager=dlb"
-# export LB_POLICY="auto_LeWI_mask"
-# export LB_LEND_MODE="BLOCK"
+# export DLB_ARGS+=" --policy=auto_LeWI_mask --lend-mode=BLOCK"
 # export OMPSSEE_LD_PRELOAD=$DLB_HOME/lib/libdlb_mpi.so
 # export I_MPI_WAIT_MODE=1
 
