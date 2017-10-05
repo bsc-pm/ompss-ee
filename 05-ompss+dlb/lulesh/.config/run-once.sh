@@ -10,4 +10,5 @@ PROGRAM=lulesh2.0-i
 # export I_MPI_WAIT_MODE=1
 
 export NX_ARGS+=" --force-tie-master --warmup-threads"
-mpirun -n 27 $INST ./$PROGRAM -i 15 -b 8 -s 100
+
+mpirun -n 27 $INST ./$PROGRAM -i 5 -b 8 -s 100
