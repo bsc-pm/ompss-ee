@@ -1,14 +1,16 @@
 LUB
 ---
 
-.. highlight:: c
+.. highlight:: none
 
-This codes performs a ...
+LUB is an LU matrix decomposition by blocks
 
-.. note::
-  You can dowload this code visiting the url http://pm.bsc.es *OmpSs Examples and Exercises*'s
-  (code) link. This code is included inside the  *05-ompss+dlb*'s directory.
+Usage::
 
-.. note::
-  You need to specify the number of MPI tasks per node. In Marenostrum you can do this
-  by adding <<#BSUB -R "span[ptile=1]">> to your job script.
+    ./LUB <size-matrix> <size-block>
+
+**Goals of this exercise**
+
+ * Run the instrumented version of LUB and analise the Paraver trace.
+ * Enable DLB options. Run and analise the Paraver trace.
+ * Run the multirun.sh script and compare the execution performance with and without DLB.

@@ -28,4 +28,5 @@ purposes only.
    02-beginners/README.rst
    03-gpu-devices/README.rst
    04-mpi+ompss/README.rst
+   05-ompss+dlb/README.rst
 

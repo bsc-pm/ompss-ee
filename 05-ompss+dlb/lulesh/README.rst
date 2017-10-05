@@ -1,14 +1,17 @@
 Lulesh
------------------------------------
+------
 
-.. highlight:: c
+.. highlight:: none
 
-This codes performs a ...
+Lulesh is a benchmark from LLNL, it represents a typical hydrocode like ALE3D.
 
-.. note::
-  You can dowload this code visiting the url http://pm.bsc.es *OmpSs Examples and Exercises*'s
-  (code) link. This code is included inside the  *05-ompss+dlb*'s directory.
+Usage::
 
-.. note::
-  You need to specify the number of MPI tasks per node. In Marenostrum you can do this
-  by adding <<#BSUB -R "span[ptile=1]">> to your job script.
+    ./lulesh2.0 -i <iterations> -b <balance> -s <size>
+
+
+**Goals of this exercise**
+
+ * Run the instrumented version of Lulesh and analise the Paraver trace.
+ * Enable DLB options, MPI interception included. Run and analise the Paraver trace.
+ * Run the multirun.sh script and compare the execution performance with and without DLB.

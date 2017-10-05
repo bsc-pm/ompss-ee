@@ -6,3 +6,6 @@ OmpSs+DLB Exercises
     :numbered:
 
     pils/README.rst
+    lulesh/README.rst
+    lub/README.rst
+    pils-multiapp/README.rst

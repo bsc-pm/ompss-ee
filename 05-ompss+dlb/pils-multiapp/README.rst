@@ -1,14 +1,14 @@
-PILS (Parallel ImbaLance Simulator)
------------------------------------
+PILS - multiapp example
+-----------------------
 
 .. highlight:: c
 
-This codes performs a ...
+This example demonstrates the capabilities of DLB sharing resources with two different
+unrelated applications. The run-once.sh script executes two instances of PILS without
+MPI support, each one in a different set of CPUs. DLB is able to automatically lend
+resources from one to another.
 
-.. note::
-  You can dowload this code visiting the url http://pm.bsc.es *OmpSs Examples and Exercises*'s
-  (code) link. This code is included inside the  *05-ompss+dlb*'s directory.
+**Goals of this exercise**
 
-.. note::
-  You need to specify the number of MPI tasks per node. In Marenostrum you can do this
-  by adding <<#BSUB -R "span[ptile=1]">> to your job script.
+ * Run the script run-once.sh with tracing and DLB enabled, and observe how two
+   unrelated applications share resources.
