@@ -11,6 +11,6 @@ Usage::
 
 **Goals of this exercise**
 
- * Run the instrumented version of LUB and analise the Paraver trace.
- * Enable DLB options. Run and analise the Paraver trace.
+ * Run the instrumented version of LUB and analyse the Paraver trace.
+ * Enable DLB options. Run and analyse the Paraver trace.
  * Run the multirun.sh script and compare the execution performance with and without DLB.

@@ -12,6 +12,6 @@ Usage::
 
 **Goals of this exercise**
 
- * Run the instrumented version of Lulesh and analise the Paraver trace.
- * Enable DLB options, MPI interception included. Run and analise the Paraver trace.
+ * Run the instrumented version of Lulesh and analyse the Paraver trace.
+ * Enable DLB options, MPI interception included. Run and analyse the Paraver trace.
  * Run the multirun.sh script and compare the execution performance with and without DLB.
