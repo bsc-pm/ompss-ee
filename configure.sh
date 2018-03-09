@@ -2,6 +2,35 @@
 
 ROOTNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
+if [ "X$1" == "X--pack" ];
+then
+   pushd $ROOTNAME
+   git archive --format=tar.gz --output=ompss-ee.tar.gz --prefix=ompss-ee/ HEAD \
+       || { echo >&2 "Option --pack requires git. Aborting"; exit 1; }
+   popd
+   exit 0
+fi
+
+if [ "X$1" == "X--wipe" ];
+then
+   pushd $ROOTNAME
+   for first in `ls -d ??-*/ | cut -f1 -d'/'`;
+   do
+      echo Entering... $first
+      pushd $first
+      for second in `ls -d */ | cut -f1 -d'/'`;
+      do
+         echo Entering... $second
+         pushd $second
+         make wipe
+         popd
+      done
+      popd
+   done
+   popd
+   exit 0
+fi
+
 echo Initial configuration...
 
 if [ "X$BSC_MACHINE" == "X" ]; then
@@ -82,31 +111,4 @@ if [ ! -f $ATLAS_LIB_DIR/libatlas.a ]; then
    echo \ \ WARNING: ATLAS library is not found, some tests will not be compiled!
 else
    echo \ \ ATLAS library at $ATLAS_LIB_DIR
-fi
-
-if [ "X$1" == "X--pack" ];
-then
-   pushd $ROOTNAME
-   git archive --format=tar.gz --output=ompss-ee.tar.gz --prefix=ompss-ee/ HEAD \
-       || { echo >&2 "Option --pack requires git. Aborting"; exit 1; }
-   popd
-fi
-
-if [ "X$1" == "X--wipe" ];
-then
-   pushd $ROOTNAME
-   for first in `ls -d ??-*/ | cut -f1 -d'/'`;
-   do
-      echo Entering... $first
-      pushd $first
-      for second in `ls -d */ | cut -f1 -d'/'`;
-      do
-         echo Entering... $second
-         pushd $second
-         make wipe
-         popd
-      done
-      popd
-   done
-   popd
 fi
