@@ -1,0 +1,8 @@
+#SBATCH --job-name=ompss-ee
+#SBATCH --workdir=.
+#SBATCH --output=ompss-ee_%j.out
+#SBATCH --error=ompss-ee_%j.err
+#SBATCH --cpus_per_task=48
+#SBATCH --ntasks=1
+#SBATCH --time=00:15:00
+#SBATCH --qos=debug

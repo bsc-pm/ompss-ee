@@ -1,0 +1,26 @@
+#!/bin/bash
+
+DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
+
+export OMPSS_HOME=/apps/PM/ompss/git
+export DLB_HOME=/apps/PM/dlb/latest/impi
+export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/impi_2017_4
+export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
+export TEMANEJO_HOME=
+export MPI_HOME=/apps/INTEL/2017.4/impi/2017.3.196
+export MPI_LIB_DIR=$MPI_HOME/lib
+export MPI_INC_DIR=$MPI_HOME/include
+export MPICC=mpiicc
+export MPICXX=mpiicpc
+export MPI_NATIVE_CC=I_MPI_CC
+export MPI_NATIVE_CXX=I_MPI_CXX
+export MKL_LIB_DIR=/apps/INTEL/2017.4/mkl/lib/intel64
+export MKL_INC_DIR=/apps/INTEL/2017.4/mkl/include
+export ATLAS_LIB_DIR=/apps/ATLAS/3.10.3/INTEL/lib
+export ATLAS_INC_DIR=/apps/ATLAS/3.10.3/INTEL/include
+
+ln -sf $DIRNAME/sched-job-smp_mn4 $DIRNAME/sched-job-smp
+ln -sf $DIRNAME/sched-job-mpi_mn4 $DIRNAME/sched-job-mpi
+
+module unload openmpi
+module load impi/2017.4
