@@ -18,7 +18,7 @@ CFLAGS_D = --debug
 LIBS  = 
 INCS  = 
 
-EXTRA = -std=c99 -O3 -Wall -Wno-unused -mcmodel=large 
+EXTRA = -std=c99 -O3 -Wall -Wno-unused
 
 RM = rm -f
 

@@ -12,6 +12,8 @@ export MPI_LIB_DIR=$MPI_HOME/lib
 export MPI_INC_DIR=$MPI_HOME/include
 export MPICC=mpiicc
 export MPICXX=mpiicpc
+export MPI_NATIVE_CC=I_MPI_CC
+export MPI_NATIVE_CXX=I_MPI_CXX
 
 # Note (vlopez); wxparaver needs glibcxx from gcc >= 5
 module load gcc/5.1.0

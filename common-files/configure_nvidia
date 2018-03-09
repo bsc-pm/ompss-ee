@@ -2,14 +2,18 @@
 
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
-export OMPSS_HOME=/apps/PM/ompss/16.06.3/
-export EXTRAE_HOME=/apps/CEPBATOOLS/extrae/latest/default/64
-export PARAVER_HOME=/apps/CEPBATOOLS/wxparaver/latest
+export OMPSS_HOME=/apps/PM/ompss/git
+export DLB_HOME=/apps/PM/dlb/latest/bullxmpi
+export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/bullxmpi_1_2_9_1
+export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
 export TEMANEJO_HOME=
 export MPI_HOME=/opt/mpi/bullxmpi/1.1.11.1
 export MPI_LIB_DIR=$MPI_HOME/lib
 export MPI_INC_DIR=$MPI_HOME/include
-export MPI_CC=mpicc
+export MPICC=mpicc
+export MPICXX=mpicxx
+export MPI_NATIVE_CC=OMPI_CC
+export MPI_NATIVE_CXX=OMPI_CXX
 export MKL_LIB_DIR=/opt/compilers/intel/2016.3.067/mkl/lib/intel64/
 export MKL_INC_DIR=/opt/compilers/intel/2016.3.067/mkl/include
 export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib

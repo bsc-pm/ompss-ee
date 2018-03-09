@@ -10,12 +10,12 @@ include $(BASE_DIR)/common-files/Makefile
 
 CC = smpcc
 
-CFLAGS = --ompss -cc=$(CC)
+CFLAGS = --ompss
 CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
 
-LIBS  = -lm -mt_mpi
+LIBS  = -lm
 INCS  =
 
 EXTRA = -std=c99 -Wall -Wno-unused
@@ -27,12 +27,15 @@ SOURCES = mpi_ompss_pils.c
 all: $(TARGETS)
 
 $(PROGRAM)-p: $(SOURCES)
+	$(MPI_NATIVE_CC)=$(CC) \
 	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ $^ $(LIBS)
 
 $(PROGRAM)-i: $(SOURCES)
+	$(MPI_NATIVE_CC)=$(CC) \
 	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ $^ $(LIBS)
 
 $(PROGRAM)-d: $(SOURCES)
+	$(MPI_NATIVE_CC)=$(CC) \
 	$(MPICC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ $^ $(LIBS)
 
 clean:
