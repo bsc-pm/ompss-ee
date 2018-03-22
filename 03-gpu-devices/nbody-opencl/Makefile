@@ -11,7 +11,7 @@ include $(BASE_DIR)/common-files/Makefile
 
 CC = mcc
 
-CFLAGS = --ompss -k
+CFLAGS = --ompss -k --opencl
 CFLAGS_P =
 CFLAGS_I = --instrument
 CFLAGS_D = --debug
