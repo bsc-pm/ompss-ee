@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'OmpSs Examples and Exercises'
-copyright = u'2016, BSC Programming Models'
+copyright = u'2016-2018, BSC Programming Models'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -100,14 +100,18 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-	"sidebarwidth" : "320",
-   "stickysidebar": "false",
+    "sidebarwidth" : "280",
+    "font_family": '"Roboto Condensed", sans-serif',
+    "caption_font_family": '"Roboto Condensed", sans-serif',
+    "head_font_family": '"Roboto Condensed", sans-serif',
+    "code_font_family": '"Roboto Mono", monospace',
+    "show_powered_by": False,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -273,7 +277,7 @@ texinfo_documents = [
 epub_title = u'OmpSs Examples and Exercises'
 epub_author = u'BSC Programming Models'
 epub_publisher = u'BSC Programming Models'
-epub_copyright = u'2016, BSC Programming Models'
+epub_copyright = u'2016-2018, BSC Programming Models'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'OmpSs Examples and Exercises'
