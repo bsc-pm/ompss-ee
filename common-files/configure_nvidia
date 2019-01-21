@@ -2,7 +2,7 @@
 
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
-export OMPSS_HOME=/apps/PM/ompss/17.12.1/
+export OMPSS_HOME=/apps/PM/ompss/17.06/
 export DLB_HOME=/apps/PM/dlb/latest/bullxmpi
 export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/bullxmpi_1_2_9_1
 export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
