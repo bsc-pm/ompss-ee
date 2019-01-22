@@ -50,7 +50,7 @@ $(KERNEL).o: $(KERNEL).cu $(PREFIX)/$(KERNEL).h
 	$(KC) $(INCS) $(PRECISION) -o $@ -c $< 
 
 .c.o:
-	$(CC) --no-openmp $(EXTRA) -c $<
+	$(CC) --no-openmp $(EXTRA) $(PRECISION) -c $<
 
 clean:
 	rm -f $(CC)_* *.o *~ $(TARGETS) 
