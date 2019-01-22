@@ -22,7 +22,8 @@ NVCFLAGS = -O3
 LIBS  = 
 INCS  = -I$(PREFIX)
 
-EXTRA = -O3 -Wall -Wno-unused -DDP
+PRECISION=-DDP
+EXTRA = -O3 -Wall -Wno-unused
 OBJECTS= check.o gendat.o prtspeed.o cclock.o
 
 $(PROGRAM)-p: $(PROGRAM)-p.o $(KERNEL).o $(OBJECTS)
@@ -36,17 +37,17 @@ $(PROGRAM)-d: $(PROGRAM)-d.o $(KERNEL).o $(OBJECTS)
 
 
 $(PROGRAM)-p.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
-	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(INCS) -o $@ -c $<
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_P) $(EXTRA) $(PRECISION) $(INCS) -o $@ -c $<
 
 $(PROGRAM)-i.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
-	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(INCS) -o $@ -c $<
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_I) $(EXTRA) $(PRECISION) $(INCS) -o $@ -c $<
 
 $(PROGRAM)-d.o: $(PROGRAM).c $(PREFIX)/$(KERNEL).h
-	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(INCS) -o $@ -c $<
+	$(CC) $(GFLAGS) $(CFLAGS) $(CFLAGS_D) $(EXTRA) $(PRECISION) $(INCS) -o $@ -c $<
 
 
 $(KERNEL).o: $(KERNEL).cu $(PREFIX)/$(KERNEL).h
-	$(KC) $(INCS) -o $@ -c $< 
+	$(KC) $(INCS) $(PRECISION) -o $@ -c $< 
 
 .c.o:
 	$(CC) --no-openmp $(EXTRA) -c $<
