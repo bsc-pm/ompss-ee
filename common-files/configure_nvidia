@@ -24,7 +24,7 @@ ln -sf $DIRNAME/sched-job-mpi_nvidia $DIRNAME/sched-job-mpi
 
 module unload gcc
 module load gcc/4.9.4
-
+module load GRAPHVIZ
 
 alias submit=mnsubmit
 alias queue=mnq

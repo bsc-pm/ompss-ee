@@ -8,4 +8,5 @@
 # @ gpus_per_node = 2
 # @ cpus_per_task = 12
 # @ node_usage = not_shared
+# @ features = k80
 # @ wall_clock_limit = 00:15:00

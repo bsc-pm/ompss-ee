@@ -19,7 +19,7 @@ CFLAGS_D = --debug
 
 NVCFLAGS = -O3
 
-LIBS  = 
+LIBS  = --Wl,-L/opt/cuda/7.0/lib64 -lcuda -lcublas -lcudart
 INCS  = -I$(PREFIX)
 
 PRECISION=-DDP
