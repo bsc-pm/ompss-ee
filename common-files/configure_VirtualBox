@@ -10,6 +10,7 @@ export MPI_HOME=/usr/lib/openmpi
 export MPI_LIB_DIR=$MPI_HOME/lib
 export MPI_INC_DIR=$MPI_HOME/include
 export MPI_CC=mpicc
+export MPIRUN_COMMAND="mpirun"
 export MKL_LIB_DIR=/home/user/Builds/mkl/lib/intel64
 export MKL_INC_DIR=/home/user/Builds/mkl/include
 export ATLAS_LIB_DIR=/usr/lib

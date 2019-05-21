@@ -16,7 +16,7 @@ extrae.xml:
 	cp $(COMMON_DIR)/extrae.xml .
 
 trace.sh:
-	cp $(COMMON_DIR)/trace.sh .
+	cp $(COMMON_DIR)/trace$(TRACE_VERSION).sh trace.sh
 
 run-once.sh: $(COMMON_DIR)/run-once.sh $(CONFIG_DIR)/run-once.sh
 	cp  $(COMMON_DIR)/run-once.sh .

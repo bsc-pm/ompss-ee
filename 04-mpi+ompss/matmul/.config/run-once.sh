@@ -1,14 +1,15 @@
-PROGRAM=matmul-i
+PROGRAM=matmul-p
 
-export NX_ARGS="--threads 2"
+# Run with 6 threads per MPI process in the same node
+export NX_SMP_WORKERS=6
 
-echo "NX_ARGS is $NX_ARGS"
-echo "LD_PRELOAD is $LD_PRELOAD"
-echo "LD_LIBRARY_PATH is $LD_LIBRARY_PATH"
-echo "##################################################"
-
-# Uncomment to enable tracing
+# Uncomment to instrument
+#export INST=./graph.sh
 #export INST=./trace.sh
 
-mpirun --cpus-per-proc 2 $INST ./$PROGRAM
+${MPIRUN_COMMAND} $INST ./$PROGRAM
 
+# Generate the trace if needed
+if [[ "$INST" == *"trace"* ]]; then
+	mpi2prv -f TRACE.mpits -o myTrace.prv
+fi
