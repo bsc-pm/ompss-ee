@@ -16,8 +16,8 @@ export MPI_NATIVE_CC=I_MPI_CC
 export MPI_NATIVE_CXX=I_MPI_CXX
 export MKL_LIB_DIR=/apps/INTEL/2017.4/mkl/lib/intel64
 export MKL_INC_DIR=/apps/INTEL/2017.4/mkl/include
-export ATLAS_LIB_DIR=/apps/ATLAS/3.10.3/INTEL/lib
-export ATLAS_INC_DIR=/apps/ATLAS/3.10.3/INTEL/include
+export ATLAS_LIB_DIR=/apps/ATLAS/3.10.3/INTEL_BK/lib
+export ATLAS_INC_DIR=/apps/ATLAS/3.10.3/INTEL_BK/include
 
 ln -sf $DIRNAME/sched-job-smp_mn4 $DIRNAME/sched-job-smp
 ln -sf $DIRNAME/sched-job-mpi_mn4 $DIRNAME/sched-job-mpi
