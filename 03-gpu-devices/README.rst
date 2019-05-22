@@ -5,7 +5,7 @@ GPU Device Exercises
    :maxdepth: 2
    :numbered:
 
-   introduction/README.rst
+   INTRO.rst
    saxpy-cuda/README.rst
    krist-cuda/README.rst
    matmul-cuda/README.rst

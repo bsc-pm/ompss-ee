@@ -37,6 +37,8 @@ if [ "X$BSC_MACHINE" == "X" ]; then
    export BSC_MACHINE=default
 fi
 
+export PATH=$ROOTNAME/common-files/:$PATH
+
 source $ROOTNAME/common-files/configure_$BSC_MACHINE
 
 # Setting environment variables 

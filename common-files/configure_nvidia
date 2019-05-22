@@ -2,7 +2,7 @@
 
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
-export OMPSS_HOME=/apps/PM/ompss/git
+export OMPSS_HOME=/apps/PM/ompss/17.06/
 export DLB_HOME=/apps/PM/dlb/latest/bullxmpi
 export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/bullxmpi_1_2_9_1
 export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
@@ -22,4 +22,9 @@ export ATLAS_INC_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/include/
 ln -sf $DIRNAME/sched-job-smp_nvidia $DIRNAME/sched-job-smp
 ln -sf $DIRNAME/sched-job-mpi_nvidia $DIRNAME/sched-job-mpi
 
+module unload gcc
 module load gcc/4.9.4
+
+
+alias submit=mnsubmit
+alias queue=mnq

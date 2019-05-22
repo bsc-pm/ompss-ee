@@ -752,19 +752,21 @@ int main(int argc, char* argv[])
     printf( "  checksum computed:           %10.10g\n", sum);
     printf( "  checksum expected:           %10.10g\n", checksum);
     if (check_result) {
-        printf("  Residual: %g\n", res);
+       printf("  Residual: %g\n", res);
+       if (check) {
+          printf("  Error checking failed\n");
+          printf( "==========================================\n" );
+          return 1;
+       }
+       else {
+          //printf("  Error is within acceptable tolerance :)\n");
+          printf("  Verification: Ok\n");
+          printf( "==========================================\n" );
+       }
+    } else {
+          printf("  Verification: not requested\n");
+          printf( "==========================================\n" );
     }
-    if (check) {
-        printf("  Error checking failed\n");
-        printf( "==========================================\n" );
-	return 1;
-    }
-    else {
-        //printf("  Error is within acceptable tolerance :)\n");
-        printf("  Verification: Ok\n");
-        printf( "==========================================\n" );
-    }
-
 
     return 0;
 }

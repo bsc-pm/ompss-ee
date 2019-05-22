@@ -5,7 +5,7 @@ Examples Using OmpSs
    :maxdepth: 2
    :numbered:
 
-   introduction/README.rst
+   INTRO.rst
    cholesky/README.rst
    stream-barr/README.rst
    array-sum-fortran/README.rst
