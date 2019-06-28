@@ -2,7 +2,7 @@
 
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
-export OMPSS_HOME=/apps/PM/ompss/17.06/
+export OMPSS_HOME=/apps/PM/ompss/19.06/
 export DLB_HOME=/apps/PM/dlb/latest/bullxmpi
 export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/impi_2017_1_132
 export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
@@ -24,10 +24,12 @@ ln -sf $DIRNAME/sched-job-smp_nvidia $DIRNAME/sched-job-smp
 ln -sf $DIRNAME/sched-job-mpi_nvidia $DIRNAME/sched-job-mpi
 
 module unload gcc
-module load gcc/4.9.4
+module load gcc/4.6.1
 module load GRAPHVIZ
 module unload bullxmpi
 module load impi/2017.1
+module unload cuda
+module load cuda/8.0
 
 alias submit=mnsubmit
 alias queue=mnq

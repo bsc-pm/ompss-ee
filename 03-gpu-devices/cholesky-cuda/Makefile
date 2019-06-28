@@ -20,7 +20,7 @@ CFLAGS_D = --debug
 NVCFLAGS = -O3 -arch=sm_20
 
 
-LIBS  = --Wl,-L/opt/cuda/7.0/lib64 -lcuda -lcublas -lcudart --Wl,-L$(MKL_LIB_DIR) -lmkl_sequential -lmkl_core -lmkl_rt -lpthread
+LIBS  = --Wl,-L$(MKL_LIB_DIR) -lmkl_sequential -lmkl_core -lmkl_rt -lpthread
 INCS  = -I$(PREFIX) -I$(MKL_INC_DIR)
 
 EXTRA = -O3 -Wall -Wno-unused 
