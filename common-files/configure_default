@@ -11,6 +11,7 @@ export PARAVER_HOME=
 export TEMANEJO_HOME=
 export MPI_LIB_DIR=
 export MPI_INC_DIR=
+export MPIRUN_COMMAND="mpirun"
 export MKL_LIB_DIR=
 export MKL_INC_DIR=
 export ATLAS_LIB_DIR=/home/xteruel/Applications/atlas-3.10.3/lib/

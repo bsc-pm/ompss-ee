@@ -2,18 +2,19 @@
 
 DIRNAME=$(readlink -f $(dirname ${BASH_SOURCE[0]}))
 
-export OMPSS_HOME=/apps/PM/ompss/17.06/
+export OMPSS_HOME=/apps/PM/ompss/19.06/
 export DLB_HOME=/apps/PM/dlb/latest/bullxmpi
-export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/bullxmpi_1_2_9_1
+export EXTRAE_HOME=/apps/BSCTOOLS/extrae/latest/impi_2017_1_132
 export PARAVER_HOME=/apps/BSCTOOLS/wxparaver/latest
 export TEMANEJO_HOME=
-export MPI_HOME=/opt/mpi/bullxmpi/1.1.11.1
-export MPI_LIB_DIR=$MPI_HOME/lib
-export MPI_INC_DIR=$MPI_HOME/include
-export MPICC=mpicc
-export MPICXX=mpicxx
-export MPI_NATIVE_CC=OMPI_CC
-export MPI_NATIVE_CXX=OMPI_CXX
+export MPI_HOME=/apps/INTEL/2017.1-043/impi/2017.1.132
+export MPI_LIB_DIR=$MPI_HOME/lib64
+export MPI_INC_DIR=$MPI_HOME/include64
+export MPICC=mpiicc
+export MPICXX=mpiicpc
+export MPI_NATIVE_CC=I_MPI_CC
+export MPI_NATIVE_CXX=I_MPI_CXX
+export MPIRUN_COMMAND="srun --cpu_bind=cores"
 export MKL_LIB_DIR=/opt/compilers/intel/2016.3.067/mkl/lib/intel64/
 export MKL_INC_DIR=/opt/compilers/intel/2016.3.067/mkl/include
 export ATLAS_LIB_DIR=/gpfs/apps/NVIDIA/ATLAS/3.9.51/lib
@@ -23,8 +24,12 @@ ln -sf $DIRNAME/sched-job-smp_nvidia $DIRNAME/sched-job-smp
 ln -sf $DIRNAME/sched-job-mpi_nvidia $DIRNAME/sched-job-mpi
 
 module unload gcc
-module load gcc/4.9.4
-
+module load gcc/4.6.1
+module load GRAPHVIZ
+module unload bullxmpi
+module load impi/2017.1
+module unload cuda
+module load cuda/8.0
 
 alias submit=mnsubmit
 alias queue=mnq

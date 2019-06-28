@@ -4,19 +4,23 @@ CONFIG_DIR=.config
 GFLAGS=
 
 PARAVER=extrae.xml trace.sh
+GRAPH=graph.sh
 SCRIPTS=run-once.sh multirun.sh
 
 MPI_CHECK=$(MPI_LIB_DIR)/libmpi.so
 MKL_CHECK=$(MKL_LIB_DIR)/libmkl_sequential.so
 ATLAS_CHECK=$(ATLAS_LIB_DIR)/libatlas.a
 
-all: $(TARGETS) $(SCRIPTS) $(PARAVER)
+all: $(TARGETS) $(SCRIPTS) $(PARAVER) $(GRAPH)
 
 extrae.xml:
 	cp $(COMMON_DIR)/extrae.xml .
 
 trace.sh:
-	cp $(COMMON_DIR)/trace.sh .
+	cp $(COMMON_DIR)/trace$(TRACE_VERSION).sh trace.sh
+
+graph.sh:
+	cp $(COMMON_DIR)/graph.sh .
 
 run-once.sh: $(COMMON_DIR)/run-once.sh $(CONFIG_DIR)/run-once.sh
 	cp  $(COMMON_DIR)/run-once.sh .

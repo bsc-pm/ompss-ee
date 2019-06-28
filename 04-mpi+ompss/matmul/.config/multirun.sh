@@ -1,11 +1,7 @@
 PROGRAM=matmul-p
 
-export NX_ARGS="--pes 2 --disable-cuda=yes"
+THREADS=(1 2 3 4 5 6)
 
-echo "NX_ARGS is $NX_ARGS"
-echo "LD_PRELOAD is $LD_PRELOAD"
-echo "LD_LIBRARY_PATH is $LD_LIBRARY_PATH"
-echo "##################################################"
-
-srun ./$PROGRAM
-
+for thread in ${THREADS[@]}; do
+	NX_SMP_WORKERS=$thread ${MPIRUN_COMMAND} ./$PROGRAM
+done

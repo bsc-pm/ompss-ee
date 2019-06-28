@@ -1,11 +1,15 @@
-PROGRAM=heat-mpi-ompss-i
+PROGRAM=heat-mpi-ompss-p
 
-# Run with 2 threads per MPI process in the same node
-
-export SMP_NUM_WORKERS=2
+# Run with 6 threads per MPI process in the same node
+export NX_SMP_WORKERS=6
 
 # Uncomment to instrument
 #export INST=./graph.sh
 #export INST=./trace.sh
 
-mpirun $INST ./$PROGRAM test.dat test.ppm
+${MPIRUN_COMMAND} $INST ./$PROGRAM test.dat test.ppm
+
+# Generate the trace if needed
+if [[ "$INST" == *"trace"* ]]; then
+	mpi2prv -f TRACE.mpits -o myTrace.prv
+fi

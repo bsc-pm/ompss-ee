@@ -4,6 +4,7 @@ PREFIX=.
 TARGETS=$(PROGRAM)-p $(PROGRAM)-i $(PROGRAM)-d
 
 JOB_SCHED_VERSION=-mpi
+TRACE_VERSION=-mpi
 
 BASE_DIR=../..
 include $(BASE_DIR)/common-files/Makefile

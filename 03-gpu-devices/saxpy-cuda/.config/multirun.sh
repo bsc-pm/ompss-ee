@@ -1,7 +1,9 @@
 PROGRAM=saxpy-p
 
 export NX_GPUMAXMEM=90
-export NX_GPUS=2 #change this in order to use more GPUs
 
-./$PROGRAM
+for gpus in 1 2; do
+  export NX_GPUS=$gpus
+  ./$PROGRAM
+done
 

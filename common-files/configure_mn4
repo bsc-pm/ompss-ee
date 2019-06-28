@@ -14,6 +14,7 @@ export MPICC=mpiicc
 export MPICXX=mpiicpc
 export MPI_NATIVE_CC=I_MPI_CC
 export MPI_NATIVE_CXX=I_MPI_CXX
+export MPIRUN_COMMAND="mpirun"
 export MKL_LIB_DIR=/apps/INTEL/2017.4/mkl/lib/intel64
 export MKL_INC_DIR=/apps/INTEL/2017.4/mkl/include
 export ATLAS_LIB_DIR=/apps/ATLAS/3.10.3/INTEL_BK/lib
